@@ -1,8 +1,6 @@
 # IQTEST.md — IQ Test Engine
 ## Complete Technical & Functional Specification
-### Version: 2.0 | Status: Draft (Revisi) | Last Updated: 2026-07-19
-
-> **Catatan revisi:** Tes IQ yang sah mengukur *kemampuan kognitif* melalui soal dengan **satu jawaban benar objektif**, dinilai berdasarkan performa aktual, bukan preferensi yang dilaporkan sendiri. Versi 2.0 ini merombak metodologi inti (Bagian 2–9) agar sesuai standar seperti Raven's Progressive Matrices, WAIS, dan CFIT, sambil mempertahankan arsitektur sistem (Go/Gin/PostgreSQL) yang sudah relevan.
+### Version: 1.0 | Status: Draft | Last Updated: 2026-07-19
 
 ---
 
@@ -40,32 +38,50 @@
 
 ### 1.2 Architecture Diagram (High-Level)
 
-*(tidak berubah dari v1.0 — lihat lampiran)*
-
 ```
-Browser (Alpine.js) → Gin Router → Handlers (Go) → Services → Repositories → PostgreSQL
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   Browser   │────▶│  Gin Router  │────▶│  Handlers   │
+│  (Alpine.js)│     │  (HTTP/1.1)  │     │  (Go)       │
+└─────────────┘     └──────────────┘     └──────┬──────┘
+                                                │
+                                        ┌───────▼──────┐
+                                        │   Services   │
+                                        │  (Business   │
+                                        │   Logic)     │
+                                        └───────┬──────┘
+                                                │
+                                        ┌───────▼──────┐
+                                        │ Repositories │
+                                        │  (Data Access)│
+                                        └───────┬──────┘
+                                                │
+                                        ┌───────▼──────┐
+                                        │  PostgreSQL  │
+                                        │  (Database)  │
+                                        └──────────────┘
 ```
 
 ### 1.3 Technology Stack
 
-Tidak berubah dari v1.0 (Go 1.25, Gin v1.12, templ v0.3, PostgreSQL, Alpine.js, Docker).
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| Backend | Go 1.25 | HTTP server, business logic |
+| HTTP Framework | Gin v1.12 | Routing, middleware, request handling |
+| Templating | templ v0.3 | Type-safe HTML components |
+| Database | PostgreSQL | Persistent storage for users, sessions, results |
+| Frontend | Alpine.js | Client-side interactivity (quiz, timer, navigation) |
+| Styling | Custom CSS | Design system based on DESIGN.md |
+| Containerization | Docker | Development & deployment consistency |
 
 ---
 
 ## 2. ASSESSMENT METHODOLOGY
 
-### 2.1 Perubahan Mendasar dari v1.0
+### 2.1 Prinsip Dasar
 
-| Aspek | v1.0 (Salah) | v2.0 (Standar) |
-|-------|--------------|-----------------|
-| Format soal | Pernyataan Likert 6-poin self-report | **Pilihan ganda A/B/C/D bergambar** |
-| Dasar penilaian | Preferensi subjektif pengguna | **Jawaban benar/salah objektif** |
-| Output | Tipe 4-huruf (mirip MBTI) | **Skor performa kognitif → estimasi IQ** |
-| Validitas konstruk | Mengukur kepribadian, dilabeli "IQ" | Mengukur kemampuan kognitif nyata |
+Tes ini mengukur **kemampuan kognitif nyata** (bukan preferensi atau kepribadian) melalui **20 soal pilihan ganda bergambar (A/B/C/D)** dengan tepat satu jawaban benar per soal. Pendekatan ini selaras dengan tes penalaran non-verbal standar seperti Raven's Progressive Matrices dan Cattell Culture Fair Test — format bergambar dipilih karena meminimalkan bias bahasa/budaya dan cocok untuk mengukur *fluid intelligence* (kemampuan menalar terhadap masalah baru).
 
 ### 2.2 Domain Kemampuan Kognitif yang Diuji
-
-Setiap soal bergambar termasuk dalam salah satu dari 4 domain kemampuan non-verbal/figural (dipilih karena format bergambar cocok untuk pengujian *fluid intelligence*, minim bias bahasa/budaya — mirip pendekatan Raven's Progressive Matrices & Cattell Culture Fair Test):
 
 | Domain | Kode | Contoh Soal | Kemampuan yang Diukur |
 |--------|------|--------------|------------------------|
@@ -100,7 +116,7 @@ Setiap soal bergambar termasuk dalam salah satu dari 4 domain kemampuan non-verb
 
 ### 3.1 Teori yang Digunakan
 
-Model ini mengikuti **Classical Test Theory (CTT)** dengan elemen kalibrasi kesulitan item, selaras dengan pendekatan tes kemampuan umum (*general cognitive ability, g-factor*, Spearman) yang diuji lewat penalaran figural non-verbal.
+Model ini mengikuti **Classical Test Theory (CTT)** dengan kalibrasi kesulitan item, selaras dengan pendekatan tes kemampuan umum (*general cognitive ability, g-factor*, Spearman) yang diuji lewat penalaran figural non-verbal.
 
 ### 3.2 Struktur Item
 
@@ -139,15 +155,15 @@ Model ini mengikuti **Classical Test Theory (CTT)** dengan elemen kalibrasi kesu
 
 ```go
 type questionDef struct {
-    ID            string   // e.g., "Q_MTX_001"
-    Domain        string   // "MTX" | "SEQ" | "SPA" | "ANL"
-    ImageURL      string   // gambar soal utama
-    OptionImages  [4]string // gambar untuk opsi A, B, C, D
-    CorrectOption string   // "A" | "B" | "C" | "D"
-    Difficulty    string   // "easy" | "medium" | "hard" | "very_hard"
-    Weight        float64  // 1.0 / 1.5 / 2.0 / 2.5 sesuai kesulitan
-    PValue        float64  // dikalibrasi dari data uji coba, nullable saat awal
-    Discrimination float64 // dikalibrasi, nullable saat awal
+    ID             string    // e.g., "Q_MTX_001"
+    Domain         string    // "MTX" | "SEQ" | "SPA" | "ANL"
+    ImageURL       string    // gambar soal utama
+    OptionImages   [4]string // gambar untuk opsi A, B, C, D
+    CorrectOption  string    // "A" | "B" | "C" | "D"
+    Difficulty     string    // "easy" | "medium" | "hard" | "very_hard"
+    Weight         float64   // 1.0 / 1.5 / 2.0 / 2.5 sesuai kesulitan
+    PValue         float64   // dikalibrasi dari data uji coba, nullable saat awal
+    Discrimination float64   // dikalibrasi dari data uji coba, nullable saat awal
 }
 ```
 
@@ -174,7 +190,7 @@ Contoh:
 
 ### 4.4 Format Respons
 
-Setiap soal punya **4 opsi jawaban bergambar (A/B/C/D)**, tepat satu benar. Tidak ada skala setuju/tidak setuju — murni pilihan objektif.
+Setiap soal memiliki **4 opsi jawaban bergambar (A/B/C/D)**, tepat satu benar. Tidak ada skala setuju/tidak setuju — murni pilihan objektif.
 
 ### 4.5 Format Soal (UI)
 
@@ -199,7 +215,7 @@ Catatan desain: tombol "Sebelumnya" **tidak tersedia** — dalam tes kemampuan k
 
 ## 5. TIMER RULES
 
-### 5.1 Spesifikasi (Sesuai Permintaan)
+### 5.1 Spesifikasi
 
 | Rule | Value | Rationale |
 |------|-------|-----------|
@@ -251,7 +267,7 @@ Alpine.data('quizApp', () => ({
 
 ## 6. SCORING ALGORITHM
 
-### 6.1 Pipeline Skoring (Baru)
+### 6.1 Scoring Pipeline
 
 ```
 Jawaban User (A/B/C/D atau timeout)
@@ -273,7 +289,7 @@ Hitung skor per domain (MTX, SEQ, SPA, ANL)
 Konversi ke estimasi IQ (Bagian 7) + persentil
 ```
 
-### 6.2 Step-by-Step
+### 6.2 Step-by-Step Algorithm
 
 **Step 1 — Cek jawaban tiap soal:**
 ```go
@@ -308,7 +324,7 @@ maxPossible := 30.5 // lihat tabel bobot 3.3
 domainPercent := domainScores[d] / domainMax[d] * 100
 ```
 
-### 6.3 Contoh Perhitungan
+### 6.3 Scoring Example
 
 | Soal | Kesulitan | Bobot | Jawaban User | Benar? | Skor |
 |------|-----------|-------|----------------|--------|------|
@@ -323,7 +339,7 @@ Raw Score (contoh 4 soal) = 1.0 + 0 + 2.0 + 0 = **3.0 / 7.0 maksimum**
 
 ## 7. IQ SCORE CONVERSION
 
-### 7.1 Status Saat Ini — Kejujuran ke Pengguna
+### 7.1 Kebijakan Tampilan Skor
 
 Selama sistem **belum memiliki data normatif tervalidasi** (populasi referensi ≥1.000 peserta, lihat 3.4), aplikasi **tidak menampilkan angka "IQ" resmi**. Sebagai gantinya, tampilkan:
 
@@ -398,7 +414,7 @@ User menyelesaikan 20 soal (atau waktu habis per soal)
 | **Kecepatan Pemrosesan** | Response time analytics | Rata-rata waktu jawab vs benar/salah |
 | **Rekomendasi Latihan** | Narrative Generator | Saran domain untuk dilatih |
 
-> **Dark Triad mapping pada v1.0 dihapus sepenuhnya.** Memetakan skor kemampuan kognitif ke narsisme/machiavellianism/psikopati tidak memiliki dasar psikometri apa pun dan berisiko menyesatkan serta merugikan pengguna secara psikologis. Jika ingin fitur kepribadian, itu harus jadi **tes terpisah** dengan instrumen kepribadian yang tervalidasi (mis. Big Five/HEXACO), bukan diturunkan dari skor tes kemampuan.
+> Sistem tidak memetakan skor kemampuan kognitif ke trait kepribadian apa pun (mis. narsisme, machiavellianism, psikopati) karena tidak ada dasar psikometri untuk menurunkan trait kepribadian dari skor tes kemampuan. Jika di masa depan ingin menambahkan fitur kepribadian, itu harus menjadi **modul tes terpisah** dengan instrumen kepribadian yang tervalidasi (mis. Big Five/HEXACO), bukan diturunkan dari skor tes kemampuan kognitif ini.
 
 ### 8.3 Visualisasi Skor Domain
 
@@ -417,10 +433,10 @@ Analogi Visual      ██████████████░░░░░░
 
 | Strategy | Implementation | Status |
 |----------|------------------|--------|
-| Timer keras 2 menit/soal | Auto-advance saat habis | ✅ Wajib diimplementasikan (bukan opsional lagi) |
+| Timer keras 2 menit/soal | Auto-advance saat habis | ✅ Wajib diimplementasikan |
 | Jawaban terkunci | Tidak bisa diubah setelah dipilih | ✅ Active |
 | Server-side validation | Kunci jawaban benar tidak pernah dikirim ke client | ✅ **Kritis** — pastikan `CorrectOption` tidak bocor lewat API/DOM |
-| Randomisasi urutan opsi | Posisi A/B/C/D diacak per sesi | ✅ Baru — mencegah pola hafalan |
+| Randomisasi urutan opsi | Posisi A/B/C/D diacak per sesi | ✅ Active — mencegah pola hafalan |
 | Paywall protection | Hasil terkunci hingga pembayaran dikonfirmasi | ✅ Active |
 
 ### 9.2 Planned Detections
@@ -447,11 +463,55 @@ type ReliabilityFlag struct {
 
 ## 10. DATABASE MODEL
 
-### 10.1 Skema yang Diperbarui
+### 10.1 Entity Relationship Diagram
+
+```
+users
+  │
+  ├──< test_sessions
+  │      │
+  │      ├──< session_responses
+  │      │
+  │      └──> iq_results
+  │
+  └──< payments
+
+admins ──> payments (confirmed_by)
+questions ──< session_responses
+```
+
+### 10.2 DDL (PostgreSQL)
 
 ```sql
 -- =============================================
--- Questions bank (BARU — dengan jawaban benar)
+-- Users table
+-- =============================================
+CREATE TABLE users (
+    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email             VARCHAR(255) UNIQUE NOT NULL,
+    nama              VARCHAR(255) NOT NULL,
+    phone             VARCHAR(20),
+    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- =============================================
+-- Test sessions
+-- =============================================
+CREATE TABLE test_sessions (
+    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id           UUID REFERENCES users(id),
+    session_token     VARCHAR(64) UNIQUE NOT NULL,
+    started_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    completed_at      TIMESTAMPTZ,
+    device_type       VARCHAR(20),
+    ip_address        INET,
+    is_completed      BOOLEAN NOT NULL DEFAULT FALSE,
+    metadata          JSONB
+);
+
+-- =============================================
+-- Questions bank
 -- =============================================
 CREATE TABLE questions (
     id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -487,7 +547,7 @@ CREATE TABLE session_responses (
 );
 
 -- =============================================
--- IQ Test results (BARU)
+-- IQ Test results
 -- =============================================
 CREATE TABLE iq_results (
     id                    UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -505,26 +565,110 @@ CREATE TABLE iq_results (
     reliability_flags     JSONB,
     calculated_at         TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- =============================================
+-- Payments tracking
+-- =============================================
+CREATE TABLE payments (
+    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id           UUID NOT NULL REFERENCES users(id),
+    session_id        UUID NOT NULL REFERENCES test_sessions(id),
+    amount            DECIMAL(12,2) NOT NULL,
+    currency          VARCHAR(3) NOT NULL DEFAULT 'IDR',
+    status            VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    payment_method    VARCHAR(50),
+    paid_at           TIMESTAMPTZ,
+    confirmed_by      UUID REFERENCES admins(id),
+    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- =============================================
+-- Admins
+-- =============================================
+CREATE TABLE admins (
+    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username          VARCHAR(50) UNIQUE NOT NULL,
+    password_hash     VARCHAR(255) NOT NULL,
+    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- =============================================
+-- Indexes
+-- =============================================
+CREATE INDEX idx_sessions_user ON test_sessions(user_id) WHERE user_id IS NOT NULL;
+CREATE INDEX idx_sessions_token ON test_sessions(session_token);
+CREATE INDEX idx_responses_session ON session_responses(session_id);
+CREATE INDEX idx_results_session ON iq_results(session_id);
+CREATE INDEX idx_payments_user ON payments(user_id);
+CREATE INDEX idx_payments_status ON payments(status);
+CREATE INDEX idx_questions_domain ON questions(domain) WHERE is_active = TRUE;
 ```
-
-Tabel `users`, `test_sessions`, `payments`, `admins` tidak berubah dari v1.0.
-
-### 10.2 Perubahan Kunci vs v1.0
-
-| v1.0 | v2.0 |
-|------|------|
-| `skor_lr`, `skor_na`, `skor_sa`, `skor_lv` (Likert) | `raw_score`, skor per domain (%) berbasis benar/salah |
-| `iq_tipe VARCHAR(4)` (tipe 4-huruf) | `estimated_iq` (nullable sampai norm tersedia) + `percentile` |
-| Tidak ada `correct_option` di soal | `correct_option` wajib, **tidak boleh dikirim ke client** |
-| Tidak ada timer per soal di DB | `time_taken_ms`, `timed_out` per respons |
 
 ---
 
 ## 11. API FLOW
 
-Alur endpoint tetap sama seperti v1.0 (`/quiz`, `/submit-tes`, `/paywall/:id`, `/hasil/:id`, dst), dengan satu perubahan kritis keamanan:
+### 11.1 Complete Request/Response Flow
 
-### 11.1 Kontrak Data Soal ke Client (Penting)
+```
+┌────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
+│ Browser │     │  Gin     │     │ Services │     │ Database │
+└────┬───┘     └────┬─────┘     └────┬─────┘     └────┬─────┘
+     │               │                │                │
+     │  GET /        │                │                │
+     │──────────────▶│                │                │
+     │◀──────────────│  IndexPage     │                │
+     │               │                │                │
+     │  GET /quiz    │                │                │
+     │──────────────▶│                │                │
+     │◀──────────────│  QuizPage (20 soal, tanpa correct_option) │
+     │               │                │                │
+     │  POST /submit-tes              │                │
+     │  {email, nama, answers[{question_id, option, elapsed_ms}]} │
+     │──────────────▶│                │                │
+     │               │  ProcessQuizAnswers()           │
+     │               │───────────────▶│                │
+     │               │                │  ScoreAgainstCorrectOption │
+     │               │                │  InsertUser()  │
+     │               │                │───────────────▶│
+     │               │                │◀───────────────│
+     │               │◀───────────────│ {userID, err}  │
+     │◀──────────────│  {id: userID}  │                │
+     │               │                │                │
+     │  GET /paywall/{id}            │                │
+     │──────────────▶│                │                │
+     │               │  GetPaywallData(id)             │
+     │               │───────────────▶│                │
+     │               │                │  GetUserName()  │
+     │               │                │───────────────▶│
+     │               │                │◀───────────────│
+     │               │◀───────────────│ {nama, err}    │
+     │◀──────────────│  PaywallPage   │                │
+     │               │                │                │
+     │  POST /konfirmasi-bayar/{id}  │                │
+     │  {nama_pengirim}              │                │
+     │──────────────▶│                │                │
+     │               │  ConfirmPayment(id)             │
+     │               │───────────────▶│                │
+     │               │                │ UpdatePaymentStatus│
+     │               │                │───────────────▶│
+     │               │                │◀───────────────│
+     │               │◀───────────────│ {err}          │
+     │◀──────────────│  {success:true, id}             │
+     │               │                │                │
+     │  GET /hasil/{id}              │                │
+     │──────────────▶│                │                │
+     │               │  GetQuizResult(id)              │
+     │               │───────────────▶│                │
+     │               │                │ GetUserResult()│
+     │               │                │───────────────▶│
+     │               │                │◀───────────────│
+     │               │                │ GenerateAllNarratives()│
+     │               │◀───────────────│ {QuizResult}   │
+     │◀──────────────│  HasilPage     │                │
+```
+
+### 11.2 Kontrak Data Soal ke Client (Penting)
 
 ```json
 // GET /api/questions — HANYA field ini yang boleh dikirim ke browser
@@ -545,84 +689,344 @@ Alur endpoint tetap sama seperti v1.0 (`/quiz`, `/submit-tes`, `/paywall/:id`, `
 
 Validasi jawaban **selalu dilakukan di server** saat `POST /submit-tes`, tidak pernah di client — mencegah manipulasi lewat devtools.
 
-### 11.2 Route Table
+### 11.3 Route Table
 
-Tidak berubah dari v1.0 (lihat Bagian 11.2 versi sebelumnya) — hanya payload request/response yang disesuaikan dengan skema pilihan ganda.
+| Method | Path | Handler | Auth | Description |
+|--------|------|---------|------|-------------|
+| GET | `/` | ShowHome | None | Landing page |
+| GET | `/quiz` | ShowQuiz | None | Assessment page |
+| GET | `/api/questions` | GetQuestions | None | Ambil 20 soal (tanpa correct_option) |
+| POST | `/submit-tes` | SubmitTest | None | Submit jawaban, hitung skor server-side |
+| GET | `/paywall/:id` | ShowPaywall | None | Payment gate |
+| POST | `/konfirmasi-bayar/:id` | KonfirmasiBayar | None | Payment confirm |
+| GET | `/hasil/:id` | ShowResult | None | View results (PAID only) |
+| GET | `/tentang` | ShowTentang | None | About page |
+| GET | `/admin/login` | ShowLogin | None | Admin login form |
+| POST | `/admin/login` | LoginProcess | None | Admin login action |
+| GET | `/admin/dashboard` | ShowDashboard | Admin cookie | Admin panel |
+| GET | `/admin/user/:id` | ShowUserDetail | Admin cookie | User detail |
+| GET | `/admin/logout` | LogoutProcess | Admin cookie | Logout |
+
+### 11.4 Response Types
+
+#### Success Response (Submit Test)
+
+```json
+{
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+}
+```
+
+#### Error Response
+
+```json
+{
+    "error": "Gagal menyimpan data tes: [reason]"
+}
+```
+
+### 11.5 HTTP Status Codes
+
+| Code | Condition |
+|------|-----------|
+| 200 | Success |
+| 303 | Redirect (payment / paywall) |
+| 400 | Bad request (invalid form data) |
+| 404 | User/session not found |
+| 429 | Rate limit exceeded |
+| 500 | Internal server error |
 
 ---
 
 ## 12. UI/UX FLOW
 
-### 12.1 Quiz Page — Perubahan Utama
+### 12.1 User Journey Map
 
-| Elemen | v1.0 | v2.0 |
-|--------|------|------|
-| Format soal | Teks pernyataan + skala 1–6 | **Gambar soal + 4 opsi jawaban bergambar** |
-| Timer | Tidak ada | **Countdown 2 menit per soal, wajib tampil** |
-| Navigasi mundur | Ada | **Dihapus** (integritas timing) |
-| Progress bar | Ada | Dipertahankan, ditambah indikator waktu tersisa |
+```
+┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│ Landing  │───▶│  Quiz    │───▶│ Paywall  │───▶│ Results  │
+│  Page    │    │ (20 Soal │    │ (Payment)│    │  (PAID)  │
+│          │    │  Timed)  │    │          │    │          │
+└──────────┘    └──────────┘    └──────────┘    └──────────┘
+      │              │               │               │
+      ▼              ▼               ▼               ▼
+  IndexPage     QuizPage       PaywallPage      HasilPage
+  (Static)      (Alpine.js)    (Static)         (Narratives)
+```
 
-### 12.2 Alpine.js State (Diperbarui)
+### 12.2 Page Descriptions
+
+#### 12.2.1 Landing Page (`GET /`)
+
+| Element | Description |
+|---------|-------------|
+| **Hero** | Tagline: "Kenali Dirimu Lebih Dalam" dengan DM Serif Display |
+| **CTA** | "Mulai Tes Gratis" — tombol utama ke `/quiz` |
+| **Trust Pills** | "Anonim · Gratis · Hasil Instan" |
+| **Features** | 3-card section menjelaskan asesmen |
+| **FAQ** | Accordion FAQ |
+| **Footer** | Links, copyright, brand info |
+
+#### 12.2.2 Quiz Page (`GET /quiz`)
+
+| Element | Description |
+|---------|-------------|
+| **Progress Bar** | Top of page, shows completion (X/20) |
+| **Question Counter** | "Soal N dari 20" |
+| **Timer Countdown** | 2:00 menghitung mundur per soal, warna berubah di 30s & 10s tersisa |
+| **Gambar Soal** | Gambar pola/matriks/deret yang harus dilengkapi |
+| **4 Opsi Bergambar** | Kartu A/B/C/D, masing-masing berisi gambar opsi jawaban |
+| **Navigasi** | Hanya maju otomatis setelah memilih atau waktu habis (tidak ada tombol mundur) |
+| **Form Fields** | Email dan Nama (ditampilkan sebelum quiz dimulai) |
+
+**Alpine.js State Management:**
 
 ```javascript
 Alpine.data('quizApp', () => ({
-    step: 'identity',
+    step: 'identity',       // 'identity' | 'quiz' | 'submitting' | 'done'
+    nama: '',
+    email: '',
     currentQuestion: 0,
     timeRemaining: 120,
-    answers: {},            // { questionId: { option, elapsedMs, timedOut } }
-    questions: [...],       // 20 soal, tanpa correct_option
+    timerInterval: null,
+    answers: {},             // { questionId: { option, elapsedMs, timedOut } }
+    questions: [...],        // 20 soal (tanpa correct_option)
 
     get progress() {
         return Object.keys(this.answers).length;
     },
 
+    startQuiz() { this.step = 'quiz'; this.startQuestionTimer(); },
+    startQuestionTimer() { /* lihat Bagian 5.2 */ },
     selectAnswer(option) { /* lihat Bagian 5.2 */ },
     autoAdvance() { /* lihat Bagian 5.2 */ },
+    nextQuestion() {
+        this.currentQuestion++;
+        if (this.currentQuestion < 20) this.startQuestionTimer();
+        else this.submitQuiz();
+    },
     submitQuiz() { /* POST semua jawaban ke /submit-tes */ }
 }));
 ```
 
-### 12.3 Halaman lain (Landing, Paywall, Hasil, Admin)
+#### 12.2.3 Paywall Page (`GET /paywall/:id`)
 
-Struktur tidak berubah signifikan dari v1.0 — hanya konten "Hasil" disesuaikan dengan skor domain baru (Bagian 8) dan disclaimer kejujuran skor IQ (Bagian 7.1).
+| Element | Description |
+|---------|-------------|
+| **Greeting** | "Halo, {nama}!" |
+| **Value Prop** | Penjelasan hasil premium (skor per domain, narasi lengkap) |
+| **Pricing** | IDR 14.900 (one-time payment) |
+| **Payment Instructions** | Transfer manual ke rekening bank |
+| **Confirmation Button** | "Saya sudah bayar" — POST ke `/konfirmasi-bayar/:id` |
+| **Error State** | "belum_bayar" query param → pesan informasi |
+
+#### 12.2.4 Results Page (`GET /hasil/:id`)
+
+| Section | Content |
+|---------|---------|
+| **Header** | "Hasil Asesmen {nama}" |
+| **Skor Total** | Raw score / 30.5 + persentil |
+| **Profil per Domain** | Bar chart MTX/SEQ/SPA/ANL (% benar) |
+| **Klasifikasi** | Kategori kemampuan berdasar persentil (atau estimasi IQ jika norm tersedia) |
+| **Kekuatan Kognitif** | 3–5 bullet points |
+| **Area Pengembangan** | 3–5 bullet points |
+| **Kecepatan Pemrosesan** | Rata-rata waktu jawab per soal |
+| **Disclaimer** | Catatan bahwa hasil bersifat indikatif, bukan diagnosis klinis |
+| **Share/Print** | Action buttons (future) |
+
+#### 12.2.5 Admin Dashboard (`GET /admin/dashboard`)
+
+| Element | Description |
+|---------|-------------|
+| **Statistics** | Total users, paid/unpaid counts, total revenue |
+| **User Table** | ID, Name, Email, Raw Score, Payment Status |
+| **Question Bank Manager** | CRUD soal: upload gambar, set correct_option, difficulty, weight |
+| **Search/Filter** | By name, email, status pembayaran |
+| **User Detail** | Link ke `/admin/user/:id` — lihat jawaban per soal |
+| **Logout** | Clear session cookie |
+
+### 12.3 Design System Integration
+
+| Token | Value |
+|-------|-------|
+| Surface | #FCF9F6 |
+| Ink | #1a1917 |
+| Primary | #0d7377 |
+| Rounded (sm/md) | 8px / 12px |
+| Body font | Inter, 1rem, 1.65 line-height |
+| Display font | DM Serif Display |
+
+### 12.4 Responsive Breakpoints
+
+| Breakpoint | Width | Layout |
+|------------|-------|--------|
+| Mobile | < 640px | Single column, gambar soal & opsi ditumpuk 2×2 |
+| Tablet | 640–1024px | 2-column grid pada opsi jawaban |
+| Desktop | > 1024px | Full layout, opsi jawaban 4-kolom sejajar |
+
+### 12.5 Accessibility Requirements
+
+- WCAG AA minimum pada semua elemen teks
+- Alt text deskriptif pada semua gambar soal & opsi (tanpa membocorkan jawaban benar)
+- Focus-visible outlines pada elemen interaktif
+- `prefers-reduced-motion` dihormati untuk animasi timer
+- Semantic HTML structure (nav, main, section, footer)
+- ARIA labels pada seluruh komponen interaktif, termasuk countdown timer (`aria-live="polite"`)
 
 ---
 
 ## 13. FUTURE IMPROVEMENTS
 
-| Improvement | Priority | Description |
-|-------------|----------|-------------|
-| **Kalibrasi item bank (p-value, discrimination)** | **Kritis** | Wajib sebelum klaim skor IQ ditampilkan ke publik |
-| **Studi validasi konstruk** | **Kritis** | Bandingkan dengan tes tervalidasi (Raven's/CFIT) pada sampel independen |
-| **Perluasan item bank 60–100 soal** | Tinggi | Untuk mendukung randomisasi & adaptive testing |
-| **Computerized Adaptive Testing (CAT)** | Sedang | Pilih soal berikutnya berdasarkan performa real-time |
-| **Stratifikasi norma demografis** | Sedang | Usia, pendidikan — meningkatkan akurasi konversi IQ |
-| **Automated payment gateway** | Tinggi | Midtrans/Xendit |
-| **Audit keamanan soal (anti-leak)** | Tinggi | Pastikan correct_option tidak pernah bocor ke client/log |
+### 13.1 Psikometri & Item Bank
+
+| Improvement | Priority | Description | Effort |
+|-------------|----------|-------------|--------|
+| **Kalibrasi item bank (p-value, discrimination)** | Kritis | Wajib sebelum klaim skor IQ ditampilkan ke publik | 3 minggu |
+| **Studi validasi konstruk** | Kritis | Bandingkan dengan tes tervalidasi (Raven's/CFIT) pada sampel independen | 4 minggu |
+| **Perluasan item bank 60–100 soal** | Tinggi | Mendukung randomisasi & mencegah kebocoran soal | 3 minggu |
+| **Computerized Adaptive Testing (CAT)** | Sedang | Pilih soal berikutnya berdasarkan performa real-time | 4 minggu |
+| **Stratifikasi norma demografis** | Sedang | Usia, pendidikan — meningkatkan akurasi konversi IQ | 2 minggu |
+
+### 13.2 Timer & Anti-Cheating
+
+| Improvement | Priority | Description | Effort |
+|-------------|----------|-------------|--------|
+| **Randomisasi urutan soal** | Tinggi | Urutan 20 soal diacak per sesi (domain tetap seimbang) | 3 hari |
+| **Tab-switch detection** | Sedang | Log dan flag saat tab dialihkan selama tes | 2 hari |
+| **IP rate limiting** | Sedang | Cegah submission berulang dari IP sama | 2 hari |
+| **CAPTCHA integration** | Rendah | Google reCAPTCHA v3 saat submit | 2 hari |
+
+### 13.3 Payment & Monetization
+
+| Improvement | Priority | Description | Effort |
+|-------------|----------|-------------|--------|
+| **Automated payment gateway** | Tinggi | Integrasi Midtrans/Xendit untuk pembayaran instan | 4 minggu |
+| **Multiple price tiers** | Sedang | Basic (gratis) / Premium (detail) / Pro (konsultasi) | 2 minggu |
+| **Discount codes** | Sedang | Kode promo dikelola admin | 1 minggu |
+
+### 13.4 User Experience
+
+| Improvement | Priority | Description | Effort |
+|-------------|----------|-------------|--------|
+| **Email delivery hasil (PDF)** | Tinggi | Kirim PDF hasil ke email setelah pembayaran | 1 minggu |
+| **Progress save/restore** | Sedang | Simpan progres parsial (dengan catatan: timer tetap berjalan sesuai kebijakan single-session) | 2 minggu |
+| **Social sharing** | Sedang | Bagikan hasil ke medsos (link saja, tanpa skor mentah) | 3 hari |
+| **Result history** | Rendah | Lacak perubahan skor antar sesi tes ulang | 2 minggu |
+
+### 13.5 Technical Infrastructure
+
+| Improvement | Priority | Description | Effort |
+|-------------|----------|-------------|--------|
+| **CDN untuk gambar soal** | Tinggi | Load gambar cepat, krusial untuk timer 2 menit/soal | 3 hari |
+| **Redis caching** | Sedang | Cache question bank, kurangi beban DB | 1 minggu |
+| **CI/CD pipeline** | Sedang | Automated testing & deployment | 1 minggu |
+| **Load testing** | Sedang | Benchmark concurrent users (target: 10.000) | 1 minggu |
+
+### 13.6 Recommended Roadmap
+
+```
+Phase 1 (Q3 2026) — Fondasi Psikometri
+├── Uji coba item bank ke 300+ responden
+├── Kalibrasi p-value & discrimination
+├── Randomisasi urutan soal
+├── CDN untuk gambar soal
+
+Phase 2 (Q4 2026) — Validasi & Monetisasi
+├── Studi validasi konstruk (vs Raven's/CFIT)
+├── Automated payment gateway
+├── Email delivery hasil (PDF)
+├── Discount codes
+
+Phase 3 (Q1 2027) — Skala & Normatif
+├── Kumpulkan 1.000+ data untuk norming
+├── Aktifkan estimated_iq resmi
+├── Perluasan item bank 60–100 soal
+├── Stratifikasi demografis
+
+Phase 4 (Q2 2027) — Fitur Lanjutan
+├── Computerized Adaptive Testing (CAT)
+├── Result comparison tool
+├── CI/CD pipeline
+├── Load testing & optimization
+```
 
 ---
 
 ## 14. APPENDICES
 
-### Appendix A — Glossary (Diperbarui)
+### Appendix A — File Map
+
+| File | Purpose |
+|------|---------|
+| `main.go` | Application entry point, server initialization |
+| `database/db.go` | PostgreSQL connection setup |
+| `handlers/router.go` | Route registration |
+| `handlers/page.go` | Static page handlers (home, quiz, about, error) |
+| `handlers/quiz.go` | Quiz submission, paywall, result display handlers |
+| `handlers/admin.go` | Admin login, dashboard, question bank management |
+| `helpers/render.go` | Templ component rendering helper |
+| `models/question.go` | Data models (Question, Answer, IQResult, ReliabilityFlag) |
+| `repositories/user.go` | User data access (insert, query, update payment) |
+| `repositories/question.go` | Question bank data access |
+| `services/quiz.go` | Scoring algorithm, domain aggregation |
+| `services/narasi.go` | Narrative generation engine |
+| `templ/components/` | Reusable UI components (head, navbar, footer, timer) |
+| `templ/layouts/` | Page layouts (public, quiz, auth, dashboard) |
+| `templ/pages/` | Page templates (index, quiz, paywall, hasil, admin) |
+| `assets/css/` | Stylesheets |
+| `assets/js/` | JavaScript (Alpine.js modules, timer logic) |
+| `assets/images/questions/` | Gambar soal & opsi jawaban |
+
+### Appendix B — Scoring Reference Card
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                    SCORING REFERENCE CARD                        │
+├────────────┬────────┬──────────┬────────┬─────────┬─────────────┤
+│ Domain     │ Kode   │ Jumlah   │ Bobot  │ Max     │ Rentang     │
+│            │        │ Soal     │ Range  │ Skor    │ Kesulitan   │
+├────────────┼────────┼──────────┼────────┼─────────┼─────────────┤
+│ Matriks    │ MTX    │ 6        │ 1.0–2.5│ ~9.5    │ Mudah→S.Sulit│
+│ Deret Logis│ SEQ    │ 5        │ 1.0–2.0│ ~7.5    │ Mudah→Sulit │
+│ Rotasi     │ SPA    │ 5        │ 1.5–2.5│ ~9.0    │ Sedang→S.Sulit│
+│ Analogi    │ ANL    │ 4        │ 1.0–2.0│ ~5.5    │ Mudah→Sulit │
+├────────────┴────────┴──────────┴────────┴─────────┴─────────────┤
+│ Total Soal: 20  │  Waktu: 2 menit/soal  │  Max Raw Score: 30.5  │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+### Appendix C — Glossary
 
 | Term | Definition |
 |------|------------|
+| **Domain** | Kategori kemampuan kognitif yang diuji (MTX, SEQ, SPA, ANL) |
 | **Item difficulty (p-value)** | Proporsi peserta yang menjawab benar suatu soal |
 | **Item discrimination** | Seberapa baik soal membedakan peserta berkemampuan tinggi vs rendah |
 | **Raw score** | Total skor tertimbang dari jawaban benar |
 | **Deviation IQ** | Skor IQ dengan mean=100, SD=15, dihitung dari z-score terhadap populasi norma |
 | **Percentile** | Posisi relatif skor dibanding peserta lain (bukan skala IQ absolut) |
-| **Fluid intelligence** | Kemampuan menalar & memecahkan masalah baru tanpa bergantung pengetahuan yang dipelajari — inti dari soal bergambar non-verbal |
+| **Fluid intelligence** | Kemampuan menalar & memecahkan masalah baru tanpa bergantung pengetahuan yang dipelajari |
 | **Reliability** | Konsistensi hasil tes (Cronbach's α, test-retest) |
-| **Construct validity** | Sejauh mana tes benar-benar mengukur apa yang diklaim (kemampuan kognitif, bukan kepribadian) |
+| **Construct validity** | Sejauh mana tes benar-benar mengukur apa yang diklaim |
+| **Norming / Normative data** | Data populasi referensi untuk mengonversi raw score ke skala IQ standar |
 
-### Appendix B — Peringatan Etis & Legal
+### Appendix D — Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `DATABASE_URL` | PostgreSQL connection string | Required |
+| `PORT` | HTTP server port | `8080` |
+| `ADMIN_USERNAME` | Admin login username | `admin` |
+| `ADMIN_PASSWORD` | Admin login password | `admin360` |
+| `QUESTION_TIMER_SECONDS` | Waktu per soal (detik) | `120` |
+| `GIN_MODE` | Gin framework mode | `release` |
+
+### Appendix E — Peringatan Etis & Legal
 
 - Sistem **tidak boleh menampilkan angka "IQ"** yang diklaim setara tes klinis tanpa validasi psikometri (Bagian 3.4 & 7.4).
 - Disarankan mencantumkan disclaimer di setiap halaman hasil: *"Tes ini untuk tujuan hiburan dan pengembangan diri, bukan diagnosis klinis. Untuk asesmen resmi, konsultasikan psikolog berlisensi."*
-- Hindari klaim pemasaran seperti "tes IQ tervalidasi ilmiah" sebelum studi validasi (Bagian 13) selesai.
+- Hindari klaim pemasaran seperti "tes IQ tervalidasi ilmiah" sebelum studi validasi (Bagian 13.1) selesai.
 
 ---
 
-*End of IQTEST.md v2.0 — Revised Specification*
+*End of IQTEST.md — Complete Specification Document*
