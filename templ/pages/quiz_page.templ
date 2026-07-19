@@ -10,79 +10,96 @@ templ QuizPage() {
 
 templ quizContent() {
 	<section class="quiz-section">
-		<div class="quiz-container">
+		<div class="quiz-container" style="max-width:900px;margin:0 auto;padding:16px;">
 			<div x-data="quizApp()" class="quiz-app">
-				<!-- Step: Identity (nama + email before quiz) -->
-				<div x-show="step === 'identity'"
-					 x-transition:enter="transition ease-out duration-300"
-					 x-transition:enter-start="opacity-0 translate-y-4"
-					 x-transition:enter-end="opacity-100 translate-y-0"
-					 class="quiz-step-content">
-					<div class="quiz-q-number">Mulai</div>
-					<h2 class="quiz-question" style="font-size:1.5rem;">Kenali Kemampuan Kognitifmu</h2>
-					<p class="quiz-question-sub">Tes ini terdiri dari 20 soal bergambar dengan waktu 2 menit per soal. Jawab secepat dan setepat mungkin.</p>
-					<form @submit.prevent="startQuiz()" class="quiz-form">
-						<div class="quiz-field">
-							<label class="quiz-field-label" for="nama">Nama Lengkap</label>
-							<input type="text" id="nama" name="nama" required placeholder="Masukkan nama kamu" class="quiz-input" x-model="nama"/>
-						</div>
-						<div class="quiz-field">
-							<label class="quiz-field-label" for="email">Email</label>
-							<input type="email" id="email" name="email" required placeholder="contoh@email.com" class="quiz-input" x-model="email"/>
-						</div>
-						<div class="quiz-form-actions">
-							<button type="submit" class="quiz-btn quiz-btn-primary quiz-btn-submit" style="width:100%;">
-								<span class="quiz-btn-inner">
-									Mulai Tes Gratis
-									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-								</span>
-							</button>
-						</div>
-					</form>
-				</div>
 
-				<!-- Step: Quiz (questions with timer) -->
-				<template x-if="step === 'quiz'">
+				<!-- ============================================================
+					 Step: Loading (skeleton placeholder while questions fetch)
+					 ============================================================ -->
+				<template x-if="step === 'loading'">
 					<div>
-						<!-- Progress Header -->
-						<div class="quiz-progress-header">
-							<div class="quiz-progress-info">
-								<span class="quiz-step-label">Soal</span>
-								<span class="quiz-step-current" x-text="currentQuestion + 1"></span>
-								<span class="quiz-step-total">/ 20</span>
-							</div>
-							<div class="quiz-timer" :class="{ 'timer-warning': timeRemaining <= 30, 'timer-danger': timeRemaining <= 10 }">
-								<span x-text="Math.floor(timeRemaining / 60).toString().padStart(2, '0')"></span>:<span x-text="(timeRemaining % 60).toString().padStart(2, '0')"></span>
+						<!-- Skeleton: QuizHeader -->
+						<div class="skeleton-header">
+							<div class="skeleton-line" style="width:60%;height:6px;border-radius:9999px;margin-bottom:8px;"></div>
+							<div class="skeleton-line" style="width:20%;height:24px;border-radius:8px;margin-left:auto;"></div>
+						</div>
+						<!-- Skeleton: QuestionCard -->
+						<div class="card skeleton-card">
+							<div class="skeleton-line" style="width:40%;height:14px;border-radius:4px;margin-bottom:12px;"></div>
+							<div class="skeleton-line" style="width:100%;height:300px;border-radius:12px;margin-bottom:16px;"></div>
+						</div>
+						<!-- Skeleton: OptionsCard -->
+						<div class="card skeleton-card" style="margin-top:16px;">
+							<div class="skeleton-line" style="width:30%;height:14px;border-radius:4px;margin-bottom:16px;"></div>
+							<div class="skeleton-options-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+								<div class="skeleton-line" style="height:120px;border-radius:8px;"></div>
+								<div class="skeleton-line" style="height:120px;border-radius:8px;"></div>
+								<div class="skeleton-line" style="height:120px;border-radius:8px;"></div>
+								<div class="skeleton-line" style="height:120px;border-radius:8px;"></div>
 							</div>
 						</div>
-						<div class="quiz-progress-track">
-							<div class="quiz-progress-fill" :style="'width:' + (Object.keys(answers).length / 20 * 100) + '%'"></div>
+					</div>
+				</template>
+
+				<!-- ============================================================
+					 Step: Question-Active (20 questions with global 20min timer)
+					 ============================================================ -->
+				<template x-if="step === 'question-active'">
+					<div>
+						<!-- Quiz Header (sticky) -->
+						<div class="quiz-header" role="banner">
+							<div class="quiz-progress-header">
+								<div class="quiz-progress-info" role="progressbar" :aria-valuenow="currentQuestion + 1" aria-valuemin="0" aria-valuemax="20" :aria-label="'Progress soal: ' + (currentQuestion + 1) + ' dari 20'">
+									<span class="quiz-step-label">Soal</span>
+									<span class="quiz-step-current" x-text="currentQuestion + 1"></span>
+									<span class="quiz-step-total">/ 20</span>
+								</div>
+								<div class="quiz-timer" :class="{ 'timer-warning': totalTimeRemaining <= 30, 'timer-danger': totalTimeRemaining <= 10 }"
+									 aria-live="polite" aria-atomic="true" :aria-label="'Sisa waktu: ' + Math.floor(totalTimeRemaining / 60) + ' menit ' + (totalTimeRemaining % 60) + ' detik'">
+									<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+									<span x-text="Math.floor(totalTimeRemaining / 60).toString().padStart(2, '0')"></span>:<span x-text="(totalTimeRemaining % 60).toString().padStart(2, '0')"></span>
+								</div>
+							</div>
+							<div class="quiz-progress-track">
+								<div class="quiz-progress-fill" :style="'width:' + ((currentQuestion) / 20 * 100) + '%'"></div>
+							</div>
 						</div>
 
-						<!-- Question -->
-						<div x-show="questions.length > 0"
-							 x-transition:enter="transition ease-out duration-200"
+						<!-- Question Card -->
+						<div class="card question-card"
+							 x-transition:enter="transition ease-out duration-150"
 							 x-transition:enter-start="opacity-0"
 							 x-transition:enter-end="opacity-100"
-							 class="quiz-question-area">
-							<div class="quiz-q-number" x-text="'0' + (currentQuestion + 1)"></div>
-							<div class="quiz-domain-badge" x-text="questions[currentQuestion].domain"></div>
-
-							<!-- Question Image -->
+							 x-transition:leave="transition ease-in duration-150"
+							 x-transition:leave-start="opacity-100"
+							 x-transition:leave-end="opacity-0"
+							 :key="currentQuestion">
+							<div class="question-counter">Soal <span x-text="currentQuestion + 1"></span> dari 20</div>
+							<div class="divider"></div>
+							<div class="quiz-domain-badge" x-text="questions[currentQuestion]?.domain"></div>
 							<div class="quiz-image-wrapper">
-								<img :src="questions[currentQuestion].image_url" :alt="'Soal ' + (currentQuestion + 1)" class="quiz-question-image" loading="eager"/>
+								<img :src="questions[currentQuestion]?.image_url"
+									 :alt="'Soal nomor ' + (currentQuestion + 1)"
+									 class="quiz-question-image"
+									 loading="eager"/>
 							</div>
+						</div>
 
-							<!-- 4 Option Images A/B/C/D -->
-							<div class="quiz-options-grid">
+						<!-- Options Card -->
+						<div class="card options-card" style="margin-top:16px;">
+							<div class="options-card-title">Pilih jawaban yang tepat:</div>
+							<div class="quiz-options-grid" role="radiogroup" :aria-label="'Pilihan jawaban untuk soal ' + (currentQuestion + 1)">
 								<template x-for="(opt, oidx) in ['A', 'B', 'C', 'D']" :key="oidx">
 									<button type="button"
-											class="quiz-option-image"
-											:class="{ 'is-selected': getAnswer(questions[currentQuestion].question_code) === opt }"
-											@click="selectAnswer(opt)"
-											:aria-label="'Opsi ' + opt">
+											class="quiz-option-item"
+											:class="{ 'is-selected': getAnswer(questions[currentQuestion]?.question_code) === opt }"
+											:disabled="isAnimating"
+											role="radio"
+											:aria-checked="getAnswer(questions[currentQuestion]?.question_code) === opt"
+											:aria-label="'Pilih jawaban ' + opt"
+											@click="selectAnswer(opt)">
 										<span class="quiz-option-letter" x-text="opt"></span>
-										<img :src="questions[currentQuestion].options[opt]"
+										<img :src="questions[currentQuestion]?.options[opt]"
 											 :alt="'Opsi ' + opt"
 											 class="quiz-option-img"
 											 loading="eager"/>
@@ -93,99 +110,173 @@ templ quizContent() {
 					</div>
 				</template>
 
-				<!-- Step: Submitting -->
-				<div x-show="step === 'submitting'"
-					 x-transition:enter="transition ease-out duration-300"
-					 class="quiz-loading">
-					<div class="quiz-loading-card">
-						<div class="quiz-loading-dots">
-							<span class="quiz-loading-dot"></span>
-							<span class="quiz-loading-dot"></span>
-							<span class="quiz-loading-dot"></span>
+				<!-- ============================================================
+					 Step: Identity (nama & email after quiz, before submit)
+					 ============================================================ -->
+				<template x-if="step === 'identity'">
+					<div class="identity-step" style="display:flex;justify-content:center;padding:24px 0;">
+						<div class="card identity-card">
+							<h3 class="identity-heading">Simpan Hasil Tes Anda</h3>
+							<div class="divider"></div>
+							<div class="identity-summary">
+								<span class="identity-check">&#10003;</span>
+								<span class="identity-summary-text">Anda telah menjawab <strong x-text="Object.keys(answers).length"></strong> dari 20 soal.</span>
+							</div>
+							<p class="identity-description">Masukkan data diri untuk menyimpan hasil tes Anda.</p>
+							<form @submit.prevent="submitQuiz()" class="quiz-form">
+								<div class="quiz-field">
+									<label class="quiz-field-label" for="nama-identity">Nama Lengkap</label>
+									<input type="text" id="nama-identity" name="nama" required placeholder="Masukkan nama kamu" class="quiz-input" x-model="nama"/>
+								</div>
+								<div class="quiz-field">
+									<label class="quiz-field-label" for="email-identity">Email</label>
+									<input type="email" id="email-identity" name="email" required placeholder="contoh@email.com" class="quiz-input" x-model="email"/>
+								</div>
+								<div class="quiz-form-actions">
+									<button type="submit" class="btn-primary quiz-btn-submit" style="width:100%;justify-content:center;">
+										<span class="quiz-btn-inner">
+											Simpan & Lanjutkan
+											<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+										</span>
+									</button>
+								</div>
+							</form>
 						</div>
-						<p class="quiz-loading-text">Menganalisis jawaban...</p>
-						<div class="quiz-loading-bar"><div class="quiz-loading-fill"></div></div>
 					</div>
-				</div>
+				</template>
+
+				<!-- ============================================================
+					 Step: Submitting (overlay with spinner)
+					 ============================================================ -->
+				<template x-if="step === 'submitting'">
+					<div class="submitting-overlay" style="position:fixed;inset:0;background:rgba(255,255,255,0.8);z-index:50;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+						<div style="text-align:center;">
+							<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 16px;animation:spinner-rotate 1s linear infinite;">
+								<path d="M21 12a9 9 0 11-6.219-8.56"/>
+							</svg>
+							<p style="font-family:'Inter',system-ui,sans-serif;font-size:0.875rem;color:#475569;margin:0;">Menyimpan jawaban...</p>
+						</div>
+					</div>
+				</template>
+
 			</div>
 		</div>
 	</section>
 
 	<script>
-	function quizApp() {
-		return {
-			step: 'identity',     // 'identity' | 'quiz' | 'submitting'
+	// ShadowSelf Quiz Alpine.js App
+	// Per QUIZ.md — global 20min timer, quiz → identity → submit flow
+	document.addEventListener('alpine:init', () => {
+		Alpine.data('quizApp', () => ({
+			// ── State ──
+			step: 'loading',          // 'loading' | 'question-active' | 'identity' | 'submitting' | 'completed'
 			currentQuestion: 0,
-			timeRemaining: 120,
+			totalTimeRemaining: 1200, // 20 menit global (dalam detik)
 			timerInterval: null,
-			answers: {},           // { question_code: selected_option }
+			answers: {},             // { question_code: selected_option }
 			questions: [],
 			tabSwitches: 0,
 			nama: '',
 			email: '',
+			isAnimating: false,      // lock during 300ms delay before auto-advance
 
+			// ── Helper ──
 			getAnswer(code) {
 				return this.answers[code] || null;
 			},
 
+			// ── Init: fetch questions, start global timer ──
 			init() {
 				// Tab-switch detection (per IQTEST.md §9.2)
 				document.addEventListener('visibilitychange', () => {
 					if (document.hidden) this.tabSwitches++;
 				});
-			},
 
-			startQuiz() {
 				// Fetch 20 questions from API (tanpa correct_option — per §11.2)
 				fetch('/api/questions')
 					.then(r => r.json())
 					.then(qs => {
 						this.questions = qs;
-						this.step = 'quiz';
-						this.startQuestionTimer();
+						this.step = 'question-active';
+						this.startGlobalTimer();
+						// Focus first option on mount
+						this.$nextTick(() => {
+							const firstOpt = document.querySelector('.quiz-option-item');
+							if (firstOpt) firstOpt.focus();
+						});
 					})
 					.catch(() => {
 						alert('Gagal memuat soal. Silakan refresh halaman.');
 					});
 			},
 
-			startQuestionTimer() {
-				this.timeRemaining = 120;
+			// ── Global 20-minute timer ──
+			startGlobalTimer() {
 				clearInterval(this.timerInterval);
 				this.timerInterval = setInterval(() => {
-					this.timeRemaining--;
-					if (this.timeRemaining <= 0) this.autoAdvance();
+					this.totalTimeRemaining--;
+					if (this.totalTimeRemaining <= 0) {
+						this.handleTimeUp();
+					}
 				}, 1000);
 			},
 
+			// ── Time up: auto-submit all unanswered, go to identity ──
+			handleTimeUp() {
+				clearInterval(this.timerInterval);
+				// Mark all unanswered questions as null (timed out)
+				for (let i = this.currentQuestion; i < this.questions.length; i++) {
+					const qCode = this.questions[i].question_code;
+					if (!this.answers[qCode]) {
+						this.answers[qCode] = null;
+					}
+				}
+				this.goToIdentity();
+			},
+
+			// ── Select an answer ──
 			selectAnswer(option) {
-				const elapsedMs = (120 - this.timeRemaining) * 1000;
-				const qCode = this.questions[this.currentQuestion].question_code;
+				if (this.isAnimating) return;
+				const qCode = this.questions[this.currentQuestion]?.question_code;
+				if (!qCode) return;
+
+				// Mark selected
 				this.answers[qCode] = option;
 
-				clearInterval(this.timerInterval);
-				this.nextQuestion();
+				// 300ms visual feedback delay (per QUIZ.md §6.1)
+				this.isAnimating = true;
+				setTimeout(() => {
+					this.isAnimating = false;
+					this.nextQuestion();
+				}, 300);
 			},
 
-			autoAdvance() {
-				const qCode = this.questions[this.currentQuestion].question_code;
-				this.answers[qCode] = null; // timed out
-
-				this.nextQuestion();
-			},
-
+			// ── Advance to next question or finish quiz ──
 			nextQuestion() {
 				if (this.currentQuestion + 1 < this.questions.length) {
 					this.currentQuestion++;
-					this.startQuestionTimer();
+					// Focus management: focus first option
+					this.$nextTick(() => {
+						const firstOpt = document.querySelector('.quiz-option-item');
+						if (firstOpt) firstOpt.focus();
+					});
 				} else {
-					this.submitQuiz();
+					// All questions answered (or last question answered)
+					this.goToIdentity();
 				}
 			},
 
-			submitQuiz() {
-				this.step = 'submitting';
+			// ── Transition to identity step (post-quiz) ──
+			goToIdentity() {
 				clearInterval(this.timerInterval);
+				this.step = 'identity';
+			},
+
+			// ── Submit: validate form, send to server, redirect ──
+			submitQuiz() {
+				if (!this.nama.trim() || !this.email.trim()) return;
+
+				this.step = 'submitting';
 
 				// Build answers array for submission
 				const answersArray = this.questions.map(q => {
@@ -202,8 +293,8 @@ templ quizContent() {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify({
-						nama: this.nama,
-						email: this.email,
+						nama: this.nama.trim(),
+						email: this.email.trim(),
 						answers: answersArray,
 						tab_switch_count: this.tabSwitches,
 					}),
@@ -214,10 +305,10 @@ templ quizContent() {
 				})
 				.catch(() => {
 					alert('Terjadi kesalahan. Silakan coba lagi.');
-					this.step = 'quiz';
+					this.step = 'identity';
 				});
 			}
-		}
-	}
+		}));
+	});
 	</script>
 }
