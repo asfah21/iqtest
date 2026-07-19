@@ -299,7 +299,7 @@ func GetPaywallData(id string) (*models.PaywallData, error) {
 // GetQuizResult — mengambil data hasil kuis (dengan proteksi paywall)
 // ──────────────────────────────────────────────────────────────
 
-func mapIQToDarkTriad(skorLR, skorNA, skorSA, skorLV int) (narsisme, machiavellian, psikopati int) {
+func mapIQToDarkTriad(skorLR, skorNA, skorSA, _ int) (narsisme, machiavellian, psikopati int) {
 	// Map IQ Test raw scores to Dark Triad percentile-like values (0-100)
 	// Per IQTEST.md §8.3: L/R → Narcissism, N/A → Machiavellianism, S/A → Psychopathy
 	// Use absolute values capped at a reasonable scale
