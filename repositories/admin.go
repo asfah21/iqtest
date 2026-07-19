@@ -7,7 +7,7 @@ import (
 
 // GetAllUsers mengambil semua data user dari database
 func GetAllUsers() ([]models.User, error) {
-	query := `SELECT id, nama, email, skor_ei, skor_sn, skor_tf, skor_jp, mbti_tipe, status_pembayaran 
+	query := `SELECT id, nama, email, skor_lr, skor_na, skor_sa, skor_lv, iq_tipe, status_pembayaran 
               FROM users_test ORDER BY id DESC`
 
 	rows, err := database.DB.Query(query)
@@ -19,7 +19,7 @@ func GetAllUsers() ([]models.User, error) {
 	var users []models.User
 	for rows.Next() {
 		var u models.User
-		err := rows.Scan(&u.ID, &u.Nama, &u.Email, &u.SkorEI, &u.SkorSN, &u.SkorTF, &u.SkorJP, &u.MBTITipe, &u.StatusPembayaran)
+		err := rows.Scan(&u.ID, &u.Nama, &u.Email, &u.SkorLR, &u.SkorNA, &u.SkorSA, &u.SkorLV, &u.IQTipe, &u.StatusPembayaran)
 		if err != nil {
 			return nil, err
 		}
@@ -32,10 +32,10 @@ func GetAllUsers() ([]models.User, error) {
 // GetUserByID mengambil data user berdasarkan ID
 func GetUserByID(id string) (*models.User, error) {
 	user := &models.User{}
-	query := `SELECT id, nama, email, skor_ei, skor_sn, skor_tf, skor_jp, mbti_tipe, status_pembayaran 
+	query := `SELECT id, nama, email, skor_lr, skor_na, skor_sa, skor_lv, iq_tipe, status_pembayaran 
               FROM users_test WHERE id = $1`
 	err := database.DB.QueryRow(query, id).Scan(
-		&user.ID, &user.Nama, &user.Email, &user.SkorEI, &user.SkorSN, &user.SkorTF, &user.SkorJP, &user.MBTITipe, &user.StatusPembayaran,
+		&user.ID, &user.Nama, &user.Email, &user.SkorLR, &user.SkorNA, &user.SkorSA, &user.SkorLV, &user.IQTipe, &user.StatusPembayaran,
 	)
 	if err != nil {
 		return nil, err

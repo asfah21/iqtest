@@ -1,60 +1,60 @@
 package models
 
-// User merepresentasikan data pengguna yang mengisi kuesioner MBTI
+// User merepresentasikan data pengguna yang mengisi kuesioner IQ Test
 type User struct {
 	ID               string `json:"id"`
 	Nama             string `json:"nama"`
 	Email            string `json:"email"`
-	SkorEI           int    `json:"skor_ei"`   // Raw score E/I (positif = E, negatif = I)
-	SkorSN           int    `json:"skor_sn"`   // Raw score S/N (positif = S, negatif = N)
-	SkorTF           int    `json:"skor_tf"`   // Raw score T/F (positif = T, negatif = F)
-	SkorJP           int    `json:"skor_jp"`   // Raw score J/P (positif = J, negatif = P)
-	MBTITipe         string `json:"mbti_tipe"` // e.g., "INTJ"
+	SkorLR           int    `json:"skor_lr"` // Raw score L/R (positif = L, negatif = R)
+	SkorNA           int    `json:"skor_na"` // Raw score N/A (positif = N, negatif = A)
+	SkorSA           int    `json:"skor_sa"` // Raw score S/A (positif = S, negatif = A)
+	SkorLV           int    `json:"skor_lv"` // Raw score L/V (positif = L, negatif = V)
+	IQTipe           string `json:"iq_tipe"` // e.g., "LNSL"
 	StatusPembayaran string `json:"status_pembayaran"`
 }
 
-// DikotomiScore menyimpan hasil skoring untuk satu sumbu dikotomi
-type DikotomiScore struct {
+// DimensionScore menyimpan hasil skoring untuk satu dimensi kognitif
+type DimensionScore struct {
 	RawScore    float64 `json:"raw_score"`
 	PoleAScore  float64 `json:"pole_a_score"`
 	PoleBScore  float64 `json:"pole_b_score"`
 	MaxPossible float64 `json:"max_possible"`
 	Preference  string  `json:"preference"`
-	PCI         float64 `json:"pci"`
+	SCI         float64 `json:"sci"`
 	Strength    string  `json:"strength"`
 }
 
-// CognitiveStack menyimpan urutan 4 fungsi kognitif hasil derivasi
-type CognitiveStack struct {
-	Dominant  string `json:"dominant"`
-	Auxiliary string `json:"auxiliary"`
-	Tertiary  string `json:"tertiary"`
-	Inferior  string `json:"inferior"`
+// CognitiveProfile menyimpan urutan 4 kemampuan kognitif hasil derivasi
+type CognitiveProfile struct {
+	Dominant      string `json:"dominant"`
+	Auxiliary     string `json:"auxiliary"`
+	Complementary string `json:"complementary"`
+	Developing    string `json:"developing"`
 }
 
-// MBTIResult adalah output akhir kalkulasi satu sesi tes
-type MBTIResult struct {
-	Type           string                   `json:"type"`
-	Scores         map[string]DikotomiScore `json:"scores"`
-	CognitiveStack CognitiveStack           `json:"cognitive_stack"`
+// IQTestResult adalah output akhir kalkulasi satu sesi tes
+type IQTestResult struct {
+	Type             string                    `json:"type"`
+	Scores           map[string]DimensionScore `json:"scores"`
+	CognitiveProfile CognitiveProfile          `json:"cognitive_profile"`
 }
 
 // QuizResult adalah data yang dikirim ke template hasil
 type QuizResult struct {
-	Nama string
-	MBTI string
+	Nama   string
+	IQTipe string
 
 	// Raw scores
-	SkorEI int
-	SkorSN int
-	SkorTF int
-	SkorJP int
+	SkorLR int
+	SkorNA int
+	SkorSA int
+	SkorLV int
 
-	// Dikotomi scores
-	Scores map[string]DikotomiScore
+	// Dimension scores
+	Scores map[string]DimensionScore
 
-	// Cognitive stack
-	CognitiveStack CognitiveStack
+	// Cognitive profile
+	CognitiveProfile CognitiveProfile
 
 	// Narrative fields
 	ExecutiveSummary    string

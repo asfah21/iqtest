@@ -18,12 +18,12 @@ templ userDetailContent(user *models.User) {
 				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">ID</span><span class="text-sm">{ user.ID }</span></div>
 				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Nama</span><span class="text-sm">{ user.Nama }</span></div>
 				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Email</span><span class="text-sm">{ user.Email }</span></div>
-				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Tipe MBTI</span><span class="text-sm font-bold">{ user.MBTITipe }</span></div>
+				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">IQ Tipe</span><span class="text-sm font-bold">{ user.IQTipe }</span></div>
 				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Status</span><span class="text-sm">{ user.StatusPembayaran }</span></div>
-				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Skor E/I</span><span class="text-sm">{ strconv.Itoa(user.SkorEI) }</span></div>
-				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Skor S/N</span><span class="text-sm">{ strconv.Itoa(user.SkorSN) }</span></div>
-				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Skor T/F</span><span class="text-sm">{ strconv.Itoa(user.SkorTF) }</span></div>
-				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Skor J/P</span><span class="text-sm">{ strconv.Itoa(user.SkorJP) }</span></div>
+				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Skor L/R</span><span class="text-sm">{ strconv.Itoa(user.SkorLR) }</span></div>
+				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Skor N/A</span><span class="text-sm">{ strconv.Itoa(user.SkorNA) }</span></div>
+				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Skor S/A</span><span class="text-sm">{ strconv.Itoa(user.SkorSA) }</span></div>
+				<div class="flex"><span class="w-32 text-sm text-[var(--textMuted)]">Skor L/V</span><span class="text-sm">{ strconv.Itoa(user.SkorLV) }</span></div>
 			</div>
 			<div class="mt-6"><a href="/admin/dashboard" class="btn-ghost text-sm">&larr; Kembali ke Dashboard</a></div>
 		</div>

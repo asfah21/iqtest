@@ -6,8 +6,8 @@ import (
 )
 
 // ──────────────────────────────────────────────────────────────
-// Narrative Generator — transforms raw Dark Triad scores into
-// a premium, personalized relationship assessment report.
+// Narrative Generator — transforms raw Dark Triad scores (from IQ Test)
+// into a premium, personalized cognitive assessment report.
 //
 // Every narrative is dynamically constructed from score combinations
 // so no two results read exactly the same.

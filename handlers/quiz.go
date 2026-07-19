@@ -18,15 +18,15 @@ func SubmitTest(c *gin.Context) {
 	email := c.PostForm("email")
 	nama := c.PostForm("nama")
 
-	// Baca 20 jawaban dari form (q_Q_EI_001, q_Q_SN_001, dll.)
+	// Baca 20 jawaban dari form (q_Q_LR_001, q_Q_NA_001, dll.)
 	answers := make(map[string]float64)
 
 	// Daftar ID soal yang dikirim dari frontend
 	questionIDs := []string{
-		"Q_EI_001", "Q_EI_002", "Q_EI_003", "Q_EI_004", "Q_EI_005",
-		"Q_SN_001", "Q_SN_002", "Q_SN_003", "Q_SN_004", "Q_SN_005", "Q_SN_006",
-		"Q_TF_001", "Q_TF_002", "Q_TF_003", "Q_TF_004", "Q_TF_005",
-		"Q_JP_001", "Q_JP_002", "Q_JP_003", "Q_JP_004",
+		"Q_LR_001", "Q_LR_002", "Q_LR_003", "Q_LR_004", "Q_LR_005",
+		"Q_NA_001", "Q_NA_002", "Q_NA_003", "Q_NA_004", "Q_NA_005", "Q_NA_006",
+		"Q_SA_001", "Q_SA_002", "Q_SA_003", "Q_SA_004", "Q_SA_005",
+		"Q_LV_001", "Q_LV_002", "Q_LV_003", "Q_LV_004",
 	}
 
 	for _, qID := range questionIDs {
@@ -112,10 +112,10 @@ func KonfirmasiBayar(c *gin.Context) {
 // quizResultToHasilData converts the service-layer QuizResult to the template data type.
 // Narrative fields are now populated by GetQuizResult via GenerateAllNarratives.
 func quizResultToHasilData(r *models.QuizResult) types.HasilPageData {
-	// Map MBTI raw scores to Dark Triad percentile display
-	narsisme := absInt(r.SkorEI)
-	machiavellian := absInt(r.SkorSN)
-	psikopati := absInt(r.SkorTF)
+	// Map IQ Test raw scores to Dark Triad percentile display
+	narsisme := absInt(r.SkorLR)
+	machiavellian := absInt(r.SkorNA)
+	psikopati := absInt(r.SkorSA)
 
 	return types.HasilPageData{
 		Nama:                r.Nama,
@@ -132,6 +132,7 @@ func quizResultToHasilData(r *models.QuizResult) types.HasilPageData {
 	}
 }
 
+// absInt returns the absolute value of x.
 func absInt(x int) int {
 	if x < 0 {
 		return -x

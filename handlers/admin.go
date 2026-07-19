@@ -72,11 +72,11 @@ func ShowDashboard(c *gin.Context) {
 			Nama:       u.Nama,
 			Email:      u.Email,
 			SudahBayar: isPaid,
-			MBTITipe:   u.MBTITipe,
-			SkorEI:     u.SkorEI,
-			SkorSN:     u.SkorSN,
-			SkorTF:     u.SkorTF,
-			SkorJP:     u.SkorJP,
+			IQTipe:     u.IQTipe,
+			SkorLR:     u.SkorLR,
+			SkorNA:     u.SkorNA,
+			SkorSA:     u.SkorSA,
+			SkorLV:     u.SkorLV,
 			Dibuat:     "-",
 		})
 	}

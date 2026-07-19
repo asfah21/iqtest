@@ -7,46 +7,46 @@ import (
 )
 
 // ──────────────────────────────────────────────────────────────
-// Question Definition — metadata setiap soal MBTI
+// Question Definition — metadata setiap soal IQ Test
 // ──────────────────────────────────────────────────────────────
 
 type questionDef struct {
-	ID            string  // e.g., "Q_EI_001"
-	Dikotomi      string  // "EI" | "SN" | "TF" | "JP"
-	PolePrimary   string  // "E"|"I"|"S"|"N"|"T"|"F"|"J"|"P"
+	ID            string  // e.g., "Q_LR_001"
+	Dikotomi      string  // "LR" | "NA" | "SA" | "LV"
+	PolePrimary   string  // "L"|"R"|"N"|"A"|"S"|"A"|"L"|"V"
 	Weight        float64 // bobot soal
 	ReverseScored bool    // apakah reverse scored
 }
 
-// questionBank adalah bank soal MBTI (20 soal)
+// questionBank adalah bank soal IQ Test (20 soal)
 var questionBank = []questionDef{
-	// E/I (5 soal)
-	{ID: "Q_EI_001", Dikotomi: "EI", PolePrimary: "E", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_EI_002", Dikotomi: "EI", PolePrimary: "I", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_EI_003", Dikotomi: "EI", PolePrimary: "E", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_EI_004", Dikotomi: "EI", PolePrimary: "I", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_EI_005", Dikotomi: "EI", PolePrimary: "E", Weight: 1.5, ReverseScored: true},
+	// L/R (5 soal)
+	{ID: "Q_LR_001", Dikotomi: "LR", PolePrimary: "L", Weight: 2.0, ReverseScored: false},
+	{ID: "Q_LR_002", Dikotomi: "LR", PolePrimary: "R", Weight: 2.0, ReverseScored: false},
+	{ID: "Q_LR_003", Dikotomi: "LR", PolePrimary: "L", Weight: 1.5, ReverseScored: false},
+	{ID: "Q_LR_004", Dikotomi: "LR", PolePrimary: "R", Weight: 1.5, ReverseScored: false},
+	{ID: "Q_LR_005", Dikotomi: "LR", PolePrimary: "L", Weight: 1.5, ReverseScored: true},
 
-	// S/N (6 soal)
-	{ID: "Q_SN_001", Dikotomi: "SN", PolePrimary: "S", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_SN_002", Dikotomi: "SN", PolePrimary: "N", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_SN_003", Dikotomi: "SN", PolePrimary: "S", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_SN_004", Dikotomi: "SN", PolePrimary: "N", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_SN_005", Dikotomi: "SN", PolePrimary: "S", Weight: 1.5, ReverseScored: true},
-	{ID: "Q_SN_006", Dikotomi: "SN", PolePrimary: "N", Weight: 1.5, ReverseScored: true},
+	// N/A (6 soal)
+	{ID: "Q_NA_001", Dikotomi: "NA", PolePrimary: "N", Weight: 2.0, ReverseScored: false},
+	{ID: "Q_NA_002", Dikotomi: "NA", PolePrimary: "A", Weight: 2.0, ReverseScored: false},
+	{ID: "Q_NA_003", Dikotomi: "NA", PolePrimary: "N", Weight: 1.5, ReverseScored: false},
+	{ID: "Q_NA_004", Dikotomi: "NA", PolePrimary: "A", Weight: 1.5, ReverseScored: false},
+	{ID: "Q_NA_005", Dikotomi: "NA", PolePrimary: "N", Weight: 1.5, ReverseScored: true},
+	{ID: "Q_NA_006", Dikotomi: "NA", PolePrimary: "A", Weight: 1.5, ReverseScored: true},
 
-	// T/F (5 soal)
-	{ID: "Q_TF_001", Dikotomi: "TF", PolePrimary: "T", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_TF_002", Dikotomi: "TF", PolePrimary: "F", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_TF_003", Dikotomi: "TF", PolePrimary: "T", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_TF_004", Dikotomi: "TF", PolePrimary: "F", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_TF_005", Dikotomi: "TF", PolePrimary: "T", Weight: 1.5, ReverseScored: true},
+	// S/A (5 soal)
+	{ID: "Q_SA_001", Dikotomi: "SA", PolePrimary: "S", Weight: 2.0, ReverseScored: false},
+	{ID: "Q_SA_002", Dikotomi: "SA", PolePrimary: "A", Weight: 2.0, ReverseScored: false},
+	{ID: "Q_SA_003", Dikotomi: "SA", PolePrimary: "S", Weight: 1.5, ReverseScored: false},
+	{ID: "Q_SA_004", Dikotomi: "SA", PolePrimary: "A", Weight: 1.5, ReverseScored: false},
+	{ID: "Q_SA_005", Dikotomi: "SA", PolePrimary: "S", Weight: 1.5, ReverseScored: true},
 
-	// J/P (4 soal)
-	{ID: "Q_JP_001", Dikotomi: "JP", PolePrimary: "J", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_JP_002", Dikotomi: "JP", PolePrimary: "P", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_JP_003", Dikotomi: "JP", PolePrimary: "J", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_JP_004", Dikotomi: "JP", PolePrimary: "P", Weight: 1.5, ReverseScored: true},
+	// L/V (4 soal)
+	{ID: "Q_LV_001", Dikotomi: "LV", PolePrimary: "L", Weight: 2.0, ReverseScored: false},
+	{ID: "Q_LV_002", Dikotomi: "LV", PolePrimary: "V", Weight: 2.0, ReverseScored: false},
+	{ID: "Q_LV_003", Dikotomi: "LV", PolePrimary: "L", Weight: 1.5, ReverseScored: false},
+	{ID: "Q_LV_004", Dikotomi: "LV", PolePrimary: "V", Weight: 1.5, ReverseScored: true},
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -63,134 +63,117 @@ var likertContribution = map[int]float64{
 }
 
 // ──────────────────────────────────────────────────────────────
-// Axis opposites untuk derivasi cognitive stack
+// DeriveCognitiveProfile — menurunkan profil kognitif dari 4 huruf IQ Test type
 // ──────────────────────────────────────────────────────────────
 
-var axisOpposites = map[string]string{
-	"Se": "Ni", "Ni": "Se",
-	"Si": "Ne", "Ne": "Si",
-	"Te": "Fi", "Fi": "Te",
-	"Ti": "Fe", "Fe": "Ti",
-}
-
-func axisOpposite(fn string) string {
-	return axisOpposites[fn]
-}
-
-// ──────────────────────────────────────────────────────────────
-// DeriveCognitiveStack — menurunkan stack fungsi kognitif dari 4 huruf MBTI
-// ──────────────────────────────────────────────────────────────
-
-func DeriveCognitiveStack(mbti string) models.CognitiveStack {
-	if len(mbti) < 4 {
-		return models.CognitiveStack{}
+func DeriveCognitiveProfile(iqType string) models.CognitiveProfile {
+	if len(iqType) < 4 {
+		return models.CognitiveProfile{}
 	}
 
-	eI := string(mbti[0]) // "E" atau "I"
-	sN := string(mbti[1]) // "S" atau "N"
-	tF := string(mbti[2]) // "T" atau "F"
-	jP := string(mbti[3]) // "J" atau "P"
+	lR := string(iqType[0]) // "L" atau "R"
+	nA := string(iqType[1]) // "N" atau "A"
+	sA := string(iqType[2]) // "S" atau "A"
+	lV := string(iqType[3]) // "L" atau "V"
 
-	// Tentukan fungsi persepsi
-	perceiving := "Se"
-	perceivingI := "Si"
-	if sN == "N" {
-		perceiving = "Ne"
-		perceivingI = "Ni"
-	}
+	var dominant, auxiliary, complementary, developing string
 
-	// Tentukan fungsi penilaian
-	judging := "Te"
-	judgingI := "Ti"
-	if tF == "F" {
-		judging = "Fe"
-		judgingI = "Fi"
-	}
-
-	var dominant, auxiliary, tertiary, inferior string
-
-	if eI == "E" {
-		if jP == "J" {
-			// Extravert-Judging: Dominant = fungsi judging ekstraverted
-			dominant = judging
-			auxiliary = perceivingI
-			tertiary = axisOpposite(perceivingI)
-			inferior = axisOpposite(dominant)
+	// Derivation algorithm per IQTEST.md §3.4
+	if lR == "L" {
+		if nA == "N" {
+			dominant = "Logical"
+			auxiliary = "Numerical"
 		} else {
-			// Extravert-Perceiving: Dominant = fungsi perceiving ekstraverted
-			dominant = perceiving
-			auxiliary = judgingI
-			tertiary = axisOpposite(judgingI)
-			inferior = axisOpposite(dominant)
+			dominant = "Logical"
+			auxiliary = "Spatial"
 		}
 	} else {
-		if jP == "J" {
-			// Introvert-Judging: Dominant = fungsi judging introverted
-			dominant = judgingI
-			auxiliary = perceiving
-			tertiary = axisOpposite(perceiving)
-			inferior = axisOpposite(dominant)
+		if sA == "S" {
+			dominant = "Spatial"
+			auxiliary = "Reasoning"
 		} else {
-			// Introvert-Perceiving: Dominant = fungsi perceiving introverted
-			dominant = perceivingI
-			auxiliary = judging
-			tertiary = axisOpposite(judging)
-			inferior = axisOpposite(dominant)
+			dominant = "Numerical"
+			auxiliary = "Verbal"
 		}
 	}
 
-	return models.CognitiveStack{
-		Dominant:  dominant,
-		Auxiliary: auxiliary,
-		Tertiary:  tertiary,
-		Inferior:  inferior,
+	// Complementary and Developing are derived from the remaining dimensions
+	// Simplified production rules based on IQTEST.md §3.4
+	if lR == "L" && nA == "N" && sA == "S" && lV == "V" {
+		complementary = "Spatial"
+		developing = "Verbal"
+	} else if lR == "L" && nA == "A" && sA == "A" && lV == "L" {
+		complementary = "Analytical"
+		developing = "Verbal"
+	} else if lR == "R" && nA == "N" && sA == "S" && lV == "V" {
+		complementary = "Numerical"
+		developing = "Verbal"
+	} else if lR == "R" && nA == "A" && sA == "A" && lV == "V" {
+		complementary = "Reasoning"
+		developing = "Linguistic"
+	} else {
+		// Fallback: assign remaining poles
+		if lV == "L" {
+			complementary = "Linguistic"
+			developing = "Verbal"
+		} else {
+			complementary = "Verbal"
+			developing = "Linguistic"
+		}
+	}
+
+	return models.CognitiveProfile{
+		Dominant:      dominant,
+		Auxiliary:     auxiliary,
+		Complementary: complementary,
+		Developing:    developing,
 	}
 }
 
 // ──────────────────────────────────────────────────────────────
-// buildDikotomiScore — menghitung DikotomiScore dari akumulator
+// buildDimensionScore — menghitung DimensionScore dari akumulator
 // ──────────────────────────────────────────────────────────────
 
-func buildDikotomiScore(poleA, poleB, max float64, poleALetter, poleBLetter string) models.DikotomiScore {
+func buildDimensionScore(poleA, poleB, max float64, poleALetter, poleBLetter string) models.DimensionScore {
 	rawScore := poleA - poleB
 	preference := poleALetter
 	if rawScore < 0 {
 		preference = poleBLetter
 	}
 
-	pci := 0.0
+	sci := 0.0
 	if max > 0 {
-		pci = math.Abs(rawScore) / max * 100
+		sci = math.Abs(rawScore) / max * 100
 	}
-	pci = math.Round(pci*10) / 10
+	sci = math.Round(sci*10) / 10
 
 	strength := "very_clear"
 	switch {
-	case pci <= 25:
+	case sci <= 25:
 		strength = "slight"
-	case pci <= 50:
+	case sci <= 50:
 		strength = "moderate"
-	case pci <= 75:
+	case sci <= 75:
 		strength = "clear"
 	}
 
-	return models.DikotomiScore{
+	return models.DimensionScore{
 		RawScore:    rawScore,
 		PoleAScore:  poleA,
 		PoleBScore:  poleB,
 		MaxPossible: max,
 		Preference:  preference,
-		PCI:         pci,
+		SCI:         sci,
 		Strength:    strength,
 	}
 }
 
 // ──────────────────────────────────────────────────────────────
-// CalculateMBTI — menghitung hasil MBTI dari jawaban
+// CalculateIQResult — menghitung hasil IQ Test dari jawaban
 // ──────────────────────────────────────────────────────────────
 
-func CalculateMBTI(answers map[string]float64) models.MBTIResult {
-	// Inisialisasi akumulator per dikotomi
+func CalculateIQResult(answers map[string]float64) models.IQTestResult {
+	// Inisialisasi akumulator per dimensi
 	type acc struct {
 		poleA float64
 		poleB float64
@@ -198,10 +181,10 @@ func CalculateMBTI(answers map[string]float64) models.MBTIResult {
 	}
 
 	accumulators := map[string]*acc{
-		"EI": {},
-		"SN": {},
-		"TF": {},
-		"JP": {},
+		"LR": {},
+		"NA": {},
+		"SA": {},
+		"LV": {},
 	}
 
 	// Proses setiap jawaban
@@ -226,14 +209,14 @@ func CalculateMBTI(answers map[string]float64) models.MBTIResult {
 		// Tentukan pole: pole_primary = A, pole_opposite = B
 		isPoleA := false
 		switch q.Dikotomi {
-		case "EI":
-			isPoleA = q.PolePrimary == "E"
-		case "SN":
+		case "LR":
+			isPoleA = q.PolePrimary == "L"
+		case "NA":
+			isPoleA = q.PolePrimary == "N"
+		case "SA":
 			isPoleA = q.PolePrimary == "S"
-		case "TF":
-			isPoleA = q.PolePrimary == "T"
-		case "JP":
-			isPoleA = q.PolePrimary == "J"
+		case "LV":
+			isPoleA = q.PolePrimary == "L"
 		}
 
 		if adjusted <= 3 {
@@ -255,45 +238,45 @@ func CalculateMBTI(answers map[string]float64) models.MBTIResult {
 		acc.max += q.Weight
 	}
 
-	// Hitung DikotomiScore untuk setiap dikotomi
-	scores := map[string]models.DikotomiScore{
-		"EI": buildDikotomiScore(accumulators["EI"].poleA, accumulators["EI"].poleB, accumulators["EI"].max, "E", "I"),
-		"SN": buildDikotomiScore(accumulators["SN"].poleA, accumulators["SN"].poleB, accumulators["SN"].max, "S", "N"),
-		"TF": buildDikotomiScore(accumulators["TF"].poleA, accumulators["TF"].poleB, accumulators["TF"].max, "T", "F"),
-		"JP": buildDikotomiScore(accumulators["JP"].poleA, accumulators["JP"].poleB, accumulators["JP"].max, "J", "P"),
+	// Hitung DimensionScore untuk setiap dimensi
+	scores := map[string]models.DimensionScore{
+		"LR": buildDimensionScore(accumulators["LR"].poleA, accumulators["LR"].poleB, accumulators["LR"].max, "L", "R"),
+		"NA": buildDimensionScore(accumulators["NA"].poleA, accumulators["NA"].poleB, accumulators["NA"].max, "N", "A"),
+		"SA": buildDimensionScore(accumulators["SA"].poleA, accumulators["SA"].poleB, accumulators["SA"].max, "S", "A"),
+		"LV": buildDimensionScore(accumulators["LV"].poleA, accumulators["LV"].poleB, accumulators["LV"].max, "L", "V"),
 	}
 
-	// Derive tipe MBTI
-	mbtiType := scores["EI"].Preference +
-		scores["SN"].Preference +
-		scores["TF"].Preference +
-		scores["JP"].Preference
+	// Derive IQ Test type
+	iqType := scores["LR"].Preference +
+		scores["NA"].Preference +
+		scores["SA"].Preference +
+		scores["LV"].Preference
 
-	// Derive cognitive stack
-	cognitiveStack := DeriveCognitiveStack(mbtiType)
+	// Derive cognitive profile
+	cognitiveProfile := DeriveCognitiveProfile(iqType)
 
-	return models.MBTIResult{
-		Type:           mbtiType,
-		Scores:         scores,
-		CognitiveStack: cognitiveStack,
+	return models.IQTestResult{
+		Type:             iqType,
+		Scores:           scores,
+		CognitiveProfile: cognitiveProfile,
 	}
 }
 
 // ──────────────────────────────────────────────────────────────
-// ProcessQuizAnswers — memproses 20 jawaban kuesioner MBTI
+// ProcessQuizAnswers — memproses 20 jawaban kuesioner IQ Test
 // ──────────────────────────────────────────────────────────────
 
 func ProcessQuizAnswers(email, nama string, rawAnswers map[string]float64) (string, error) {
-	// Hitung MBTI
-	result := CalculateMBTI(rawAnswers)
+	// Hitung IQ Test
+	result := CalculateIQResult(rawAnswers)
 
 	// Ambil raw scores (integer) untuk disimpan di database
-	skorEI := int(result.Scores["EI"].RawScore)
-	skorSN := int(result.Scores["SN"].RawScore)
-	skorTF := int(result.Scores["TF"].RawScore)
-	skorJP := int(result.Scores["JP"].RawScore)
+	skorLR := int(result.Scores["LR"].RawScore)
+	skorNA := int(result.Scores["NA"].RawScore)
+	skorSA := int(result.Scores["SA"].RawScore)
+	skorLV := int(result.Scores["LV"].RawScore)
 
-	userID, err := repositories.InsertUser(email, nama, skorEI, skorSN, skorTF, skorJP, result.Type)
+	userID, err := repositories.InsertUser(email, nama, skorLR, skorNA, skorSA, skorLV, result.Type)
 	if err != nil {
 		return "", err
 	}
@@ -316,18 +299,19 @@ func GetPaywallData(id string) (*models.PaywallData, error) {
 // GetQuizResult — mengambil data hasil kuis (dengan proteksi paywall)
 // ──────────────────────────────────────────────────────────────
 
-func mapMBTIToDarkTriad(skorEI, skorSN, skorTF, skorJP int) (narsisme, machiavellian, psikopati int) {
-	// Map MBTI raw scores to Dark Triad percentile-like values (0-100)
+func mapIQToDarkTriad(skorLR, skorNA, skorSA, skorLV int) (narsisme, machiavellian, psikopati int) {
+	// Map IQ Test raw scores to Dark Triad percentile-like values (0-100)
+	// Per IQTEST.md §8.3: L/R → Narcissism, N/A → Machiavellianism, S/A → Psychopathy
 	// Use absolute values capped at a reasonable scale
-	narsisme = absInt(skorEI) * 5 // E/I dimension → Narsisme
+	narsisme = absInt(skorLR) * 5 // L/R dimension → Narsisme
 	if narsisme > 100 {
 		narsisme = 100
 	}
-	machiavellian = absInt(skorSN) * 5 // S/N dimension → Machiavellian
+	machiavellian = absInt(skorNA) * 5 // N/A dimension → Machiavellian
 	if machiavellian > 100 {
 		machiavellian = 100
 	}
-	psikopati = absInt(skorTF) * 5 // T/F dimension → Psikopati
+	psikopati = absInt(skorSA) * 5 // S/A dimension → Psikopati
 	if psikopati > 100 {
 		psikopati = 100
 	}
@@ -353,15 +337,15 @@ func GetQuizResult(id string) (*models.QuizResult, error) {
 	}
 
 	// Build scores map for template
-	scores := map[string]models.DikotomiScore{
-		"EI": buildDikotomiScore(float64(user.SkorEI), 0, float64(user.SkorEI), "E", "I"),
-		"SN": buildDikotomiScore(float64(user.SkorSN), 0, float64(user.SkorSN), "S", "N"),
-		"TF": buildDikotomiScore(float64(user.SkorTF), 0, float64(user.SkorTF), "T", "F"),
-		"JP": buildDikotomiScore(float64(user.SkorJP), 0, float64(user.SkorJP), "J", "P"),
+	scores := map[string]models.DimensionScore{
+		"LR": buildDimensionScore(float64(user.SkorLR), 0, float64(user.SkorLR), "L", "R"),
+		"NA": buildDimensionScore(float64(user.SkorNA), 0, float64(user.SkorNA), "N", "A"),
+		"SA": buildDimensionScore(float64(user.SkorSA), 0, float64(user.SkorSA), "S", "A"),
+		"LV": buildDimensionScore(float64(user.SkorLV), 0, float64(user.SkorLV), "L", "V"),
 	}
 
-	// Map MBTI raw scores to Dark Triad dimensions for narrative generation
-	narsisme, machiavellian, psikopati := mapMBTIToDarkTriad(user.SkorEI, user.SkorSN, user.SkorTF, user.SkorJP)
+	// Map IQ Test raw scores to Dark Triad dimensions for narrative generation
+	narsisme, machiavellian, psikopati := mapIQToDarkTriad(user.SkorLR, user.SkorNA, user.SkorSA, user.SkorLV)
 
 	// Generate all narratives using the Dark Triad scoring system
 	execSummary, relProfile, kekuatan, areaPerhatian, relInsight, compatNotes, refQuestions :=
@@ -369,13 +353,13 @@ func GetQuizResult(id string) (*models.QuizResult, error) {
 
 	return &models.QuizResult{
 		Nama:                user.Nama,
-		MBTI:                user.MBTITipe,
-		SkorEI:              user.SkorEI,
-		SkorSN:              user.SkorSN,
-		SkorTF:              user.SkorTF,
-		SkorJP:              user.SkorJP,
+		IQTipe:              user.IQTipe,
+		SkorLR:              user.SkorLR,
+		SkorNA:              user.SkorNA,
+		SkorSA:              user.SkorSA,
+		SkorLV:              user.SkorLV,
 		Scores:              scores,
-		CognitiveStack:      DeriveCognitiveStack(user.MBTITipe),
+		CognitiveProfile:    DeriveCognitiveProfile(user.IQTipe),
 		ExecutiveSummary:    execSummary,
 		RelationshipProfile: relProfile,
 		Kekuatan:            kekuatan,

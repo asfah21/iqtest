@@ -116,7 +116,7 @@ func dashboardContent(data types.DashboardPageData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div></div><div class=\"card p-6\"><h2 class=\"text-lg font-bold mb-4\">Daftar Pengguna</h2><table class=\"w-full text-sm\"><thead><tr class=\"text-left border-b\"><th class=\"pb-2 pr-4\">Nama</th><th class=\"pb-2 pr-4\">Email</th><th class=\"pb-2 pr-4\">MBTI</th><th class=\"pb-2 pr-4\">Status</th><th class=\"pb-2\">Aksi</th></tr></thead> <tbody>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div></div><div class=\"card p-6\"><h2 class=\"text-lg font-bold mb-4\">Daftar Pengguna</h2><table class=\"w-full text-sm\"><thead><tr class=\"text-left border-b\"><th class=\"pb-2 pr-4\">Nama</th><th class=\"pb-2 pr-4\">Email</th><th class=\"pb-2 pr-4\">IQ Tipe</th><th class=\"pb-2 pr-4\">Status</th><th class=\"pb-2\">Aksi</th></tr></thead> <tbody>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -152,9 +152,9 @@ func dashboardContent(data types.DashboardPageData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var9 string
-			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(user.MBTITipe)
+			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(user.IQTipe)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/dashboard_page.templ`, Line: 38, Col: 44}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/dashboard_page.templ`, Line: 38, Col: 42}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {
