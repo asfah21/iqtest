@@ -30,8 +30,8 @@
 | Attribute | Value |
 |-----------|-------|
 | **Product Name** | ShadowSelf |
-| **Domain** | Personality & Cognitive Assessment |
-| **Core Test** | MBTI-Based Personality Assessment (20-question variant) |
+| **Domain** | Cognitive Assessment |
+| **Core Test** | IQ Test-Based Cognitive Assessment (20-question variant) |
 | **Framework** | Go (Gin) + PostgreSQL + templ |
 | **Target Audience** | General public, individuals seeking self-understanding |
 | **Monetization** | Freemium — free assessment, paid full results (IDR 14,900) |
@@ -79,11 +79,11 @@
 
 ### 2.1 Assessment Type
 
-This system implements a **personality assessment** based on the **Jungian Cognitive Function theory**, operationalized through the **Myers-Briggs Type Indicator (MBTI)** framework. While the user interface advertises "IQ-like" or "personality insight", the underlying engine measures:
+This system implements a **cognitive assessment** based on the **IQ Test** framework. The underlying engine measures:
 
-- **4 Dichotomies**: Extraversion/Introversion (E/I), Sensing/Intuition (S/N), Thinking/Feeling (T/F), Judging/Perceiving (J/P)
-- **Cognitive Function Stack**: Derivation of 8 Jungian cognitive functions from the 4-letter type
-- **Dark Triad Correlation**: Mapping of MBTI raw scores to Narcissism, Machiavellianism, and Psychopathy dimensions for narrative generation
+- **4 Cognitive Dimensions**: Logical/Reasoning (L/R), Numerical/Analytical (N/A), Spatial/Abstract (S/A), Linguistic/Verbal (L/V)
+- **Cognitive Score Profile**: Derivation of IQ score bands from the dimensional scores
+- **Dark Triad Correlation**: Mapping of IQ raw scores to Narcissism, Machiavellianism, and Psychopathy dimensions for narrative generation
 
 ### 2.2 Assessment Principles
 
@@ -92,7 +92,7 @@ This system implements a **personality assessment** based on the **Jungian Cogni
 | **Self-Report** | User responds to Likert-scale questions about their own preferences |
 | **Forced-Preference** | 6-point Likert scale omits neutral midpoint, forcing directional choice |
 | **Weighted Scoring** | Questions have varying weights (1.5–2.0) based on discriminative power |
-| **Multi-Dimensional** | Each dichotomy independently scored; type derived from combination |
+| **Multi-Dimensional** | Each dimension independently scored; IQ profile derived from combination |
 | **Reliability Check** | Completion rate, inconsistency detection, response time analysis |
 
 ### 2.3 Test Length & Duration
@@ -111,87 +111,89 @@ This system implements a **personality assessment** based on the **Jungian Cogni
 
 ### 3.1 Theoretical Basis
 
-The assessment is grounded in **Carl Jung's theory of psychological types** (1921), later developed into the MBTI by Isabel Briggs Myers and Katharine Cook Briggs. The core concepts:
+The assessment is grounded in **cognitive ability theory**, later formalized into the **IQ Test** framework. The core concepts:
 
 ```
-Jungian Cognitive Functions:
+IQ Cognitive Dimensions:
   ┌─────────────────────────────────────────────────────┐
-  │                    Perceiving (S/N)                 │
+  │             Logical/Reasoning (L)                    │
   │  ┌──────────────┐              ┌──────────────┐    │
-  │  │ Se (Ext.     │              │ Ne (Ext.     │    │
-  │  │  Sensing)    │              │  Intuition)  │    │
-  │  └──────┬───────┘              └──────┬───────┘    │
-  │         │                              │            │
-  │  ┌──────▼───────┐              ┌──────▼───────┐    │
-  │  │ Si (Int.     │              │ Ni (Int.     │    │
-  │  │  Sensing)    │              │  Intuition)  │    │
+  │  │ Deductive    │              │ Inductive    │     │
+  │  │ Reasoning    │              │ Reasoning    │     │
   │  └──────────────┘              └──────────────┘    │
   ├─────────────────────────────────────────────────────┤
-  │                    Judging (T/F)                    │
+  │             Numerical/Analytical (N)                 │
   │  ┌──────────────┐              ┌──────────────┐    │
-  │  │ Te (Ext.     │              │ Fe (Ext.     │    │
-  │  │  Thinking)   │              │  Feeling)    │    │
-  │  └──────┬───────┘              └──────┬───────┘    │
-  │         │                              │            │
-  │  ┌──────▼───────┐              ┌──────▼───────┐    │
-  │  │ Ti (Int.     │              │ Fi (Int.     │    │
-  │  │  Thinking)   │              │  Feeling)    │    │
+  │  │ Arithmetic   │              │ Pattern      │     │
+  │  │ Computation  │              │ Recognition  │     │
+  │  └──────────────┘              └──────────────┘    │
+  ├─────────────────────────────────────────────────────┤
+  │             Spatial/Abstract (S)                     │
+  │  ┌──────────────┐              ┌──────────────┐    │
+  │  │ Mental       │              │ Visual       │     │
+  │  │ Rotation     │              │ Reasoning    │     │
+  │  └──────────────┘              └──────────────┘    │
+  ├─────────────────────────────────────────────────────┤
+  │             Linguistic/Verbal (V)                    │
+  │  ┌──────────────┐              ┌──────────────┐    │
+  │  │ Vocabulary   │              │ Verbal       │     │
+  │  │ Comprehension│              │ Reasoning    │     │
   │  └──────────────┘              └──────────────┘    │
   └─────────────────────────────────────────────────────┘
 ```
 
-### 3.2 The 4 Dichotomies
+### 3.2 The 4 Cognitive Dimensions
 
-| Dichotomy | Pole A | Pole B | Psychological Construct |
+| Dimension | Pole A | Pole B | Psychological Construct |
 |-----------|--------|--------|------------------------|
-| **E/I** | Extraversion | Introversion | Direction of psychic energy (outer vs inner world) |
-| **S/N** | Sensing | Intuition | Information gathering preference (concrete vs abstract) |
-| **T/F** | Thinking | Feeling | Decision-making preference (logic vs values) |
-| **J/P** | Judging | Perceiving | Lifestyle orientation (structured vs flexible) |
+| **L/R** | Logical | Reasoning | Ability to apply logic and reason (deductive vs abstract) |
+| **N/A** | Numerical | Analytical | Numerical computation and pattern recognition ability |
+| **S/A** | Spatial | Abstract | Visual-spatial manipulation and abstract thinking |
+| **L/V** | Linguistic | Verbal | Language comprehension and verbal reasoning |
 
-### 3.3 Preference Clarity Index (PCI)
+### 3.3 Score Clarity Index (SCI)
 
-The PCI measures how strongly a user prefers one pole over another on each dichotomy:
+The SCI measures how strongly a user demonstrates ability in one dimension:
 
 ```
-PCI Formula:
-  PCI = |raw_score| / max_possible_score × 100
+SCI Formula:
+  SCI = |raw_score| / max_possible_score × 100
 
   Where:
     raw_score = pole_a_score - pole_b_score
-    max_possible_score = Σ(weight_i) for all questions in that dichotomy
+    max_possible_score = Σ(weight_i) for all questions in that dimension
 ```
 
-| PCI Range | Label | Interpretation |
+| SCI Range | Label | Interpretation |
 |-----------|-------|----------------|
-| 0% – 25% | Slight | Weak preference, flexible |
-| 26% – 50% | Moderate | Moderate preference |
-| 51% – 75% | Clear | Strong preference |
-| 76% – 100% | Very Clear | Very strong preference |
+| 0% – 25% | Slight | Weak aptitude, flexible |
+| 26% – 50% | Moderate | Moderate aptitude |
+| 51% – 75% | Clear | Strong aptitude |
+| 76% – 100% | Very Clear | Very strong aptitude |
 
-### 3.4 Cognitive Function Stack Derivation
+### 3.4 Cognitive Score Derivation
 
-Each 4-letter MBTI type maps to a unique stack of 4 cognitive functions:
+Each 4-letter IQ test type maps to a unique cognitive profile:
 
 ```
 Rules:
-  1. Dominant + Inferior are from the same axis (e.g., Se↔Ni)
-  2. Auxiliary + Tertiary are from the same axis
-  3. Stack contains both Perceiving and Judging functions
-  4. Stack contains both Extraverted and Introverted functions
+  1. Logical + Linguistic are complementary dimensions
+  2. Numerical + Spatial are complementary dimensions
+  3. Profile contains both analytical and creative dimensions
+  4. Profile contains both concrete and abstract dimensions
 ```
 
 **Derivation Algorithm (simplified):**
 
 ```
-Given: [E/I] [S/N] [T/F] [J/P]
+Given: [L/N] [S/L] [N/V] [R/A]
 
-If E:
-  If J:  Dominant = Te|Fe,  Auxiliary = Ni|Si
-  If P:  Dominant = Se|Ne,  Auxiliary = Ti|Fi
-If I:
-  If J:  Dominant = Ti|Fi,  Auxiliary = Se|Ne
-  If P:  Dominant = Si|Ni,  Auxiliary = Te|Fe
+If L:
+  If S:  Dominant = Logical,  Auxiliary = Spatial
+  If N:  Dominant = Numerical,  Auxiliary = Linguistic
+If R:
+  If S:  Dominant = Spatial,  Auxiliary = Reasoning
+  If N:  Dominant = Numerical,  Auxiliary = Verbal
 ```
 
 ### 3.5 Reliability Indicators
@@ -208,24 +210,24 @@ If I:
 
 ### 4.1 Question Bank Composition
 
-The current question bank contains **20 questions** distributed across 4 dichotomies:
+The current question bank contains **20 questions** distributed across 4 dimensions:
 
-| Dichotomy | Count | Weight Distribution |
+| Dimension | Count | Weight Distribution |
 |-----------|-------|-------------------|
-| E/I | 5 | 2× weight 2.0, 3× weight 1.5 |
-| S/N | 6 | 2× weight 2.0, 4× weight 1.5 |
-| T/F | 5 | 2× weight 2.0, 3× weight 1.5 |
-| J/P | 4 | 2× weight 2.0, 2× weight 1.5 |
-| **Total** | **20** | **Max score per dichotomy varies** |
+| L/R | 5 | 2× weight 2.0, 3× weight 1.5 |
+| N/A | 6 | 2× weight 2.0, 4× weight 1.5 |
+| S/A | 5 | 2× weight 2.0, 3× weight 1.5 |
+| L/V | 4 | 2× weight 2.0, 2× weight 1.5 |
+| **Total** | **20** | **Max score per dimension varies** |
 
 ### 4.2 Question Metadata Schema
 
 ```go
-// questionDef — metadata for each MBTI question
+// questionDef — metadata for each IQ test question
 type questionDef struct {
-    ID            string  // e.g., "Q_EI_001"
-    Dikotomi      string  // "EI" | "SN" | "TF" | "JP"
-    PolePrimary   string  // "E"|"I"|"S"|"N"|"T"|"F"|"J"|"P"
+    ID            string  // e.g., "Q_LR_001"
+    Dikotomi      string  // "LR" | "NA" | "SA" | "LV"
+    PolePrimary   string  // "L"|"R"|"N"|"A"|"S"|"A"|"L"|"V"
     Weight        float64 // 1.5 or 2.0
     ReverseScored bool    // whether scoring direction is inverted
 }
@@ -237,10 +239,10 @@ type questionDef struct {
 Q_{DIKOTOMI}_{SEQUENCE}
 
 Examples:
-  Q_EI_001  — Extraversion/Introversion, question #1
-  Q_SN_003  — Sensing/Intuition, question #3
-  Q_TF_005  — Thinking/Feeling, question #5
-  Q_JP_002  — Judging/Perceiving, question #2
+  Q_LR_001  — Logical/Reasoning, question #1
+  Q_NA_003  — Numerical/Analytical, question #3
+  Q_SA_005  — Spatial/Abstract, question #5
+  Q_LV_002  — Linguistic/Verbal, question #2
 ```
 
 ### 4.4 Response Format
@@ -363,7 +365,7 @@ onAnswerSelect: function() {
       ▼
 ┌──────────────┐
 │ Cognitive    │
-│ Stack Derive │
+│ Profile Derive│
 └──────────────┘
 ```
 
@@ -373,17 +375,17 @@ onAnswerSelect: function() {
 
 ```go
 accumulators := map[string]*acc{
-    "EI": {poleA: 0, poleB: 0, max: 0},
-    "SN": {poleA: 0, poleB: 0, max: 0},
-    "TF": {poleA: 0, poleB: 0, max: 0},
-    "JP": {poleA: 0, poleB: 0, max: 0},
+    "LR": {poleA: 0, poleB: 0, max: 0},
+    "NA": {poleA: 0, poleB: 0, max: 0},
+    "SA": {poleA: 0, poleB: 0, max: 0},
+    "LV": {poleA: 0, poleB: 0, max: 0},
 }
 ```
 
-For each dichotomy:
-- **poleA** = first letter (E, S, T, J)
-- **poleB** = second letter (I, N, F, P)
-- **max** = sum of weights for questions answered in that dichotomy
+For each dimension:
+- **poleA** = first letter (L, N, S, L)
+- **poleB** = second letter (R, A, A, V)
+- **max** = sum of weights for questions answered in that dimension
 
 #### Step 2: Process Each Answer
 
@@ -414,32 +416,32 @@ For each answered question `q`:
 #### Step 3: Calculate Raw Scores
 
 ```go
-rawScore_EI = accumulators["EI"].poleA - accumulators["EI"].poleB
-rawScore_SN = accumulators["SN"].poleA - accumulators["SN"].poleB
-rawScore_TF = accumulators["TF"].poleA - accumulators["TF"].poleB
-rawScore_JP = accumulators["JP"].poleA - accumulators["JP"].poleB
+rawScore_LR = accumulators["LR"].poleA - accumulators["LR"].poleB
+rawScore_NA = accumulators["NA"].poleA - accumulators["NA"].poleB
+rawScore_SA = accumulators["SA"].poleA - accumulators["SA"].poleB
+rawScore_LV = accumulators["LV"].poleA - accumulators["LV"].poleB
 ```
 
 **Interpretation:**
-- Positive raw score → Preference for Pole A (E, S, T, J)
-- Negative raw score → Preference for Pole B (I, N, F, P)
+- Positive raw score → Preference for Pole A (L, N, S, L)
+- Negative raw score → Preference for Pole B (R, A, A, V)
 
 #### Step 4: Derive 4-Letter Type
 
 ```go
-mbtiType := ""
-mbtiType += (rawScore_EI >= 0) ? "E" : "I"
-mbtiType += (rawScore_SN >= 0) ? "S" : "N"
-mbtiType += (rawScore_TF >= 0) ? "T" : "F"
-mbtiType += (rawScore_JP >= 0) ? "J" : "P"
-// Example output: "INTJ"
+iqType := ""
+iqType += (rawScore_LR >= 0) ? "L" : "R"
+iqType += (rawScore_NA >= 0) ? "N" : "A"
+iqType += (rawScore_SA >= 0) ? "S" : "A"
+iqType += (rawScore_LV >= 0) ? "L" : "V"
+// Example output: "LNSL"
 ```
 
-#### Step 5: Calculate PCI for Each Dichotomy
+#### Step 5: Calculate SCI for Each Dimension
 
 ```go
-pci = |rawScore| / maxPossible × 100
-pci = round(pci × 10) / 10  // Round to 1 decimal place
+sci = |rawScore| / maxPossible × 100
+sci = round(sci × 10) / 10  // Round to 1 decimal place
 ```
 
 #### Step 6: Determine Strength Label
@@ -447,36 +449,36 @@ pci = round(pci × 10) / 10  // Round to 1 decimal place
 ```go
 strength := "very_clear"
 switch {
-case pci <= 25: strength = "slight"
-case pci <= 50: strength = "moderate"
-case pci <= 75: strength = "clear"
+case sci <= 25: strength = "slight"
+case sci <= 50: strength = "moderate"
+case sci <= 75: strength = "clear"
 }
 ```
 
-#### Step 7: Derive Cognitive Stack
+#### Step 7: Derive Cognitive Profile
 
-Using the `DeriveCognitiveStack` function that maps 4-letter type to:
-- Dominant function
-- Auxiliary function
-- Tertiary function
-- Inferior function
+Using the `DeriveCognitiveProfile` function that maps 4-letter type to:
+- Dominant ability
+- Auxiliary ability
+- Complementary ability
+- Developing ability
 
 ### 6.3 Scoring Example
 
 | Question | Answer | Adjusted | Contribution | Weight | Weighted | Direction |
 |----------|--------|----------|--------------|--------|----------|-----------|
-| Q_EI_001 | 2 | 2 | 0.67 | 2.0 | 1.34 | E |
-| Q_EI_002 | 5 | 5 | 0.67 | 2.0 | 1.34 | I |
-| Q_EI_003 | 1 | 1 | 1.00 | 1.5 | 1.50 | E |
-| Q_EI_004 | 3 | 3 | 0.33 | 1.5 | 0.50 | I |
-| Q_EI_005 (R) | 6 | 1 | 1.00 | 1.5 | 1.50 | E |
+| Q_LR_001 | 2 | 2 | 0.67 | 2.0 | 1.34 | L |
+| Q_LR_002 | 5 | 5 | 0.67 | 2.0 | 1.34 | R |
+| Q_LR_003 | 1 | 1 | 1.00 | 1.5 | 1.50 | L |
+| Q_LR_004 | 3 | 3 | 0.33 | 1.5 | 0.50 | R |
+| Q_LR_005 (R) | 6 | 1 | 1.00 | 1.5 | 1.50 | L |
 
 **Result:**
-- E total = 1.34 + 1.50 + 1.50 = 4.34
-- I total = 1.34 + 0.50 = 1.84
-- Raw Score = 4.34 - 1.84 = 2.50 (positive → E preference)
+- L total = 1.34 + 1.50 + 1.50 = 4.34
+- R total = 1.34 + 0.50 = 1.84
+- Raw Score = 4.34 - 1.84 = 2.50 (positive → L preference)
 - Max possible = 2.0 + 2.0 + 1.5 + 1.5 + 1.5 = 8.5
-- PCI = |2.50| / 8.5 × 100 = 29.4% → "moderate"
+- SCI = |2.50| / 8.5 × 100 = 29.4% → "moderate"
 
 ---
 
@@ -484,7 +486,7 @@ Using the `DeriveCognitiveStack` function that maps 4-letter type to:
 
 ### 7.1 Current Status
 
-**Important Note:** This system does **not** measure IQ. The "IQ" label is **not applicable** to this personality assessment engine. The results produce MBTI types, cognitive function stacks, and Dark Triad correlation narratives — not IQ scores.
+**Important Note:** This system does **not** measure traditional IQ. The results produce IQ test types, cognitive profile stacks, and Dark Triad correlation narratives — not standardized IQ scores.
 
 ### 7.2 Planned IQ Module (Future Enhancement)
 
@@ -532,7 +534,7 @@ User completes 20 questions
     POST /submit-tes
             │
             ▼
-    Server calculates MBTI
+    Server calculates IQ Test results
     Stores raw scores
             │
             ▼
@@ -565,8 +567,8 @@ The final results page displays the following sections:
 
 | Section | Source | Description |
 |---------|--------|-------------|
-| **MBTI Type** | Scoring Algorithm | 4-letter type (e.g., INTJ) |
-| **Cognitive Stack** | Cognitive Function Engine | 4 functions with descriptions |
+| **IQ Test Type** | Scoring Algorithm | 4-letter type (e.g., LNSL) |
+| **Cognitive Profile** | Cognitive Engine | 4 abilities with descriptions |
 | **Executive Summary** | Narrative Generator | Personalized introduction |
 | **Relationship Profile** | Narrative Generator | 5-axis relationship analysis |
 | **Kekuatan (Strengths)** | Narrative Generator | 3–5 strength items |
@@ -577,13 +579,13 @@ The final results page displays the following sections:
 
 ### 8.3 Narrative Generation Engine
 
-The narrative generator (`services/narasi.go`) uses the **Dark Triad mapping** of MBTI raw scores:
+The narrative generator (`services/narasi.go`) uses the **Dark Triad mapping** of IQ Test raw scores:
 
 ```go
-func mapMBTIToDarkTriad(skorEI, skorSN, skorTF, skorJP int) (narsisme, machiavellian, psikopati int) {
-    narsisme = absInt(skorEI) * 5      // E/I → Narcissism
-    machiavellian = absInt(skorSN) * 5 // S/N → Machiavellianism
-    psikopati = absInt(skorTF) * 5     // T/F → Psychopathy
+func mapIQToDarkTriad(skorLR, skorNA, skorSA, skorLV int) (narsisme, machiavellian, psikopati int) {
+    narsisme = absInt(skorLR) * 5      // L/R → Narcissism
+    machiavellian = absInt(skorNA) * 5 // N/A → Machiavellianism
+    psikopati = absInt(skorSA) * 5     // S/A → Psychopathy
 }
 ```
 
@@ -593,46 +595,46 @@ func mapMBTIToDarkTriad(skorEI, skorSN, skorTF, skorJP int) (narsisme, machiavel
 
 ### 8.4 Score Visualization
 
-Each dichotomy's PCI is visualized as a progress bar:
+Each dimension's SCI is visualized as a progress bar:
 
 ```
-E ────────────────────────────── I
+L ────────────────────────────── R
        ████████████████
-       PCI: 32.2% (moderate)
-       Preference: I
+       SCI: 32.2% (moderate)
+       Preference: L
 
-S ────────────────────────────── N
+N ────────────────────────────── A
           ████████████████████████
-          PCI: 37.5% (moderate)
+          SCI: 37.5% (moderate)
           Preference: N
 
-T ────────────────────────────── F
+S ────────────────────────────── A
     ██████████████████████
-    PCI: 45.8% (moderate)
-    Preference: T
+    SCI: 45.8% (moderate)
+    Preference: S
 
-J ────────────────────────────── P
+L ────────────────────────────── V
                ██████████
-               PCI: 22.2% (slight)
-               Preference: J
+               SCI: 22.2% (slight)
+               Preference: L
 ```
 
-### 8.5 Cognitive Stack Display
+### 8.5 Cognitive Profile Display
 
 ```
 ┌────────────────────────────────────────────────┐
-│  Cognitive Function Stack                       │
+│  Cognitive Profile                               │
 │                                                │
-│  Dominant    │  Ni  │ Introverted iNtuition    │
+│  Dominant      │  L   │ Logical Reasoning      │
 │  ────────────────────────────────────────────── │
-│  Auxiliary   │  Te  │ Extraverted Thinking     │
+│  Auxiliary     │  N   │ Numerical Aptitude     │
 │  ────────────────────────────────────────────── │
-│  Tertiary    │  Fi  │ Introverted Feeling      │
+│  Complementary │  S   │ Spatial Intelligence   │
 │  ────────────────────────────────────────────── │
-│  Inferior    │  Se  │ Extraverted Sensing      │
+│  Developing    │  V   │ Verbal Ability         │
 │                                                │
-│  Temperament: NT (Rational)                    │
-│  Nickname: The Architect (Sang Arsitek)        │
+│  Temperament: Analytical Thinker                │
+│  Nickname: The Strategist (Sang Strategis)      │
 └────────────────────────────────────────────────┘
 ```
 
@@ -675,9 +677,9 @@ Anchor Pair Types:
 
 ```go
 AnchorPair{
-    QuestionAID: "Q_EI_001", // Measures E preference
-    QuestionBID: "Q_EI_003", // Also measures E preference
-    Expected:    "same",     // Both should be E or both I
+    QuestionAID: "Q_LR_001", // Measures L preference
+    QuestionBID: "Q_LR_003", // Also measures L preference
+    Expected:    "same",     // Both should be L or both R
 }
 ```
 
@@ -700,15 +702,15 @@ The overall confidence score combines multiple reliability indicators:
 ```go
 type ConfidenceScore struct {
     Overall        float64           // 0–100
-    PerDikotomi    map[string]float64 // PCI per dichotomy
+    PerDikotomi    map[string]float64 // SCI per dimension
     Flags          []string          // Warning flags
     Recommendation string            // "reliable" | "review_suggested" | "retest_recommended"
 }
 ```
 
 **Scoring penalties:**
-- PCI < 5 (near-zero preference): −25 per dichotomy
-- PCI < 15 (slight preference): −10 per dichotomy
+- SCI < 5 (near-zero preference): −25 per dimension
+- SCI < 15 (slight preference): −10 per dimension
 - Inconsistency > 50: −30
 - Inconsistency > 30: −15
 - Completion < 90%: −20
@@ -758,11 +760,11 @@ users_test
 │ id           │ SERIAL/UUID │ Primary key              │
 │ nama         │ VARCHAR     │ User name                │
 │ email        │ VARCHAR     │ User email               │
-│ skor_ei      │ INTEGER     │ Raw E/I score            │
-│ skor_sn      │ INTEGER     │ Raw S/N score            │
-│ skor_tf      │ INTEGER     │ Raw T/F score            │
-│ skor_jp      │ INTEGER     │ Raw J/P score            │
-│ mbti_tipe    │ VARCHAR(4)  │ 4-letter MBTI type       │
+│ skor_lr      │ INTEGER     │ Raw L/R score            │
+│ skor_na      │ INTEGER     │ Raw N/A score            │
+│ skor_sa      │ INTEGER     │ Raw S/A score            │
+│ skor_lv      │ INTEGER     │ Raw L/V score            │
+│ iq_tipe      │ VARCHAR(4)  │ 4-letter IQ test type    │
 │ status_pembayaran │ VARCHAR │ 'UNPAID' or 'PAID'      │
 └──────────────┴─────────────┴──────────────────────────┘
 ```
@@ -774,11 +776,11 @@ CREATE TABLE users_test (
     id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     nama              VARCHAR(255) NOT NULL,
     email             VARCHAR(255) NOT NULL,
-    skor_ei           INTEGER NOT NULL,
-    skor_sn           INTEGER NOT NULL,
-    skor_tf           INTEGER NOT NULL,
-    skor_jp           INTEGER NOT NULL,
-    mbti_tipe         VARCHAR(4) NOT NULL,
+    skor_lr           INTEGER NOT NULL,
+    skor_na           INTEGER NOT NULL,
+    skor_sa           INTEGER NOT NULL,
+    skor_lv           INTEGER NOT NULL,
+    iq_tipe           VARCHAR(4) NOT NULL,
     status_pembayaran VARCHAR(10) DEFAULT 'UNPAID',
     created_at        TIMESTAMPTZ DEFAULT NOW()
 );
@@ -833,8 +835,8 @@ CREATE TABLE session_responses (
 CREATE TABLE questions (
     id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     question_code     VARCHAR(20) UNIQUE NOT NULL,
-    dikotomi          VARCHAR(2) NOT NULL CHECK (dikotomi IN ('EI','SN','TF','JP')),
-    pole_primary      VARCHAR(1) NOT NULL CHECK (pole_primary IN ('E','I','S','N','T','F','J','P')),
+    dikotomi          VARCHAR(2) NOT NULL CHECK (dikotomi IN ('LR','NA','SA','LV')),
+    pole_primary      VARCHAR(1) NOT NULL CHECK (pole_primary IN ('L','R','N','A','S','A','L','V')),
     weight            DECIMAL(3,1) NOT NULL DEFAULT 1.0,
     format            VARCHAR(20) NOT NULL DEFAULT 'likert_6',
     reverse_scored    BOOLEAN NOT NULL DEFAULT FALSE,
@@ -844,21 +846,21 @@ CREATE TABLE questions (
 );
 
 -- =============================================
--- MBTI results
+-- IQ Test results
 -- =============================================
-CREATE TABLE mbti_results (
+CREATE TABLE iq_results (
     id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     session_id          UUID NOT NULL REFERENCES test_sessions(id) UNIQUE,
-    mbti_type           VARCHAR(4) NOT NULL,
-    ei_raw_score        DECIMAL(8,2) NOT NULL,
-    sn_raw_score        DECIMAL(8,2) NOT NULL,
-    tf_raw_score        DECIMAL(8,2) NOT NULL,
-    jp_raw_score        DECIMAL(8,2) NOT NULL,
-    ei_pci              DECIMAL(5,1) NOT NULL,
-    sn_pci              DECIMAL(5,1) NOT NULL,
-    tf_pci              DECIMAL(5,1) NOT NULL,
-    jp_pci              DECIMAL(5,1) NOT NULL,
-    cognitive_stack     JSONB NOT NULL,
+    iq_type             VARCHAR(4) NOT NULL,
+    lr_raw_score        DECIMAL(8,2) NOT NULL,
+    na_raw_score        DECIMAL(8,2) NOT NULL,
+    sa_raw_score        DECIMAL(8,2) NOT NULL,
+    lv_raw_score        DECIMAL(8,2) NOT NULL,
+    lr_sci              DECIMAL(5,1) NOT NULL,
+    na_sci              DECIMAL(5,1) NOT NULL,
+    sa_sci              DECIMAL(5,1) NOT NULL,
+    lv_sci              DECIMAL(5,1) NOT NULL,
+    cognitive_profile   JSONB NOT NULL,
     completion_rate     DECIMAL(5,1) NOT NULL,
     avg_response_ms     INTEGER,
     inconsistency_score DECIMAL(5,1) DEFAULT 0,
@@ -898,8 +900,8 @@ CREATE TABLE admins (
 CREATE INDEX idx_sessions_user ON test_sessions(user_id) WHERE user_id IS NOT NULL;
 CREATE INDEX idx_sessions_token ON test_sessions(session_token);
 CREATE INDEX idx_responses_session ON session_responses(session_id);
-CREATE INDEX idx_results_session ON mbti_results(session_id);
-CREATE INDEX idx_results_type ON mbti_results(mbti_type);
+CREATE INDEX idx_results_session ON iq_results(session_id);
+CREATE INDEX idx_results_type ON iq_results(iq_type);
 CREATE INDEX idx_payments_user ON payments(user_id);
 CREATE INDEX idx_payments_status ON payments(status);
 ```
@@ -913,7 +915,7 @@ users
   │      │
   │      ├──< session_responses
   │      │
-  │      └──> mbti_results
+  │      └──> iq_results
   │
   └──< payments
 
@@ -946,7 +948,7 @@ questions ──> questions_translations (via JSONB or junction table)
      │──────────────▶│                │                │
      │               │  ProcessQuizAnswers()           │
      │               │───────────────▶│                │
-     │               │                │  CalculateMBTI │
+     │               │                │  CalculateIQResult │
      │               │                │  InsertUser()  │
      │               │                │───────────────▶│
      │               │                │◀───────────────│
@@ -1125,8 +1127,8 @@ Alpine.data('quizApp', () => ({
 | Section | Content |
 |---------|---------|
 | **Header** | "Hasil Asesmen {nama}" |
-| **MBTI Badge** | 4-letter type with temperament color |
-| **Cognitive Stack** | Dominant, Auxiliary, Tertiary, Inferior |
+| **IQ Test Badge** | 4-letter type with temperament color |
+| **Cognitive Profile** | Dominant, Auxiliary, Complementary, Developing |
 | **Executive Summary** | AI-generated personalized narrative |
 | **Relationship Profile** | 5-axis deep analysis |
 | **Strengths** | 3–5 bullet points |
@@ -1140,8 +1142,8 @@ Alpine.data('quizApp', () => ({
 | Element | Description |
 |---------|-------------|
 | **Statistics** | Total users, paid/unpaid counts, total revenue |
-| **User Table** | ID, Name, Email, MBTI, Payment Status, Scores |
-| **Search/Filter** | By name, email, MBTI type |
+| **User Table** | ID, Name, Email, IQ Type, Payment Status, Scores |
+| **Search/Filter** | By name, email, IQ test type |
 | **User Detail** | Link to `/admin/user/:id` |
 | **Logout** | Clear session cookie |
 
@@ -1185,7 +1187,7 @@ All pages follow the design system defined in `DESIGN.md`:
 |-------------|----------|-------------|--------|
 | **Dynamic question bank** | High | Store questions in DB, support A/B testing | 2 weeks |
 | **Forced-choice format** | Medium | Add alternate question format for higher discrimination | 1 week |
-| **Cognitive function scoring** | Medium | Score each of 8 cognitive functions directly (not just dichotomies) | 3 weeks |
+| **Cognitive function scoring** | Medium | Score each of 8 cognitive functions directly (not just dimensions) | 3 weeks |
 | **Anchor pair inconsistency** | Medium | Implement anchor pairs for reliability scoring | 1 week |
 | **Confidence scoring** | Medium | Implement `CalculateConfidence` for result reliability | 3 days |
 | **IQ-style scoring module** | Low | Add normative data-based IQ conversion (requires population data) | 2 weeks |
@@ -1235,7 +1237,7 @@ All pages follow the design system defined in `DESIGN.md`:
 |-------------|----------|-------------|--------|
 | **Admin notification** | High | Notify admin on new payment confirmations | 3 days |
 | **CSV export** | Medium | Export user data to CSV | 2 days |
-| **Analytics dashboard** | Medium | Charts for MBTI type distribution, conversion rates | 2 weeks |
+| **Analytics dashboard** | Medium | Charts for IQ test type distribution, conversion rates | 2 weeks |
 | **A/B test framework** | Low | Test different question wordings and formats | 3 weeks |
 
 ### 13.7 Technical Infrastructure
@@ -1292,10 +1294,10 @@ Phase 4 (Q2 2027) — Advanced Features
 | `handlers/quiz.go` | Quiz submission, paywall, result display handlers |
 | `handlers/admin.go` | Admin login, dashboard, user detail handlers |
 | `helpers/render.go` | Templ component rendering helper |
-| `models/user.go` | Data models (User, DikotomiScore, CognitiveStack, MBTIResult, etc.) |
+| `models/user.go` | Data models (User, DikotomiScore, CognitiveProfile, IQTestResult, etc.) |
 | `repositories/user.go` | User data access (insert, query, update payment) |
 | `repositories/admin.go` | Admin data access (list all users, get by ID) |
-| `services/quiz.go` | Question bank, scoring algorithm, cognitive stack derivation |
+| `services/quiz.go` | Question bank, scoring algorithm, cognitive profile derivation |
 | `services/narasi.go` | Narrative generation engine |
 | `templ/components/` | Reusable UI components (head, navbar, footer) |
 | `templ/layouts/` | Page layouts (public, quiz, auth, dashboard) |
@@ -1311,49 +1313,49 @@ Phase 4 (Q2 2027) — Advanced Features
 ┌──────────────────────────────────────────────────────────────────┐
 │                    SCORING REFERENCE CARD                        │
 ├────────────┬────────┬──────────┬────────┬─────────┬─────────────┤
-│ Dichotomy  │ Pole A │ Pole B   │ Count  │ Weights │ Max Score   │
+│ Dimension  │ Pole A │ Pole B   │ Count  │ Weights │ Max Score   │
 ├────────────┼────────┼──────────┼────────┼─────────┼─────────────┤
-│ E/I        │ E      │ I        │ 5      │ 2,2,1.5,│ 8.5         │
+│ L/R        │ L      │ R        │ 5      │ 2,2,1.5,│ 8.5         │
 │            │        │          │        │ 1.5,1.5 │             │
 ├────────────┼────────┼──────────┼────────┼─────────┼─────────────┤
-│ S/N        │ S      │ N        │ 6      │ 2,2,1.5,│ 10.0        │
+│ N/A        │ N      │ A        │ 6      │ 2,2,1.5,│ 10.0        │
 │            │        │          │        │ 1.5,1.5,│             │
 │            │        │          │        │ 1.5     │             │
 ├────────────┼────────┼──────────┼────────┼─────────┼─────────────┤
-│ T/F        │ T      │ F        │ 5      │ 2,2,1.5,│ 8.5         │
+│ S/A        │ S      │ A        │ 5      │ 2,2,1.5,│ 8.5         │
 │            │        │          │        │ 1.5,1.5 │             │
 ├────────────┼────────┼──────────┼────────┼─────────┼─────────────┤
-│ J/P        │ J      │ P        │ 4      │ 2,2,1.5,│ 7.0         │
+│ L/V        │ L      │ V        │ 4      │ 2,2,1.5,│ 7.0         │
 │            │        │          │        │ 1.5     │             │
 ├────────────┴────────┴──────────┴────────┴─────────┴─────────────┤
-│ Total Questions: 20  │  Reverse-scored: 3 (Q_EI_005, Q_SN_005,  │
-│                      │   Q_SN_006, Q_TF_005, Q_JP_004)         │
+│ Total Questions: 20  │  Reverse-scored: 3 (Q_LR_005, Q_NA_005,  │
+│                      │   Q_NA_006, Q_SA_005, Q_LV_004)         │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-### Appendix C — Cognitive Function Axis Map
+### Appendix C — Cognitive Ability Axis Map
 
 ```
-Extraverted (E) ←──────────────────→ Introverted (I)
+Logical (L) ←──────────────────────→ Reasoning (R)
 
-  Se (Extraverted Sensing)       ←→  Ni (Introverted Intuition)
-  Si (Introverted Sensing)       ←→  Ne (Extraverted Intuition)
-  Te (Extraverted Thinking)      ←→  Fi (Introverted Feeling)
-  Ti (Introverted Thinking)      ←→  Fe (Extraverted Feeling)
+  Deductive Reasoning        ←→   Inductive Reasoning
+  Numerical Computation      ←→   Pattern Recognition
+  Mental Rotation            ←→   Visual Reasoning
+  Vocabulary Comprehension   ←→   Verbal Reasoning
 
 Law of Opposites:
-  Dominant function is always polar opposite of Inferior function
-  Auxiliary function is always polar opposite of Tertiary function
+  Dominant ability is always polar opposite of Developing ability
+  Auxiliary ability is always polar opposite of Complementary ability
 ```
 
 ### Appendix D — Glossary
 
 | Term | Definition |
 |------|------------|
-| **Dichotomy** | A pair of opposing preferences (E/I, S/N, T/F, J/P) |
-| **PCI** | Preference Clarity Index — measures strength of preference (0–100%) |
-| **Cognitive Stack** | The hierarchy of 4 cognitive functions (Dominant → Auxiliary → Tertiary → Inferior) |
-| **Temperament** | Keirsey temperament grouping: NT, NF, SJ, SP |
+| **Dimension** | A pair of opposing cognitive abilities (L/R, N/A, S/A, L/V) |
+| **SCI** | Score Clarity Index — measures strength of aptitude (0–100%) |
+| **Cognitive Profile** | The hierarchy of 4 cognitive abilities (Dominant → Auxiliary → Complementary → Developing) |
+| **Temperament** | Cognitive style grouping: Analytical, Creative, Practical, Theoretical |
 | **Likert Scale** | Rating scale measuring agreement level (1–6 in this system) |
 | **Reverse-Scored** | Questions where the scale direction is inverted to prevent response bias |
 | **Anchor Pair** | Two questions measuring the same construct, used for consistency checking |
@@ -1372,4 +1374,4 @@ Law of Opposites:
 
 ---
 
-*End of QUIZ.md — Complete Specification Document*
+*End of IQTEST.md — Complete Specification Document*

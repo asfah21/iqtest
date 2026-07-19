@@ -1,7 +1,7 @@
 services:
-  mbti-app:
+  iqtest-app:
     build: .
-    container_name: mbti
+    container_name: iqtest
     restart: always
     ports:
       - "127.0.0.1:8080:8080"
