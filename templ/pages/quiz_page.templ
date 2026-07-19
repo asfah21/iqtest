@@ -81,7 +81,8 @@ templ quizContent() {
 								<img :src="questions[currentQuestion]?.image_url"
 									 :alt="'Soal nomor ' + (currentQuestion + 1)"
 									 class="quiz-question-image"
-									 loading="eager"/>
+									 loading="eager"
+									 onerror="this.classList.add('image-error')"/>
 							</div>
 						</div>
 

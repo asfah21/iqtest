@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<rect width="120" height="120" fill="#ffffff" rx="6" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="30" y="30" width="60" height="60" rx="4" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+<text x="60" y="110" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#94a3b8">opt_b2</text>
+</svg>

@@ -187,6 +187,25 @@
   display: block;
 }
 
+.quiz-question-image.image-error,
+.quiz-option-img.image-error {
+  display: none;
+}
+
+.image-error-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  background: var(--quiz-bord-light);
+  border-radius: var(--quiz-radius-sm);
+  color: var(--quiz-ink-subtle);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  padding: 16px;
+  text-align: center;
+}
+
 /* ---- Options Card ---- */
 .options-card {
   padding: 24px;

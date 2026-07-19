@@ -3,37 +3,62 @@ package services
 import (
 	"crypto/rand"
 	"encoding/hex"
+	"encoding/json"
 	"math"
+	"os"
 
 	"ego/models"
 	"ego/repositories"
 )
 
 // ──────────────────────────────────────────────────────────────
-// Question Definition — metadata setiap soal IQ Test
+// Question Bank — dimuat dari assets/data/questions.json saat startup
 // ──────────────────────────────────────────────────────────────
 
-var questionBank = []models.QuestionDef{
-	{QuestionCode: "Q_MTX_001", Domain: "MTX", Difficulty: "easy", Weight: 1.0, CorrectOption: "A"},
-	{QuestionCode: "Q_MTX_002", Domain: "MTX", Difficulty: "easy", Weight: 1.0, CorrectOption: "B"},
-	{QuestionCode: "Q_MTX_003", Domain: "MTX", Difficulty: "medium", Weight: 1.5, CorrectOption: "C"},
-	{QuestionCode: "Q_MTX_004", Domain: "MTX", Difficulty: "medium", Weight: 1.5, CorrectOption: "D"},
-	{QuestionCode: "Q_MTX_005", Domain: "MTX", Difficulty: "hard", Weight: 2.0, CorrectOption: "A"},
-	{QuestionCode: "Q_MTX_006", Domain: "MTX", Difficulty: "very_hard", Weight: 2.5, CorrectOption: "B"},
-	{QuestionCode: "Q_SEQ_001", Domain: "SEQ", Difficulty: "easy", Weight: 1.0, CorrectOption: "A"},
-	{QuestionCode: "Q_SEQ_002", Domain: "SEQ", Difficulty: "medium", Weight: 1.5, CorrectOption: "B"},
-	{QuestionCode: "Q_SEQ_003", Domain: "SEQ", Difficulty: "medium", Weight: 1.5, CorrectOption: "C"},
-	{QuestionCode: "Q_SEQ_004", Domain: "SEQ", Difficulty: "hard", Weight: 2.0, CorrectOption: "D"},
-	{QuestionCode: "Q_SEQ_005", Domain: "SEQ", Difficulty: "hard", Weight: 2.0, CorrectOption: "A"},
-	{QuestionCode: "Q_SPA_001", Domain: "SPA", Difficulty: "medium", Weight: 1.5, CorrectOption: "B"},
-	{QuestionCode: "Q_SPA_002", Domain: "SPA", Difficulty: "medium", Weight: 1.5, CorrectOption: "C"},
-	{QuestionCode: "Q_SPA_003", Domain: "SPA", Difficulty: "hard", Weight: 2.0, CorrectOption: "D"},
-	{QuestionCode: "Q_SPA_004", Domain: "SPA", Difficulty: "very_hard", Weight: 2.5, CorrectOption: "A"},
-	{QuestionCode: "Q_SPA_005", Domain: "SPA", Difficulty: "very_hard", Weight: 2.5, CorrectOption: "B"},
-	{QuestionCode: "Q_ANL_001", Domain: "ANL", Difficulty: "easy", Weight: 1.0, CorrectOption: "C"},
-	{QuestionCode: "Q_ANL_002", Domain: "ANL", Difficulty: "medium", Weight: 1.5, CorrectOption: "D"},
-	{QuestionCode: "Q_ANL_003", Domain: "ANL", Difficulty: "medium", Weight: 1.5, CorrectOption: "A"},
-	{QuestionCode: "Q_ANL_004", Domain: "ANL", Difficulty: "hard", Weight: 2.0, CorrectOption: "B"},
+var questionBank []models.QuestionDef
+
+// questionJSON mirrors the JSON structure from questions.json
+type questionJSON struct {
+	Version   string `json:"version"`
+	Questions []struct {
+		ID            string            `json:"id"`
+		QuestionCode  string            `json:"question_code"`
+		Domain        string            `json:"domain"`
+		Difficulty    string            `json:"difficulty"`
+		Weight        float64           `json:"weight"`
+		CorrectOption string            `json:"correct_option"`
+		ImagePath     string            `json:"image_path"`
+		Options       map[string]string `json:"options"`
+	} `json:"questions"`
+}
+
+func init() {
+	data, err := os.ReadFile("assets/data/questions.json")
+	if err != nil {
+		panic("gagal membaca assets/data/questions.json: " + err.Error())
+	}
+	var qj questionJSON
+	if err := json.Unmarshal(data, &qj); err != nil {
+		panic("gagal parse assets/data/questions.json: " + err.Error())
+	}
+
+	for _, q := range qj.Questions {
+		def := models.QuestionDef{
+			QuestionCode:  q.QuestionCode,
+			Domain:        q.Domain,
+			Difficulty:    q.Difficulty,
+			Weight:        q.Weight,
+			CorrectOption: q.CorrectOption,
+			ImageURL:      q.ImagePath,
+		}
+		// Map options in order A, B, C, D
+		for i, letter := range []string{"A", "B", "C", "D"} {
+			if path, ok := q.Options[letter]; ok {
+				def.OptionImages[i] = path
+			}
+		}
+		questionBank = append(questionBank, def)
+	}
 }
 
 // ──────────────────────────────────────────────────────────────

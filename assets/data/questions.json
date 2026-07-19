@@ -1,0 +1,305 @@
+{
+  "version": "1.0",
+  "questions": [
+    {
+      "id": "qmtx001",
+      "question_code": "Q_MTX_001",
+      "domain": "MTX",
+      "difficulty": "easy",
+      "weight": 1.0,
+      "correct_option": "A",
+      "image_path": "/assets/images/q_mtx_001.svg",
+      "options": {
+        "A": "/assets/images/opt_a.svg",
+        "B": "/assets/images/opt_b.svg",
+        "C": "/assets/images/opt_c.svg",
+        "D": "/assets/images/opt_d.svg"
+      }
+    },
+    {
+      "id": "qmtx002",
+      "question_code": "Q_MTX_002",
+      "domain": "MTX",
+      "difficulty": "easy",
+      "weight": 1.0,
+      "correct_option": "B",
+      "image_path": "/assets/images/q_mtx_002.svg",
+      "options": {
+        "A": "/assets/images/opt_a2.svg",
+        "B": "/assets/images/opt_b2.svg",
+        "C": "/assets/images/opt_c2.svg",
+        "D": "/assets/images/opt_d2.svg"
+      }
+    },
+    {
+      "id": "qmtx003",
+      "question_code": "Q_MTX_003",
+      "domain": "MTX",
+      "difficulty": "medium",
+      "weight": 1.5,
+      "correct_option": "C",
+      "image_path": "/assets/images/q_mtx_003.svg",
+      "options": {
+        "A": "/assets/images/opt_b.svg",
+        "B": "/assets/images/opt_c.svg",
+        "C": "/assets/images/opt_d.svg",
+        "D": "/assets/images/opt_a.svg"
+      }
+    },
+    {
+      "id": "qmtx004",
+      "question_code": "Q_MTX_004",
+      "domain": "MTX",
+      "difficulty": "medium",
+      "weight": 1.5,
+      "correct_option": "D",
+      "image_path": "/assets/images/q_mtx_004.svg",
+      "options": {
+        "A": "/assets/images/opt_c.svg",
+        "B": "/assets/images/opt_d.svg",
+        "C": "/assets/images/opt_a.svg",
+        "D": "/assets/images/opt_b.svg"
+      }
+    },
+    {
+      "id": "qmtx005",
+      "question_code": "Q_MTX_005",
+      "domain": "MTX",
+      "difficulty": "hard",
+      "weight": 2.0,
+      "correct_option": "A",
+      "image_path": "/assets/images/q_mtx_005.svg",
+      "options": {
+        "A": "/assets/images/opt_d.svg",
+        "B": "/assets/images/opt_a.svg",
+        "C": "/assets/images/opt_b.svg",
+        "D": "/assets/images/opt_c.svg"
+      }
+    },
+    {
+      "id": "qmtx006",
+      "question_code": "Q_MTX_006",
+      "domain": "MTX",
+      "difficulty": "very_hard",
+      "weight": 2.5,
+      "correct_option": "B",
+      "image_path": "/assets/images/q_mtx_006.svg",
+      "options": {
+        "A": "/assets/images/opt_a2.svg",
+        "B": "/assets/images/opt_b2.svg",
+        "C": "/assets/images/opt_c2.svg",
+        "D": "/assets/images/opt_d2.svg"
+      }
+    },
+    {
+      "id": "qseq001",
+      "question_code": "Q_SEQ_001",
+      "domain": "SEQ",
+      "difficulty": "easy",
+      "weight": 1.0,
+      "correct_option": "A",
+      "image_path": "/assets/images/q_seq_001.svg",
+      "options": {
+        "A": "/assets/images/opt_a.svg",
+        "B": "/assets/images/opt_b.svg",
+        "C": "/assets/images/opt_c.svg",
+        "D": "/assets/images/opt_d.svg"
+      }
+    },
+    {
+      "id": "qseq002",
+      "question_code": "Q_SEQ_002",
+      "domain": "SEQ",
+      "difficulty": "medium",
+      "weight": 1.5,
+      "correct_option": "B",
+      "image_path": "/assets/images/q_seq_002.svg",
+      "options": {
+        "A": "/assets/images/opt_b.svg",
+        "B": "/assets/images/opt_c.svg",
+        "C": "/assets/images/opt_d.svg",
+        "D": "/assets/images/opt_a.svg"
+      }
+    },
+    {
+      "id": "qseq003",
+      "question_code": "Q_SEQ_003",
+      "domain": "SEQ",
+      "difficulty": "medium",
+      "weight": 1.5,
+      "correct_option": "C",
+      "image_path": "/assets/images/q_seq_003.svg",
+      "options": {
+        "A": "/assets/images/opt_c.svg",
+        "B": "/assets/images/opt_d.svg",
+        "C": "/assets/images/opt_a.svg",
+        "D": "/assets/images/opt_b.svg"
+      }
+    },
+    {
+      "id": "qseq004",
+      "question_code": "Q_SEQ_004",
+      "domain": "SEQ",
+      "difficulty": "hard",
+      "weight": 2.0,
+      "correct_option": "D",
+      "image_path": "/assets/images/q_seq_004.svg",
+      "options": {
+        "A": "/assets/images/opt_d.svg",
+        "B": "/assets/images/opt_a.svg",
+        "C": "/assets/images/opt_b.svg",
+        "D": "/assets/images/opt_c.svg"
+      }
+    },
+    {
+      "id": "qseq005",
+      "question_code": "Q_SEQ_005",
+      "domain": "SEQ",
+      "difficulty": "hard",
+      "weight": 2.0,
+      "correct_option": "A",
+      "image_path": "/assets/images/q_seq_005.svg",
+      "options": {
+        "A": "/assets/images/opt_a2.svg",
+        "B": "/assets/images/opt_b2.svg",
+        "C": "/assets/images/opt_c2.svg",
+        "D": "/assets/images/opt_d2.svg"
+      }
+    },
+    {
+      "id": "qspa001",
+      "question_code": "Q_SPA_001",
+      "domain": "SPA",
+      "difficulty": "medium",
+      "weight": 1.5,
+      "correct_option": "B",
+      "image_path": "/assets/images/q_spa_001.svg",
+      "options": {
+        "A": "/assets/images/opt_a.svg",
+        "B": "/assets/images/opt_b.svg",
+        "C": "/assets/images/opt_c.svg",
+        "D": "/assets/images/opt_d.svg"
+      }
+    },
+    {
+      "id": "qspa002",
+      "question_code": "Q_SPA_002",
+      "domain": "SPA",
+      "difficulty": "medium",
+      "weight": 1.5,
+      "correct_option": "C",
+      "image_path": "/assets/images/q_spa_002.svg",
+      "options": {
+        "A": "/assets/images/opt_b.svg",
+        "B": "/assets/images/opt_c.svg",
+        "C": "/assets/images/opt_d.svg",
+        "D": "/assets/images/opt_a.svg"
+      }
+    },
+    {
+      "id": "qspa003",
+      "question_code": "Q_SPA_003",
+      "domain": "SPA",
+      "difficulty": "hard",
+      "weight": 2.0,
+      "correct_option": "D",
+      "image_path": "/assets/images/q_spa_003.svg",
+      "options": {
+        "A": "/assets/images/opt_c.svg",
+        "B": "/assets/images/opt_d.svg",
+        "C": "/assets/images/opt_a.svg",
+        "D": "/assets/images/opt_b.svg"
+      }
+    },
+    {
+      "id": "qspa004",
+      "question_code": "Q_SPA_004",
+      "domain": "SPA",
+      "difficulty": "very_hard",
+      "weight": 2.5,
+      "correct_option": "A",
+      "image_path": "/assets/images/q_spa_004.svg",
+      "options": {
+        "A": "/assets/images/opt_d.svg",
+        "B": "/assets/images/opt_a.svg",
+        "C": "/assets/images/opt_b.svg",
+        "D": "/assets/images/opt_c.svg"
+      }
+    },
+    {
+      "id": "qspa005",
+      "question_code": "Q_SPA_005",
+      "domain": "SPA",
+      "difficulty": "very_hard",
+      "weight": 2.5,
+      "correct_option": "B",
+      "image_path": "/assets/images/q_spa_005.svg",
+      "options": {
+        "A": "/assets/images/opt_a2.svg",
+        "B": "/assets/images/opt_b2.svg",
+        "C": "/assets/images/opt_c2.svg",
+        "D": "/assets/images/opt_d2.svg"
+      }
+    },
+    {
+      "id": "qanl001",
+      "question_code": "Q_ANL_001",
+      "domain": "ANL",
+      "difficulty": "easy",
+      "weight": 1.0,
+      "correct_option": "C",
+      "image_path": "/assets/images/q_anl_001.svg",
+      "options": {
+        "A": "/assets/images/opt_a.svg",
+        "B": "/assets/images/opt_b.svg",
+        "C": "/assets/images/opt_c.svg",
+        "D": "/assets/images/opt_d.svg"
+      }
+    },
+    {
+      "id": "qanl002",
+      "question_code": "Q_ANL_002",
+      "domain": "ANL",
+      "difficulty": "medium",
+      "weight": 1.5,
+      "correct_option": "D",
+      "image_path": "/assets/images/q_anl_002.svg",
+      "options": {
+        "A": "/assets/images/opt_b.svg",
+        "B": "/assets/images/opt_c.svg",
+        "C": "/assets/images/opt_d.svg",
+        "D": "/assets/images/opt_a.svg"
+      }
+    },
+    {
+      "id": "qanl003",
+      "question_code": "Q_ANL_003",
+      "domain": "ANL",
+      "difficulty": "medium",
+      "weight": 1.5,
+      "correct_option": "A",
+      "image_path": "/assets/images/q_anl_003.svg",
+      "options": {
+        "A": "/assets/images/opt_c.svg",
+        "B": "/assets/images/opt_d.svg",
+        "C": "/assets/images/opt_a.svg",
+        "D": "/assets/images/opt_b.svg"
+      }
+    },
+    {
+      "id": "qanl004",
+      "question_code": "Q_ANL_004",
+      "domain": "ANL",
+      "difficulty": "hard",
+      "weight": 2.0,
+      "correct_option": "B",
+      "image_path": "/assets/images/q_anl_004.svg",
+      "options": {
+        "A": "/assets/images/opt_d.svg",
+        "B": "/assets/images/opt_a.svg",
+        "C": "/assets/images/opt_b.svg",
+        "D": "/assets/images/opt_c.svg"
+      }
+    }
+  ]
+}
