@@ -1,73 +1,60 @@
 package models
 
-// User merepresentasikan data pengguna yang mengisi kuesioner IQ Test
+import "time"
+
+// User — data pengguna (per IQTEST.md §10.2 users table)
+// Score fields dihapus — skor disimpan di iq_results
 type User struct {
-	ID               string `json:"id"`
-	Nama             string `json:"nama"`
-	Email            string `json:"email"`
-	SkorLR           int    `json:"skor_lr"` // Raw score L/R (positif = L, negatif = R)
-	SkorNA           int    `json:"skor_na"` // Raw score N/A (positif = N, negatif = A)
-	SkorSA           int    `json:"skor_sa"` // Raw score S/A (positif = S, negatif = A)
-	SkorLV           int    `json:"skor_lv"` // Raw score L/V (positif = L, negatif = V)
-	IQTipe           string `json:"iq_tipe"` // e.g., "LNSL"
-	StatusPembayaran string `json:"status_pembayaran"`
+	ID        string
+	Email     string
+	Nama      string
+	Phone     *string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
-// DimensionScore menyimpan hasil skoring untuk satu dimensi kognitif
-type DimensionScore struct {
-	RawScore    float64 `json:"raw_score"`
-	PoleAScore  float64 `json:"pole_a_score"`
-	PoleBScore  float64 `json:"pole_b_score"`
-	MaxPossible float64 `json:"max_possible"`
-	Preference  string  `json:"preference"`
-	SCI         float64 `json:"sci"`
-	Strength    string  `json:"strength"`
-}
-
-// CognitiveProfile menyimpan urutan 4 kemampuan kognitif hasil derivasi
-type CognitiveProfile struct {
-	Dominant      string `json:"dominant"`
-	Auxiliary     string `json:"auxiliary"`
-	Complementary string `json:"complementary"`
-	Developing    string `json:"developing"`
-}
-
-// IQTestResult adalah output akhir kalkulasi satu sesi tes
-type IQTestResult struct {
-	Type             string                    `json:"type"`
-	Scores           map[string]DimensionScore `json:"scores"`
-	CognitiveProfile CognitiveProfile          `json:"cognitive_profile"`
-}
-
-// QuizResult adalah data yang dikirim ke template hasil
+// QuizResult — data yang dikirim ke template hasil (per IQTEST.md §8.2)
 type QuizResult struct {
-	Nama   string
-	IQTipe string
+	ID   string
+	Nama string
 
-	// Raw scores
-	SkorLR int
-	SkorNA int
-	SkorSA int
-	SkorLV int
+	// Skor
+	RawScore    float64
+	MaxPossible float64
+	Percentile  *float64
+	EstimatedIQ *float64
 
-	// Dimension scores
-	Scores map[string]DimensionScore
+	// Skor per domain
+	DomainScores map[string]DomainScore
 
-	// Cognitive profile
-	CognitiveProfile CognitiveProfile
+	// Waktu
+	AvgResponseMs int
+
+	// Reliabilitas
+	IsReliable       bool
+	ReliabilityFlags []string
 
 	// Narrative fields
-	ExecutiveSummary    string
-	RelationshipProfile string
-	Kekuatan            []string
-	AreaPerhatian       []string
-	RelationshipInsight string
-	CompatibilityNotes  string
-	ReflectionQuestions []string
+	ExecutiveSummary string
+	Kekuatan         []string
+	AreaPerhatian    []string
 }
 
-// PaywallData adalah data yang dikirim ke template paywall
+// PaywallData — data untuk rendering paywall page
 type PaywallData struct {
 	ID   string
 	Nama string
+}
+
+// Payment — data pembayaran (per IQTEST.md §10.2 payments table)
+type Payment struct {
+	ID            string
+	UserID        string
+	SessionID     string
+	Amount        float64
+	Currency      string
+	Status        string
+	PaymentMethod *string
+	PaidAt        *interface{}
+	CreatedAt     interface{}
 }

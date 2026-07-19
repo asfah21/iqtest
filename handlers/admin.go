@@ -60,23 +60,23 @@ func ShowDashboard(c *gin.Context) {
 
 	var rows []types.DashboardUserRow
 	for _, u := range users {
-		isPaid := u.StatusPembayaran == "paid"
+		isPaid := false
 		if isPaid {
 			sudahBayar++
 			totalPendapatan += 14900
 		} else {
 			belumBayar++
 		}
+		rawScore := 0.0
+		if u.RawScore.Valid {
+			rawScore = u.RawScore.Float64
+		}
 		rows = append(rows, types.DashboardUserRow{
-			ID:         u.ID,
-			Nama:       u.Nama,
-			Email:      u.Email,
+			ID:         u.User.ID,
+			Nama:       u.User.Nama,
+			Email:      u.User.Email,
 			SudahBayar: isPaid,
-			IQTipe:     u.IQTipe,
-			SkorLR:     u.SkorLR,
-			SkorNA:     u.SkorNA,
-			SkorSA:     u.SkorSA,
-			SkorLV:     u.SkorLV,
+			RawScore:   rawScore,
 			Dibuat:     "-",
 		})
 	}

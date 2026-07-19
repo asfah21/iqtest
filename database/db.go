@@ -26,4 +26,11 @@ func Init() {
 		log.Fatalf("Database connection error: %v", err)
 	}
 	log.Println("⚡ Terkoneksi ke PostgreSQL dengan sukses!")
+
+	// Jalankan migrasi schema
+	_, err = DB.Exec(initSchemaSQL)
+	if err != nil {
+		log.Fatalf("Gagal menjalankan migrasi schema: %v", err)
+	}
+	log.Println("🗄️  Migrasi database berhasil dijalankan!")
 }

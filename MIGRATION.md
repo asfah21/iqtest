@@ -19,6 +19,7 @@
 7. [Phase 5 — Handler & Template](#7-phase-5--handler--template)
 8. [Phase 6 — Narrative Engine](#8-phase-6--narrative-engine)
 9. [Phase 7 — Anti-Cheating System](#9-phase-7--anti-cheating-system)
+
 10. [Phase 8 — Automated Payment Gateway (Future)](#10-phase-8--automated-payment-gateway-future)
 11. [Phase 9 — Admin Analytics & CSV Export (Future)](#11-phase-9--admin-analytics--csv-export-future)
 12. [Dependency Graph](#12-dependency-graph)
@@ -250,122 +251,47 @@ type PaywallData struct {
 
 | # | Task | File(s) | Description |
 |---|------|---------|-------------|
-| 1.1 | Create `users` table | `migrations/001_init_schema.sql` | DDL persis per IQTEST.md §10.2: `id UUID PK DEFAULT gen_random_uuid()`, `email VARCHAR(255) UNIQUE NOT NULL`, `nama VARCHAR(255) NOT NULL`, `phone VARCHAR(20)`, `created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`, `updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`. |
-| 1.2 | Create `test_sessions` table | `migrations/001_init_schema.sql` | `id UUID PK`, `user_id UUID REFERENCES users(id)`, `session_token VARCHAR(64) UNIQUE NOT NULL`, `started_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`, `completed_at TIMESTAMPTZ`, `device_type VARCHAR(20)`, `ip_address INET`, `is_completed BOOLEAN NOT NULL DEFAULT FALSE`, `metadata JSONB`. |
-| 1.3 | Create `questions` table | `migrations/001_init_schema.sql` | `id UUID PK`, `question_code VARCHAR(20) UNIQUE NOT NULL`, `domain VARCHAR(3)` CHECK IN ('MTX','SEQ','SPA','ANL'), `difficulty VARCHAR(10)` CHECK, `weight DECIMAL(3,1)`, `image_url TEXT`, `option_a_image`–`option_d_image TEXT`, `correct_option CHAR(1)` CHECK, `p_value DECIMAL(4,3)`, `discrimination DECIMAL(4,3)`, `is_active BOOLEAN DEFAULT TRUE`, `created_at TIMESTAMPTZ`. |
-| 1.4 | Create `session_responses` table | `migrations/001_init_schema.sql` | `id UUID PK`, `session_id UUID NOT NULL REFERENCES test_sessions(id)`, `question_id UUID NOT NULL REFERENCES questions(id)`, `selected_option CHAR(1)` (nullable), `is_correct BOOLEAN NOT NULL`, `time_taken_ms INTEGER NOT NULL`, `timed_out BOOLEAN DEFAULT FALSE`, `answered_at TIMESTAMPTZ`. UNIQUE(session_id, question_id). |
-| 1.5 | Create `iq_results` table | `migrations/001_init_schema.sql` | `id UUID PK`, `session_id UUID NOT NULL REFERENCES test_sessions(id) UNIQUE`, `raw_score DECIMAL(5,2) NOT NULL`, `max_possible_score DECIMAL(5,2) NOT NULL DEFAULT 30.5`, `mtx_score_pct DECIMAL(5,1)`, `seq_score_pct DECIMAL(5,1)`, `spa_score_pct DECIMAL(5,1)`, `anl_score_pct DECIMAL(5,1)`, `percentile DECIMAL(5,1)`, `estimated_iq DECIMAL(5,1)`, `avg_response_ms INTEGER`, `is_reliable BOOLEAN NOT NULL DEFAULT TRUE`, `reliability_flags JSONB`, `calculated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`. |
-| 1.6 | Create `payments` table | `migrations/001_init_schema.sql` | `id UUID PK`, `user_id UUID NOT NULL REFERENCES users(id)`, `session_id UUID NOT NULL REFERENCES test_sessions(id)`, `amount DECIMAL(12,2) NOT NULL`, `currency VARCHAR(3) NOT NULL DEFAULT 'IDR'`, `status VARCHAR(20) NOT NULL DEFAULT 'PENDING'`, `payment_method VARCHAR(50)`, `paid_at TIMESTAMPTZ`, `confirmed_by UUID REFERENCES admins(id)`, `created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`. |
-| 1.7 | Create `admins` table | `migrations/001_init_schema.sql` | `id UUID PK`, `username VARCHAR(50) UNIQUE NOT NULL`, `password_hash VARCHAR(255) NOT NULL`, `created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`. |
-| 1.8 | Create indexes | `migrations/001_init_schema.sql` | Per IQTEST.md §10.2: `idx_sessions_user` (user_id WHERE NOT NULL), `idx_sessions_token`, `idx_responses_session`, `idx_results_session`, `idx_payments_user`, `idx_payments_status`, `idx_questions_domain` (WHERE is_active). |
-| 1.9 | Migration runner | `database/db.go` | Ensure migration runner executes `001_init_schema.sql` on startup. |
+| 1.1 | Create `users` table | `database/db.go` | DDL via Go const `initSchemaSQL` per IQTEST.md §10.2: `id UUID PK DEFAULT gen_random_uuid()`, `email VARCHAR(255) UNIQUE NOT NULL`, `nama VARCHAR(255) NOT NULL`, `phone VARCHAR(20)`, `created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`, `updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`. |
+| 1.2 | Create `test_sessions` table | `database/db.go` | `id UUID PK`, `user_id UUID REFERENCES users(id)`, `session_token VARCHAR(64) UNIQUE NOT NULL`, `started_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`, `completed_at TIMESTAMPTZ`, `device_type VARCHAR(20)`, `ip_address INET`, `is_completed BOOLEAN NOT NULL DEFAULT FALSE`, `metadata JSONB`. |
+| 1.3 | Create `questions` table | `database/db.go` | `id UUID PK`, `question_code VARCHAR(20) UNIQUE NOT NULL`, `domain VARCHAR(3)` CHECK IN ('MTX','SEQ','SPA','ANL'), `difficulty VARCHAR(10)` CHECK, `weight DECIMAL(3,1)`, `image_url TEXT`, `option_a_image`–`option_d_image TEXT`, `correct_option CHAR(1)` CHECK, `p_value DECIMAL(4,3)`, `discrimination DECIMAL(4,3)`, `is_active BOOLEAN DEFAULT TRUE`, `created_at TIMESTAMPTZ`. |
+| 1.4 | Create `session_responses` table | `database/db.go` | `id UUID PK`, `session_id UUID NOT NULL REFERENCES test_sessions(id)`, `question_id UUID NOT NULL REFERENCES questions(id)`, `selected_option CHAR(1)` (nullable), `is_correct BOOLEAN NOT NULL`, `time_taken_ms INTEGER NOT NULL`, `timed_out BOOLEAN DEFAULT FALSE`, `answered_at TIMESTAMPTZ`. UNIQUE(session_id, question_id). |
+| 1.5 | Create `iq_results` table | `database/db.go` | `id UUID PK`, `session_id UUID NOT NULL REFERENCES test_sessions(id) UNIQUE`, `raw_score DECIMAL(5,2) NOT NULL`, `max_possible_score DECIMAL(5,2) NOT NULL DEFAULT 30.5`, `mtx_score_pct DECIMAL(5,1)`, `seq_score_pct DECIMAL(5,1)`, `spa_score_pct DECIMAL(5,1)`, `anl_score_pct DECIMAL(5,1)`, `percentile DECIMAL(5,1)`, `estimated_iq DECIMAL(5,1)`, `avg_response_ms INTEGER`, `is_reliable BOOLEAN NOT NULL DEFAULT TRUE`, `reliability_flags JSONB`, `calculated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`. |
+| 1.6 | Create `payments` table | `database/db.go` | `id UUID PK`, `user_id UUID NOT NULL REFERENCES users(id)`, `session_id UUID NOT NULL REFERENCES test_sessions(id)`, `amount DECIMAL(12,2) NOT NULL`, `currency VARCHAR(3) NOT NULL DEFAULT 'IDR'`, `status VARCHAR(20) NOT NULL DEFAULT 'PENDING'`, `payment_method VARCHAR(50)`, `paid_at TIMESTAMPTZ`, `confirmed_by UUID REFERENCES admins(id)`, `created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`. |
+| 1.7 | Create `admins` table | `database/db.go` | `id UUID PK`, `username VARCHAR(50) UNIQUE NOT NULL`, `password_hash VARCHAR(255) NOT NULL`, `created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`. |
+| 1.8 | Create indexes | `database/db.go` | Per IQTEST.md §10.2: `idx_sessions_user` (user_id WHERE NOT NULL), `idx_sessions_token`, `idx_responses_session`, `idx_results_session`, `idx_payments_user`, `idx_payments_status`, `idx_questions_domain` (WHERE is_active). |
+| 1.9 | Migration runner | `database/db.go` | Call `DB.Exec(initSchemaSQL)` on startup via `Init()`. DDL di-embed sebagai Go `const`. |
 
-### 3.3 DDL (Per IQTEST.md §10.2 — Source of Truth)
+### 3.3 DDL — Go Const (Per IQTEST.md §10.2 — Source of Truth)
 
-```sql
--- migrations/001_init_schema.sql
+Schema didefinisikan sebagai Go string constant `initSchemaSQL` di `database/db.go`. DDL lengkap mencakup 7 tabel (`users`, `test_sessions`, `questions`, `session_responses`, `iq_results`, `payments`, `admins`) + 7 indexes, dengan `CREATE TABLE IF NOT EXISTS` dan `CREATE INDEX IF NOT EXISTS` untuk idempotensi.
 
-CREATE TABLE users (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email             VARCHAR(255) UNIQUE NOT NULL,
-    nama              VARCHAR(255) NOT NULL,
-    phone             VARCHAR(20),
-    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
+```go
+const initSchemaSQL = `
+CREATE TABLE IF NOT EXISTS users ( ... );
+CREATE TABLE IF NOT EXISTS test_sessions ( ... );
+CREATE TABLE IF NOT EXISTS questions ( ... );
+CREATE TABLE IF NOT EXISTS session_responses ( ... );
+CREATE TABLE IF NOT EXISTS iq_results ( ... );
+CREATE TABLE IF NOT EXISTS payments ( ... );
+CREATE TABLE IF NOT EXISTS admins ( ... );
+CREATE INDEX IF NOT EXISTS idx_sessions_user ...;
+CREATE INDEX IF NOT EXISTS idx_sessions_token ...;
+CREATE INDEX IF NOT EXISTS idx_responses_session ...;
+CREATE INDEX IF NOT EXISTS idx_results_session ...;
+CREATE INDEX IF NOT EXISTS idx_payments_user ...;
+CREATE INDEX IF NOT EXISTS idx_payments_status ...;
+CREATE INDEX IF NOT EXISTS idx_questions_domain ...;
+`
+```
 
-CREATE TABLE test_sessions (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id           UUID REFERENCES users(id),
-    session_token     VARCHAR(64) UNIQUE NOT NULL,
-    started_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    completed_at      TIMESTAMPTZ,
-    device_type       VARCHAR(20),
-    ip_address        INET,
-    is_completed      BOOLEAN NOT NULL DEFAULT FALSE,
-    metadata          JSONB
-);
-
-CREATE TABLE questions (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    question_code     VARCHAR(20) UNIQUE NOT NULL,
-    domain            VARCHAR(3) NOT NULL CHECK (domain IN ('MTX','SEQ','SPA','ANL')),
-    difficulty        VARCHAR(10) NOT NULL CHECK (difficulty IN ('easy','medium','hard','very_hard')),
-    weight            DECIMAL(3,1) NOT NULL,
-    image_url         TEXT NOT NULL,
-    option_a_image    TEXT NOT NULL,
-    option_b_image    TEXT NOT NULL,
-    option_c_image    TEXT NOT NULL,
-    option_d_image    TEXT NOT NULL,
-    correct_option    CHAR(1) NOT NULL CHECK (correct_option IN ('A','B','C','D')),
-    p_value           DECIMAL(4,3),
-    discrimination    DECIMAL(4,3),
-    is_active         BOOLEAN NOT NULL DEFAULT TRUE,
-    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE session_responses (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    session_id        UUID NOT NULL REFERENCES test_sessions(id),
-    question_id       UUID NOT NULL REFERENCES questions(id),
-    selected_option   CHAR(1),                       -- NULL jika timeout
-    is_correct        BOOLEAN NOT NULL,
-    time_taken_ms     INTEGER NOT NULL,
-    timed_out         BOOLEAN NOT NULL DEFAULT FALSE,
-    answered_at       TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    UNIQUE(session_id, question_id)
-);
-
-CREATE TABLE iq_results (
-    id                    UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    session_id            UUID NOT NULL REFERENCES test_sessions(id) UNIQUE,
-    raw_score             DECIMAL(5,2) NOT NULL,
-    max_possible_score    DECIMAL(5,2) NOT NULL DEFAULT 30.5,
-    mtx_score_pct         DECIMAL(5,1),
-    seq_score_pct         DECIMAL(5,1),
-    spa_score_pct         DECIMAL(5,1),
-    anl_score_pct         DECIMAL(5,1),
-    percentile            DECIMAL(5,1),
-    estimated_iq          DECIMAL(5,1),
-    avg_response_ms       INTEGER,
-    is_reliable           BOOLEAN NOT NULL DEFAULT TRUE,
-    reliability_flags     JSONB,
-    calculated_at         TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE payments (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id           UUID NOT NULL REFERENCES users(id),
-    session_id        UUID NOT NULL REFERENCES test_sessions(id),
-    amount            DECIMAL(12,2) NOT NULL,
-    currency          VARCHAR(3) NOT NULL DEFAULT 'IDR',
-    status            VARCHAR(20) NOT NULL DEFAULT 'PENDING',
-    payment_method    VARCHAR(50),
-    paid_at           TIMESTAMPTZ,
-    confirmed_by      UUID REFERENCES admins(id),
-    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE admins (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    username          VARCHAR(50) UNIQUE NOT NULL,
-    password_hash     VARCHAR(255) NOT NULL,
-    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
--- Indexes
-CREATE INDEX idx_sessions_user ON test_sessions(user_id) WHERE user_id IS NOT NULL;
-CREATE INDEX idx_sessions_token ON test_sessions(session_token);
-CREATE INDEX idx_responses_session ON session_responses(session_id);
-CREATE INDEX idx_results_session ON iq_results(session_id);
-CREATE INDEX idx_payments_user ON payments(user_id);
-CREATE INDEX idx_payments_status ON payments(status);
-CREATE INDEX idx_questions_domain ON questions(domain) WHERE is_active = TRUE;
+Dijalankan di `database.Init()` setelah koneksi DB sukses:
+```go
+_, err = DB.Exec(initSchemaSQL)
 ```
 
 ### 3.4 Completion Criteria
 
-- [ ] Migration runs without errors on empty database
+- [ ] Migration runs without errors on empty database (`go run .` dengan DATABASE_URL terisi)
 - [ ] All 7 tables created (`users`, `test_sessions`, `questions`, `session_responses`, `iq_results`, `payments`, `admins`)
 - [ ] All CHECK constraints, FK references, and UNIQUE constraints per IQTEST.md §10.2
 - [ ] All 7 indexes created
@@ -957,8 +883,8 @@ Phase 0 (Models) ──────► Phase 1 (DB Schema) ──► Phase 2 (Re
 | `models/question.go` | 0 | Create |
 | `models/session.go` | 0 | Create |
 | `models/result.go` | 0 | Create |
-| `migrations/001_init_schema.sql` | 1 | Create (7 tabel + indexes per IQTEST.md §10.2) |
-| `database/db.go` | 1 | Update (migration runner) |
+| `database/schema.go` | 1 | Create — `initSchemaSQL` const dengan DDL 7 tabel + indexes per IQTEST.md §10.2 |
+| `database/db.go` | 1 | Update — panggil `DB.Exec(initSchemaSQL)` di `Init()` |
 | `repositories/user.go` | 2 | Create |
 | `repositories/admin.go` | 2 | Create |
 | `repositories/question.go` | 2 | Create |

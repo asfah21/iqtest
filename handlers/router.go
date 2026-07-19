@@ -2,8 +2,10 @@ package handlers
 
 import (
 	"net/http"
+	"time"
 
 	"ego/helpers"
+	"ego/middleware"
 	"ego/templ/pages"
 
 	"github.com/gin-gonic/gin"
@@ -26,12 +28,15 @@ func SetupRoutes(r *gin.Engine) {
 	r.GET("/", ShowHome)
 	r.HEAD("/", ShowHome)
 
-	// 2. Halaman Kuesioner
+	// 2. API Questions (tanpa correctOption — per IQTEST.md §11.2)
+	r.GET("/api/questions", GetQuestions)
+
+	// 3. Halaman Kuesioner
 	r.GET("/quiz", ShowQuiz)
 	r.HEAD("/quiz", ShowQuiz)
 
-	// 3. Proses Jawaban
-	r.POST("/submit-tes", SubmitTest)
+	// 4. Proses Jawaban (dengan rate limiting: max 5/jam per IP — per IQTEST.md §9.2)
+	r.POST("/submit-tes", middleware.RateLimitMiddleware(5, time.Hour), SubmitTest)
 
 	// 4. Paywall
 	r.GET("/paywall/:id", ShowPaywall)

@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"strconv"
 
 	"ego/helpers"
 	"ego/models"
@@ -13,31 +12,69 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// SubmitTest memproses jawaban kuis dan mengembalikan ID user sebagai JSON
+// GetQuestions — GET /api/questions
+// Mengembalikan 20 soal tanpa correctOption (per IQTEST.md §11.2)
+func GetQuestions(c *gin.Context) {
+	questions := services.GetQuestions()
+
+	type questionResponse struct {
+		ID           string            `json:"id"`
+		QuestionCode string            `json:"question_code"`
+		Domain       string            `json:"domain"`
+		ImageURL     string            `json:"image_url"`
+		Options      map[string]string `json:"options"`
+	}
+
+	var resp []questionResponse
+	for _, q := range questions {
+		resp = append(resp, questionResponse{
+			ID:           q.ID,
+			QuestionCode: q.QuestionCode,
+			Domain:       q.Domain,
+			ImageURL:     q.ImageURL,
+			Options: map[string]string{
+				"A": q.OptionImages[0],
+				"B": q.OptionImages[1],
+				"C": q.OptionImages[2],
+				"D": q.OptionImages[3],
+			},
+		})
+	}
+
+	c.JSON(http.StatusOK, resp)
+}
+
+// SubmitTest — POST /submit-tes
+// Menerima payload JSON { nama, email, answers, tab_switch_count }
 func SubmitTest(c *gin.Context) {
-	email := c.PostForm("email")
-	nama := c.PostForm("nama")
-
-	// Baca 20 jawaban dari form (q_Q_LR_001, q_Q_NA_001, dll.)
-	answers := make(map[string]float64)
-
-	// Daftar ID soal yang dikirim dari frontend
-	questionIDs := []string{
-		"Q_LR_001", "Q_LR_002", "Q_LR_003", "Q_LR_004", "Q_LR_005",
-		"Q_NA_001", "Q_NA_002", "Q_NA_003", "Q_NA_004", "Q_NA_005", "Q_NA_006",
-		"Q_SA_001", "Q_SA_002", "Q_SA_003", "Q_SA_004", "Q_SA_005",
-		"Q_LV_001", "Q_LV_002", "Q_LV_003", "Q_LV_004",
+	var req struct {
+		Nama    string `json:"nama"`
+		Email   string `json:"email"`
+		Answers []struct {
+			QuestionCode   string  `json:"question_code"`
+			SelectedOption *string `json:"selected_option"`
+			TimeTakenMs    int     `json:"time_taken_ms"`
+			TimedOut       bool    `json:"timed_out"`
+		} `json:"answers"`
+		TabSwitchCount int `json:"tab_switch_count"`
 	}
 
-	for _, qID := range questionIDs {
-		val, err := strconv.ParseFloat(c.PostForm("q_"+qID), 64)
-		if err != nil {
-			val = 0 // default jika tidak terisi
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Data tidak valid: " + err.Error(),
+		})
+		return
+	}
+
+	// Convert to map[string]string for ProcessQuizAnswers
+	rawAnswers := make(map[string]string)
+	for _, a := range req.Answers {
+		if a.SelectedOption != nil {
+			rawAnswers[a.QuestionCode] = *a.SelectedOption
 		}
-		answers[qID] = val
 	}
 
-	userID, err := services.ProcessQuizAnswers(email, nama, answers)
+	sessionID, err := services.ProcessQuizAnswers(req.Email, req.Nama, rawAnswers, req.TabSwitchCount)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Gagal menyimpan data tes: " + err.Error(),
@@ -46,7 +83,7 @@ func SubmitTest(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"id": userID,
+		"id": sessionID,
 	})
 }
 
@@ -71,12 +108,10 @@ func ShowResult(c *gin.Context) {
 		return
 	}
 	if result == nil {
-		// Belum bayar, redirect ke paywall
 		c.Redirect(http.StatusSeeOther, "/paywall/"+id+"?error=belum_bayar")
 		return
 	}
 
-	// Convert models.QuizResult to types.HasilPageData
 	hasilData := quizResultToHasilData(result)
 	helpers.Render(c, http.StatusOK, pages.HasilPage(hasilData))
 }
@@ -110,32 +145,38 @@ func KonfirmasiBayar(c *gin.Context) {
 }
 
 // quizResultToHasilData converts the service-layer QuizResult to the template data type.
-// Narrative fields are now populated by GetQuizResult via GenerateAllNarratives.
 func quizResultToHasilData(r *models.QuizResult) types.HasilPageData {
-	// Map IQ Test raw scores to Dark Triad percentile display
-	narsisme := absInt(r.SkorLR)
-	machiavellian := absInt(r.SkorNA)
-	psikopati := absInt(r.SkorSA)
+	domainViews := make(map[string]types.DomainScoreView)
+	domainLabels := map[string]string{
+		"MTX": "Penalaran Matriks",
+		"SEQ": "Deret Logis",
+		"SPA": "Rotasi Spasial",
+		"ANL": "Analogi Visual",
+	}
+	for k, ds := range r.DomainScores {
+		domainViews[k] = types.DomainScoreView{
+			Domain:     k,
+			Percentage: ds.Percentage,
+			Label:      domainLabels[k],
+		}
+	}
+
+	percentile := 0.0
+	if r.Percentile != nil {
+		percentile = *r.Percentile
+	}
 
 	return types.HasilPageData{
-		Nama:                r.Nama,
-		Narsisme:            narsisme,
-		Machiavellian:       machiavellian,
-		Psikopati:           psikopati,
-		ExecutiveSummary:    r.ExecutiveSummary,
-		RelationshipProfile: r.RelationshipProfile,
-		Kekuatan:            r.Kekuatan,
-		AreaPerhatian:       r.AreaPerhatian,
-		RelationshipInsight: r.RelationshipInsight,
-		CompatibilityNotes:  r.CompatibilityNotes,
-		ReflectionQuestions: r.ReflectionQuestions,
+		Nama:             r.Nama,
+		RawScore:         r.RawScore,
+		MaxPossible:      r.MaxPossible,
+		Percentile:       percentile,
+		EstimatedIQ:      r.EstimatedIQ,
+		DomainScores:     domainViews,
+		AvgResponseMs:    r.AvgResponseMs,
+		IsReliable:       r.IsReliable,
+		ExecutiveSummary: r.ExecutiveSummary,
+		Kekuatan:         r.Kekuatan,
+		AreaPerhatian:    r.AreaPerhatian,
 	}
-}
-
-// absInt returns the absolute value of x.
-func absInt(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
 }

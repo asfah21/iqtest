@@ -1,393 +1,340 @@
 package services
 
 import (
+	"crypto/rand"
+	"encoding/hex"
+	"math"
+
 	"ego/models"
 	"ego/repositories"
-	"math"
 )
 
 // ──────────────────────────────────────────────────────────────
 // Question Definition — metadata setiap soal IQ Test
 // ──────────────────────────────────────────────────────────────
 
-type questionDef struct {
-	ID            string  // e.g., "Q_LR_001"
-	Dikotomi      string  // "LR" | "NA" | "SA" | "LV"
-	PolePrimary   string  // "L"|"R"|"N"|"A"|"S"|"A"|"L"|"V"
-	Weight        float64 // bobot soal
-	ReverseScored bool    // apakah reverse scored
-}
-
-// questionBank adalah bank soal IQ Test (20 soal)
-var questionBank = []questionDef{
-	// L/R (5 soal)
-	{ID: "Q_LR_001", Dikotomi: "LR", PolePrimary: "L", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_LR_002", Dikotomi: "LR", PolePrimary: "R", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_LR_003", Dikotomi: "LR", PolePrimary: "L", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_LR_004", Dikotomi: "LR", PolePrimary: "R", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_LR_005", Dikotomi: "LR", PolePrimary: "L", Weight: 1.5, ReverseScored: true},
-
-	// N/A (6 soal)
-	{ID: "Q_NA_001", Dikotomi: "NA", PolePrimary: "N", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_NA_002", Dikotomi: "NA", PolePrimary: "A", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_NA_003", Dikotomi: "NA", PolePrimary: "N", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_NA_004", Dikotomi: "NA", PolePrimary: "A", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_NA_005", Dikotomi: "NA", PolePrimary: "N", Weight: 1.5, ReverseScored: true},
-	{ID: "Q_NA_006", Dikotomi: "NA", PolePrimary: "A", Weight: 1.5, ReverseScored: true},
-
-	// S/A (5 soal)
-	{ID: "Q_SA_001", Dikotomi: "SA", PolePrimary: "S", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_SA_002", Dikotomi: "SA", PolePrimary: "A", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_SA_003", Dikotomi: "SA", PolePrimary: "S", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_SA_004", Dikotomi: "SA", PolePrimary: "A", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_SA_005", Dikotomi: "SA", PolePrimary: "S", Weight: 1.5, ReverseScored: true},
-
-	// L/V (4 soal)
-	{ID: "Q_LV_001", Dikotomi: "LV", PolePrimary: "L", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_LV_002", Dikotomi: "LV", PolePrimary: "V", Weight: 2.0, ReverseScored: false},
-	{ID: "Q_LV_003", Dikotomi: "LV", PolePrimary: "L", Weight: 1.5, ReverseScored: false},
-	{ID: "Q_LV_004", Dikotomi: "LV", PolePrimary: "V", Weight: 1.5, ReverseScored: true},
+var questionBank = []models.QuestionDef{
+	{QuestionCode: "Q_MTX_001", Domain: "MTX", Difficulty: "easy", Weight: 1.0, CorrectOption: "A"},
+	{QuestionCode: "Q_MTX_002", Domain: "MTX", Difficulty: "easy", Weight: 1.0, CorrectOption: "B"},
+	{QuestionCode: "Q_MTX_003", Domain: "MTX", Difficulty: "medium", Weight: 1.5, CorrectOption: "C"},
+	{QuestionCode: "Q_MTX_004", Domain: "MTX", Difficulty: "medium", Weight: 1.5, CorrectOption: "D"},
+	{QuestionCode: "Q_MTX_005", Domain: "MTX", Difficulty: "hard", Weight: 2.0, CorrectOption: "A"},
+	{QuestionCode: "Q_MTX_006", Domain: "MTX", Difficulty: "very_hard", Weight: 2.5, CorrectOption: "B"},
+	{QuestionCode: "Q_SEQ_001", Domain: "SEQ", Difficulty: "easy", Weight: 1.0, CorrectOption: "A"},
+	{QuestionCode: "Q_SEQ_002", Domain: "SEQ", Difficulty: "medium", Weight: 1.5, CorrectOption: "B"},
+	{QuestionCode: "Q_SEQ_003", Domain: "SEQ", Difficulty: "medium", Weight: 1.5, CorrectOption: "C"},
+	{QuestionCode: "Q_SEQ_004", Domain: "SEQ", Difficulty: "hard", Weight: 2.0, CorrectOption: "D"},
+	{QuestionCode: "Q_SEQ_005", Domain: "SEQ", Difficulty: "hard", Weight: 2.0, CorrectOption: "A"},
+	{QuestionCode: "Q_SPA_001", Domain: "SPA", Difficulty: "medium", Weight: 1.5, CorrectOption: "B"},
+	{QuestionCode: "Q_SPA_002", Domain: "SPA", Difficulty: "medium", Weight: 1.5, CorrectOption: "C"},
+	{QuestionCode: "Q_SPA_003", Domain: "SPA", Difficulty: "hard", Weight: 2.0, CorrectOption: "D"},
+	{QuestionCode: "Q_SPA_004", Domain: "SPA", Difficulty: "very_hard", Weight: 2.5, CorrectOption: "A"},
+	{QuestionCode: "Q_SPA_005", Domain: "SPA", Difficulty: "very_hard", Weight: 2.5, CorrectOption: "B"},
+	{QuestionCode: "Q_ANL_001", Domain: "ANL", Difficulty: "easy", Weight: 1.0, CorrectOption: "C"},
+	{QuestionCode: "Q_ANL_002", Domain: "ANL", Difficulty: "medium", Weight: 1.5, CorrectOption: "D"},
+	{QuestionCode: "Q_ANL_003", Domain: "ANL", Difficulty: "medium", Weight: 1.5, CorrectOption: "A"},
+	{QuestionCode: "Q_ANL_004", Domain: "ANL", Difficulty: "hard", Weight: 2.0, CorrectOption: "B"},
 }
 
 // ──────────────────────────────────────────────────────────────
-// Likert contribution mapping (1–6)
+// CalculateIQResult
 // ──────────────────────────────────────────────────────────────
 
-var likertContribution = map[int]float64{
-	1: 1.00, // Sangat kuat ke pole_primary
-	2: 0.67, // Kuat ke pole_primary
-	3: 0.33, // Lemah ke pole_primary
-	4: 0.33, // Lemah ke pole_opposite
-	5: 0.67, // Kuat ke pole_opposite
-	6: 1.00, // Sangat kuat ke pole_opposite
-}
+func CalculateIQResult(responses []models.SessionResponse) models.IQTestResult {
+	domainScores := map[string]float64{"MTX": 0, "SEQ": 0, "SPA": 0, "ANL": 0}
+	domainMax := map[string]float64{"MTX": 0, "SEQ": 0, "SPA": 0, "ANL": 0}
+	totalTimeMs := 0
 
-// ──────────────────────────────────────────────────────────────
-// DeriveCognitiveProfile — menurunkan profil kognitif dari 4 huruf IQ Test type
-// ──────────────────────────────────────────────────────────────
-
-func DeriveCognitiveProfile(iqType string) models.CognitiveProfile {
-	if len(iqType) < 4 {
-		return models.CognitiveProfile{}
-	}
-
-	lR := string(iqType[0]) // "L" atau "R"
-	nA := string(iqType[1]) // "N" atau "A"
-	sA := string(iqType[2]) // "S" atau "A"
-	lV := string(iqType[3]) // "L" atau "V"
-
-	var dominant, auxiliary, complementary, developing string
-
-	// Derivation algorithm per IQTEST.md §3.4
-	if lR == "L" {
-		if nA == "N" {
-			dominant = "Logical"
-			auxiliary = "Numerical"
-		} else {
-			dominant = "Logical"
-			auxiliary = "Spatial"
-		}
-	} else {
-		if sA == "S" {
-			dominant = "Spatial"
-			auxiliary = "Reasoning"
-		} else {
-			dominant = "Numerical"
-			auxiliary = "Verbal"
-		}
-	}
-
-	// Complementary and Developing are derived from the remaining dimensions
-	// Simplified production rules based on IQTEST.md §3.4
-	if lR == "L" && nA == "N" && sA == "S" && lV == "V" {
-		complementary = "Spatial"
-		developing = "Verbal"
-	} else if lR == "L" && nA == "A" && sA == "A" && lV == "L" {
-		complementary = "Analytical"
-		developing = "Verbal"
-	} else if lR == "R" && nA == "N" && sA == "S" && lV == "V" {
-		complementary = "Numerical"
-		developing = "Verbal"
-	} else if lR == "R" && nA == "A" && sA == "A" && lV == "V" {
-		complementary = "Reasoning"
-		developing = "Linguistic"
-	} else {
-		// Fallback: assign remaining poles
-		if lV == "L" {
-			complementary = "Linguistic"
-			developing = "Verbal"
-		} else {
-			complementary = "Verbal"
-			developing = "Linguistic"
-		}
-	}
-
-	return models.CognitiveProfile{
-		Dominant:      dominant,
-		Auxiliary:     auxiliary,
-		Complementary: complementary,
-		Developing:    developing,
-	}
-}
-
-// ──────────────────────────────────────────────────────────────
-// buildDimensionScore — menghitung DimensionScore dari akumulator
-// ──────────────────────────────────────────────────────────────
-
-func buildDimensionScore(poleA, poleB, max float64, poleALetter, poleBLetter string) models.DimensionScore {
-	rawScore := poleA - poleB
-	preference := poleALetter
-	if rawScore < 0 {
-		preference = poleBLetter
-	}
-
-	sci := 0.0
-	if max > 0 {
-		sci = math.Abs(rawScore) / max * 100
-	}
-	sci = math.Round(sci*10) / 10
-
-	strength := "very_clear"
-	switch {
-	case sci <= 25:
-		strength = "slight"
-	case sci <= 50:
-		strength = "moderate"
-	case sci <= 75:
-		strength = "clear"
-	}
-
-	return models.DimensionScore{
-		RawScore:    rawScore,
-		PoleAScore:  poleA,
-		PoleBScore:  poleB,
-		MaxPossible: max,
-		Preference:  preference,
-		SCI:         sci,
-		Strength:    strength,
-	}
-}
-
-// ──────────────────────────────────────────────────────────────
-// CalculateIQResult — menghitung hasil IQ Test dari jawaban
-// ──────────────────────────────────────────────────────────────
-
-func CalculateIQResult(answers map[string]float64) models.IQTestResult {
-	// Inisialisasi akumulator per dimensi
-	type acc struct {
-		poleA float64
-		poleB float64
-		max   float64
-	}
-
-	accumulators := map[string]*acc{
-		"LR": {},
-		"NA": {},
-		"SA": {},
-		"LV": {},
-	}
-
-	// Proses setiap jawaban
-	for _, q := range questionBank {
-		answerValue, ok := answers[q.ID]
-		if !ok {
-			continue
-		}
-
-		acc := accumulators[q.Dikotomi]
-
-		// Skala Likert 1–6
-		raw := int(answerValue)
-		adjusted := raw
-		if q.ReverseScored {
-			adjusted = 7 - raw
-		}
-
-		contribution := likertContribution[adjusted]
-		weighted := contribution * q.Weight
-
-		// Tentukan pole: pole_primary = A, pole_opposite = B
-		isPoleA := false
-		switch q.Dikotomi {
-		case "LR":
-			isPoleA = q.PolePrimary == "L"
-		case "NA":
-			isPoleA = q.PolePrimary == "N"
-		case "SA":
-			isPoleA = q.PolePrimary == "S"
-		case "LV":
-			isPoleA = q.PolePrimary == "L"
-		}
-
-		if adjusted <= 3 {
-			// Condong ke pole_primary
-			if isPoleA {
-				acc.poleA += weighted
-			} else {
-				acc.poleB += weighted
+	for _, response := range responses {
+		for _, q := range questionBank {
+			if q.QuestionCode != response.QuestionCode {
+				continue
 			}
-		} else {
-			// Condong ke pole_opposite
-			if isPoleA {
-				acc.poleB += weighted
-			} else {
-				acc.poleA += weighted
+			domainMax[q.Domain] += q.Weight
+			if response.IsCorrect {
+				domainScores[q.Domain] += q.Weight
 			}
+			totalTimeMs += response.TimeTakenMs
+			break
 		}
-
-		acc.max += q.Weight
 	}
 
-	// Hitung DimensionScore untuk setiap dimensi
-	scores := map[string]models.DimensionScore{
-		"LR": buildDimensionScore(accumulators["LR"].poleA, accumulators["LR"].poleB, accumulators["LR"].max, "L", "R"),
-		"NA": buildDimensionScore(accumulators["NA"].poleA, accumulators["NA"].poleB, accumulators["NA"].max, "N", "A"),
-		"SA": buildDimensionScore(accumulators["SA"].poleA, accumulators["SA"].poleB, accumulators["SA"].max, "S", "A"),
-		"LV": buildDimensionScore(accumulators["LV"].poleA, accumulators["LV"].poleB, accumulators["LV"].max, "L", "V"),
+	rawScore := domainScores["MTX"] + domainScores["SEQ"] + domainScores["SPA"] + domainScores["ANL"]
+	maxPossible := 30.5
+
+	domainPct := make(map[string]models.DomainScore)
+	for _, domain := range []string{"MTX", "SEQ", "SPA", "ANL"} {
+		pct := 0.0
+		if domainMax[domain] > 0 {
+			pct = domainScores[domain] / domainMax[domain] * 100
+		}
+		domainPct[domain] = models.DomainScore{
+			Domain:      domain,
+			RawScore:    domainScores[domain],
+			MaxPossible: domainMax[domain],
+			Percentage:  pct,
+		}
 	}
-
-	// Derive IQ Test type
-	iqType := scores["LR"].Preference +
-		scores["NA"].Preference +
-		scores["SA"].Preference +
-		scores["LV"].Preference
-
-	// Derive cognitive profile
-	cognitiveProfile := DeriveCognitiveProfile(iqType)
 
 	return models.IQTestResult{
-		Type:             iqType,
-		Scores:           scores,
-		CognitiveProfile: cognitiveProfile,
+		RawScore:         rawScore,
+		MaxPossible:      maxPossible,
+		DomainScores:     domainPct,
+		AvgResponseMs:    totalTimeMs / len(responses),
+		IsReliable:       true,
+		ReliabilityFlags: nil,
 	}
 }
 
 // ──────────────────────────────────────────────────────────────
-// ProcessQuizAnswers — memproses 20 jawaban kuesioner IQ Test
+// CalculatePercentile
 // ──────────────────────────────────────────────────────────────
 
-func ProcessQuizAnswers(email, nama string, rawAnswers map[string]float64) (string, error) {
-	// Hitung IQ Test
-	result := CalculateIQResult(rawAnswers)
+func CalculatePercentile(rawScore float64, allScores []float64) float64 {
+	if len(allScores) == 0 {
+		return 0
+	}
+	count := 0
+	for _, s := range allScores {
+		if s <= rawScore {
+			count++
+		}
+	}
+	return float64(count) / float64(len(allScores)) * 100
+}
 
-	// Ambil raw scores (integer) untuk disimpan di database
-	skorLR := int(result.Scores["LR"].RawScore)
-	skorNA := int(result.Scores["NA"].RawScore)
-	skorSA := int(result.Scores["SA"].RawScore)
-	skorLV := int(result.Scores["LV"].RawScore)
+// ──────────────────────────────────────────────────────────────
+// EstimateIQ — Deviation IQ (Wechsler-style)
+// ──────────────────────────────────────────────────────────────
 
-	userID, err := repositories.InsertUser(email, nama, skorLR, skorNA, skorSA, skorLV, result.Type)
+func EstimateIQ(rawScore float64, populationMean float64, populationStdDev float64) *float64 {
+	if populationStdDev == 0 {
+		return nil
+	}
+	zScore := (rawScore - populationMean) / populationStdDev
+	iq := 100 + (zScore * 15)
+	iq = math.Round(iq*10) / 10
+	return &iq
+}
+
+// ──────────────────────────────────────────────────────────────
+// Anti-Cheating Detection (Per IQTEST.md §9)
+// ──────────────────────────────────────────────────────────────
+
+func DetectSpeedGuessing(responses []models.SessionResponse) bool {
+	if len(responses) == 0 {
+		return false
+	}
+	fastCount := 0
+	correctCount := 0
+	for _, r := range responses {
+		if r.TimeTakenMs > 0 && r.TimeTakenMs < 3000 {
+			fastCount++
+			if r.IsCorrect {
+				correctCount++
+			}
+		}
+	}
+	if fastCount == 0 {
+		return false
+	}
+	fastRatio := float64(fastCount) / float64(len(responses))
+	accuracy := float64(correctCount) / float64(fastCount)
+	return fastRatio > 0.3 && accuracy < 0.25
+}
+
+func DetectStraightPattern(responses []models.SessionResponse) bool {
+	optionCounts := map[string]int{"A": 0, "B": 0, "C": 0, "D": 0}
+	for _, r := range responses {
+		if r.SelectedOption != nil {
+			optionCounts[*r.SelectedOption]++
+		}
+	}
+	for _, count := range optionCounts {
+		if count >= 15 {
+			return true
+		}
+	}
+	return false
+}
+
+func AssessReliability(responses []models.SessionResponse, tabSwitchCount int) (bool, []string) {
+	var reasons []string
+	if DetectSpeedGuessing(responses) {
+		reasons = append(reasons, "speed_guessing")
+	}
+	if DetectStraightPattern(responses) {
+		reasons = append(reasons, "straight_pattern")
+	}
+	if tabSwitchCount > 3 {
+		reasons = append(reasons, "tab_switch_excessive")
+	}
+	return len(reasons) == 0, reasons
+}
+
+// ──────────────────────────────────────────────────────────────
+// GetQuestions
+// ──────────────────────────────────────────────────────────────
+
+func GetQuestions() []models.QuestionDef {
+	return questionBank
+}
+
+func generateSessionToken() string {
+	b := make([]byte, 16)
+	rand.Read(b)
+	return hex.EncodeToString(b)
+}
+
+// ──────────────────────────────────────────────────────────────
+// ProcessQuizAnswers
+// ──────────────────────────────────────────────────────────────
+
+func ProcessQuizAnswers(email, nama string, rawAnswers map[string]string, tabSwitchCount int) (string, error) {
+	var responses []models.SessionResponse
+	for _, q := range questionBank {
+		selectedOption, exists := rawAnswers[q.QuestionCode]
+		isCorrect := exists && selectedOption == q.CorrectOption
+		resp := models.SessionResponse{
+			QuestionCode: q.QuestionCode,
+			IsCorrect:    isCorrect,
+		}
+		if exists {
+			resp.SelectedOption = &selectedOption
+		}
+		responses = append(responses, resp)
+	}
+
+	result := CalculateIQResult(responses)
+
+	allScores, err := repositories.GetAllRawScores()
+	if err != nil {
+		allScores = nil
+	}
+	percentile := CalculatePercentile(result.RawScore, allScores)
+	result.Percentile = &percentile
+	result.EstimatedIQ = EstimateIQ(result.RawScore, 0, 0)
+
+	// Assess reliability
+	isReliable, reasons := AssessReliability(responses, tabSwitchCount)
+	result.IsReliable = isReliable
+	result.ReliabilityFlags = reasons
+
+	var userID string
+	existingUser, err := repositories.GetUserByEmail(email)
+	if err != nil {
+		userID, err = repositories.InsertUser(email, nama, "")
+		if err != nil {
+			return "", err
+		}
+	} else {
+		userID = existingUser.ID
+	}
+
+	sessionToken := generateSessionToken()
+	sessionID, err := repositories.CreateSession(userID, sessionToken, "web", "")
 	if err != nil {
 		return "", err
 	}
-	return userID, nil
+
+	err = repositories.InsertResponsesBatch(responses, sessionID)
+	if err != nil {
+		return "", err
+	}
+
+	_, err = repositories.InsertIQResult(sessionID, result)
+	if err != nil {
+		return "", err
+	}
+
+	repositories.UpdateSessionCompleted(sessionID)
+	return sessionID, nil
 }
 
 // ──────────────────────────────────────────────────────────────
-// GetPaywallData — mengambil data untuk halaman paywall
+// GetPaywallData
 // ──────────────────────────────────────────────────────────────
 
-func GetPaywallData(id string) (*models.PaywallData, error) {
-	nama, err := repositories.GetUserName(id)
+func GetPaywallData(sessionID string) (*models.PaywallData, error) {
+	session, err := repositories.GetSessionByID(sessionID)
 	if err != nil {
 		return nil, err
 	}
-	return &models.PaywallData{ID: id, Nama: nama}, nil
+	user, err := repositories.GetUserByID(session.UserID)
+	if err != nil {
+		return nil, err
+	}
+	return &models.PaywallData{ID: sessionID, Nama: user.Nama}, nil
 }
 
 // ──────────────────────────────────────────────────────────────
-// GetQuizResult — mengambil data hasil kuis (dengan proteksi paywall)
+// GetQuizResult
 // ──────────────────────────────────────────────────────────────
 
-func mapIQToDarkTriad(skorLR, skorNA, skorSA, _ int) (narsisme, machiavellian, psikopati int) {
-	// Map IQ Test raw scores to Dark Triad percentile-like values (0-100)
-	// Per IQTEST.md §8.3: L/R → Narcissism, N/A → Machiavellianism, S/A → Psychopathy
-	// Use absolute values capped at a reasonable scale
-	narsisme = absInt(skorLR) * 5 // L/R dimension → Narsisme
-	if narsisme > 100 {
-		narsisme = 100
+func GetQuizResult(sessionID string) (*models.QuizResult, error) {
+	payment, err := repositories.GetPaymentBySession(sessionID)
+	if err != nil || payment.Status != "PAID" {
+		return nil, nil
 	}
-	machiavellian = absInt(skorNA) * 5 // N/A dimension → Machiavellian
-	if machiavellian > 100 {
-		machiavellian = 100
-	}
-	psikopati = absInt(skorSA) * 5 // S/A dimension → Psikopati
-	if psikopati > 100 {
-		psikopati = 100
-	}
-	return
-}
 
-func absInt(x int) int {
-	if x < 0 {
-		return -x
+	result, err := repositories.GetIQResultBySession(sessionID)
+	if err != nil {
+		return nil, nil
 	}
-	return x
-}
 
-func GetQuizResult(id string) (*models.QuizResult, error) {
-	user, err := repositories.GetUserResult(id)
+	session, err := repositories.GetSessionByID(sessionID)
 	if err != nil {
 		return nil, err
 	}
 
-	// Proteksi: hanya tampilkan hasil jika sudah PAID
-	if user.StatusPembayaran != "PAID" {
-		return nil, nil // nil menandakan belum bayar
+	user, err := repositories.GetUserByID(session.UserID)
+	if err != nil {
+		return nil, err
 	}
 
-	// Build scores map for template
-	scores := map[string]models.DimensionScore{
-		"LR": buildDimensionScore(float64(user.SkorLR), 0, float64(user.SkorLR), "L", "R"),
-		"NA": buildDimensionScore(float64(user.SkorNA), 0, float64(user.SkorNA), "N", "A"),
-		"SA": buildDimensionScore(float64(user.SkorSA), 0, float64(user.SkorSA), "S", "A"),
-		"LV": buildDimensionScore(float64(user.SkorLV), 0, float64(user.SkorLV), "L", "V"),
+	percentile := 0.0
+	if result.Percentile != nil {
+		percentile = *result.Percentile
 	}
-
-	// Map IQ Test raw scores to Dark Triad dimensions for narrative generation
-	narsisme, machiavellian, psikopati := mapIQToDarkTriad(user.SkorLR, user.SkorNA, user.SkorSA, user.SkorLV)
-
-	// Generate all narratives using the Dark Triad scoring system
-	execSummary, relProfile, kekuatan, areaPerhatian, relInsight, compatNotes, refQuestions :=
-		GenerateAllNarratives(user.Nama, narsisme, machiavellian, psikopati)
+	execSummary, kekuatan, areaPerhatian, _ := GenerateAllNarratives(
+		user.Nama, result.RawScore, result.MaxPossible, result.DomainScores, percentile, result.EstimatedIQ,
+	)
 
 	return &models.QuizResult{
-		Nama:                user.Nama,
-		IQTipe:              user.IQTipe,
-		SkorLR:              user.SkorLR,
-		SkorNA:              user.SkorNA,
-		SkorSA:              user.SkorSA,
-		SkorLV:              user.SkorLV,
-		Scores:              scores,
-		CognitiveProfile:    DeriveCognitiveProfile(user.IQTipe),
-		ExecutiveSummary:    execSummary,
-		RelationshipProfile: relProfile,
-		Kekuatan:            kekuatan,
-		AreaPerhatian:       areaPerhatian,
-		RelationshipInsight: relInsight,
-		CompatibilityNotes:  compatNotes,
-		ReflectionQuestions: refQuestions,
+		ID:               sessionID,
+		Nama:             user.Nama,
+		RawScore:         result.RawScore,
+		MaxPossible:      result.MaxPossible,
+		Percentile:       result.Percentile,
+		EstimatedIQ:      result.EstimatedIQ,
+		DomainScores:     result.DomainScores,
+		AvgResponseMs:    result.AvgResponseMs,
+		IsReliable:       result.IsReliable,
+		ReliabilityFlags: result.ReliabilityFlags,
+		ExecutiveSummary: execSummary,
+		Kekuatan:         kekuatan,
+		AreaPerhatian:    areaPerhatian,
 	}, nil
 }
 
 // ──────────────────────────────────────────────────────────────
-// ConfirmPayment — mengonfirmasi pembayaran user
+// ConfirmPayment
 // ──────────────────────────────────────────────────────────────
 
-func ConfirmPayment(id string) error {
-	return repositories.UpdatePaymentStatus(id)
+func ConfirmPayment(sessionID string) error {
+	return repositories.UpdatePaymentStatus(sessionID)
 }
 
 // ──────────────────────────────────────────────────────────────
-// GetAllUsers — mengambil semua user untuk admin
+// GetAllUsers
 // ──────────────────────────────────────────────────────────────
 
-func GetAllUsers() ([]models.User, error) {
+func GetAllUsers() ([]repositories.AdminUserRow, error) {
 	return repositories.GetAllUsers()
 }
 
 // ──────────────────────────────────────────────────────────────
-// GetUserByID — mengambil user by ID untuk admin
+// GetUserByID
 // ──────────────────────────────────────────────────────────────
 
 func GetUserByID(id string) (*models.User, error) {

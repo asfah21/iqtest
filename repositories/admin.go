@@ -1,14 +1,29 @@
 package repositories
 
 import (
+	"database/sql"
+
 	"ego/database"
 	"ego/models"
 )
 
-// GetAllUsers mengambil semua data user dari database
-func GetAllUsers() ([]models.User, error) {
-	query := `SELECT id, nama, email, skor_lr, skor_na, skor_sa, skor_lv, iq_tipe, status_pembayaran 
-              FROM users_test ORDER BY id DESC`
+// AdminUserRow menyimpan data user dengan skor dari iq_results untuk dashboard admin
+type AdminUserRow struct {
+	models.User
+	RawScore    sql.NullFloat64
+	Percentile  sql.NullFloat64
+	EstimatedIQ sql.NullFloat64
+}
+
+// GetAllUsers mengambil semua data user dengan LEFT JOIN ke iq_results untuk raw_score, percentile, estimated_iq
+func GetAllUsers() ([]AdminUserRow, error) {
+	query := `SELECT u.id, u.email, u.nama, u.phone, u.created_at, u.updated_at,
+                     r.raw_score, r.percentile, r.estimated_iq
+              FROM users u
+              LEFT JOIN iq_results r ON r.session_id IN (
+                  SELECT id FROM test_sessions WHERE user_id = u.id LIMIT 1
+              )
+              ORDER BY u.created_at DESC`
 
 	rows, err := database.DB.Query(query)
 	if err != nil {
@@ -16,10 +31,13 @@ func GetAllUsers() ([]models.User, error) {
 	}
 	defer rows.Close()
 
-	var users []models.User
+	var users []AdminUserRow
 	for rows.Next() {
-		var u models.User
-		err := rows.Scan(&u.ID, &u.Nama, &u.Email, &u.SkorLR, &u.SkorNA, &u.SkorSA, &u.SkorLV, &u.IQTipe, &u.StatusPembayaran)
+		var u AdminUserRow
+		err := rows.Scan(
+			&u.ID, &u.Email, &u.Nama, &u.Phone, &u.CreatedAt, &u.UpdatedAt,
+			&u.RawScore, &u.Percentile, &u.EstimatedIQ,
+		)
 		if err != nil {
 			return nil, err
 		}
@@ -27,18 +45,4 @@ func GetAllUsers() ([]models.User, error) {
 	}
 
 	return users, nil
-}
-
-// GetUserByID mengambil data user berdasarkan ID
-func GetUserByID(id string) (*models.User, error) {
-	user := &models.User{}
-	query := `SELECT id, nama, email, skor_lr, skor_na, skor_sa, skor_lv, iq_tipe, status_pembayaran 
-              FROM users_test WHERE id = $1`
-	err := database.DB.QueryRow(query, id).Scan(
-		&user.ID, &user.Nama, &user.Email, &user.SkorLR, &user.SkorNA, &user.SkorSA, &user.SkorLV, &user.IQTipe, &user.StatusPembayaran,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return user, nil
 }

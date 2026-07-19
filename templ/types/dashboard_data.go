@@ -6,11 +6,7 @@ type DashboardUserRow struct {
 	Nama       string
 	Email      string
 	SudahBayar bool
-	IQTipe     string
-	SkorLR     int
-	SkorNA     int
-	SkorSA     int
-	SkorLV     int
+	RawScore   float64
 	Dibuat     string
 }
 
