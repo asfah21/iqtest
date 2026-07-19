@@ -1,0 +1,18 @@
+package layouts
+
+import (
+	tc "github.com/a-h/templ"
+	"ego/templ/components"
+)
+
+templ QuizLayout(title string, body tc.Component) {
+	<!DOCTYPE html>
+	<html lang="id">
+		@components.Head(title)
+		<body>
+			<main>
+				@body
+			</main>
+		</body>
+	</html>
+}

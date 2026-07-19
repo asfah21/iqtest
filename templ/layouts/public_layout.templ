@@ -1,0 +1,20 @@
+package layouts
+
+import (
+	tc "github.com/a-h/templ"
+	"ego/templ/components"
+)
+
+templ PublicLayout(title string, body tc.Component) {
+	<!DOCTYPE html>
+	<html lang="id">
+		@components.Head(title)
+		<body>
+			@components.Navbar()
+			<main>
+				@body
+			</main>
+			@components.Footer()
+		</body>
+	</html>
+}

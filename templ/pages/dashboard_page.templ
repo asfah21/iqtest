@@ -1,0 +1,55 @@
+package pages
+
+import (
+	"strconv"
+	"ego/templ/layouts"
+	"ego/templ/types"
+)
+
+templ DashboardPage(data types.DashboardPageData) {
+	@layouts.DashboardLayout("Dashboard", dashboardContent(data))
+}
+
+templ dashboardContent(data types.DashboardPageData) {
+	<div class="dashboard-content">
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+			<div class="card p-4"><div class="text-xs text-[var(--textMuted)] mb-1">Total User</div><div class="text-2xl font-bold">{ strconv.Itoa(data.TotalUser) }</div></div>
+			<div class="card p-4"><div class="text-xs text-[var(--textMuted)] mb-1">Sudah Bayar</div><div class="text-2xl font-bold text-green-600">{ strconv.Itoa(data.SudahBayar) }</div></div>
+			<div class="card p-4"><div class="text-xs text-[var(--textMuted)] mb-1">Belum Bayar</div><div class="text-2xl font-bold text-yellow-600">{ strconv.Itoa(data.BelumBayar) }</div></div>
+			<div class="card p-4"><div class="text-xs text-[var(--textMuted)] mb-1">Total Pendapatan</div><div class="text-2xl font-bold text-green-700">Rp{ strconv.Itoa(data.TotalPendapatan) }</div></div>
+		</div>
+		<div class="card p-6">
+			<h2 class="text-lg font-bold mb-4">Daftar Pengguna</h2>
+			<table class="w-full text-sm">
+				<thead>
+					<tr class="text-left border-b">
+						<th class="pb-2 pr-4">Nama</th>
+						<th class="pb-2 pr-4">Email</th>
+						<th class="pb-2 pr-4">MBTI</th>
+						<th class="pb-2 pr-4">Status</th>
+						<th class="pb-2">Aksi</th>
+					</tr>
+				</thead>
+				<tbody>
+					for _, user := range data.Users {
+						<tr class="border-b hover:bg-[var(--bgAlt)]">
+							<td class="py-2 pr-4">{ user.Nama }</td>
+							<td class="py-2 pr-4">{ user.Email }</td>
+							<td class="py-2 pr-4">{ user.MBTITipe }</td>
+							<td class="py-2 pr-4">
+								if user.SudahBayar {
+									<span class="text-green-600 font-medium">Paid</span>
+								} else {
+									<span class="text-yellow-600 font-medium">Pending</span>
+								}
+							</td>
+							<td class="py-2">
+								<a href="/admin/user/{ user.ID }" class="text-[var(--accent)] hover:underline">Detail</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}

@@ -1,0 +1,181 @@
+package pages
+
+import (
+	"ego/templ/components"
+	"ego/templ/layouts"
+)
+
+templ IndexPage() {
+	@layouts.PublicLayout("", indexContent())
+}
+
+templ indexContent() {
+	<!-- HERO -->
+	<section class="section-hero" aria-label="Hero">
+		<div class="container">
+			<div class="hero-grid">
+				<div class="fade-in-up">
+					<h1 class="hero-headline">
+						Kenali Tipe<br/>
+						<span class="text-accent">Kepribadianmu</span>
+					</h1>
+					<p class="hero-subheadline">
+						Temukan potensi dirimu melalui asesmen psikologi berbasis
+						<strong>MBTI</strong> — 16 tipe kepribadian berdasarkan teori fungsi kognitif Carl Jung.
+					</p>
+					<div class="terminal-block" role="code" aria-label="Installation command">
+						<span class="terminal-prompt">$</span>
+						<span class="terminal-command">npx mbti assess --type</span>
+						<span class="terminal-comment"># ±5 menit</span>
+						<span class="terminal-cursor" aria-hidden="true"></span>
+					</div>
+					<div class="hero-actions">
+						<a href="/quiz" class="btn-primary" aria-label="Mulai tes gratis">Mulai Tes Gratis</a>
+						<a href="#features" class="btn-secondary" aria-label="Pelajari lebih lanjut">Pelajari Lebih Lanjut</a>
+					</div>
+					<div class="hero-stats">
+						<span class="stat-pill">👥 <strong>12K+</strong> Pengguna</span>
+						<span class="stat-pill">🔬 <strong>16</strong> Tipe</span>
+						<span class="stat-pill">⚡ <strong>99.9%</strong> Uptime</span>
+						<span class="stat-pill">🆓 <strong>Gratis</strong></span>
+					</div>
+				</div>
+				<div class="hero-visual fade-in-up-delayed">
+					<div class="dashboard-mockup" role="img" aria-label="Dashboard preview">
+						<div class="mockup-header"><span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span></div>
+						<div class="mockup-body">
+							<div class="mockup-row"><span class="mockup-label">E/I</span><div class="mockup-bar" style="background:#7c3aed;"></div><span class="mockup-score">I 68%</span></div>
+							<div class="mockup-row"><span class="mockup-label">S/N</span><div class="mockup-bar" style="background:#d97706;"></div><span class="mockup-score">N 44%</span></div>
+							<div class="mockup-row"><span class="mockup-label">T/F</span><div class="mockup-bar" style="background:#059669;"></div><span class="mockup-score">T 75%</span></div>
+							<div class="mockup-row"><span class="mockup-label">J/P</span><div class="mockup-bar" style="background:#2563eb;"></div><span class="mockup-score">J 41%</span></div>
+							<div class="mockup-footer"><span class="mockup-badge">MBTI Assessment</span><span class="mockup-score">Tipe: INTJ</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FEATURES -->
+	<section id="features" class="section-alt" aria-labelledby="features-heading">
+		<div class="container">
+			<div class="section-heading fade-in-up"><h2 id="features-heading">Mengapa MBTI?</h2><p>Asesmen psikologi modern yang dirancang untuk membantu kamu memahami kepribadian secara lebih dalam.</p></div>
+			<div class="features-grid">
+				<div class="feature-card fade-in-up" style="animation-delay:0.05s;">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+					<h3>Berbasis Ilmiah</h3><p>Dikembangkan berdasarkan teori fungsi kognitif Carl Jung yang telah divalidasi oleh para profesional di bidangnya.</p>
+				</div>
+				<div class="feature-card fade-in-up" style="animation-delay:0.1s;">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+					<h3>Hanya 5 Menit</h3><p>Proses asesmen yang cepat dan efisien. Jawab 20+ pertanyaan dan dapatkan hasil instan.</p>
+				</div>
+				<div class="feature-card fade-in-up" style="animation-delay:0.15s;">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+					<h3>Data Terenkripsi</h3><p>Privasi adalah prioritas. Data kamu diamankan dengan enkripsi dan tidak dibagikan ke pihak ketiga.</p>
+				</div>
+				<div class="feature-card fade-in-up" style="animation-delay:0.2s;">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+					<h3>Hasil Mendalam</h3><p>Dapatkan analisis detail untuk 4 dikotomi MBTI lengkap dengan stack fungsi kognitif dan interpretasi personal.</p>
+				</div>
+				<div class="feature-card fade-in-up" style="animation-delay:0.25s;">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+					<h3>Laporan PDF</h3><p>Unduh hasil asesmen dalam format PDF yang rapi dan siap untuk dicetak atau dibagikan.</p>
+				</div>
+				<div class="feature-card fade-in-up" style="animation-delay:0.3s;">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+					<h3>Gratis Selamanya</h3><p>Asesmen ini sepenuhnya gratis. Tidak ada biaya tersembunyi, tidak perlu kartu kredit.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- HOW IT WORKS -->
+	<section class="section" aria-labelledby="how-heading">
+		<div class="container">
+			<div class="section-heading fade-in-up"><h2 id="how-heading">Bagaimana Cara Kerjanya?</h2><p>Tiga langkah sederhana untuk mulai mengenal dirimu lebih dalam.</p></div>
+			<div class="steps-container">
+				<div class="step-card fade-in-up" style="animation-delay:0.1s;"><div class="step-number">01</div><h3>Mulai Tes</h3><p>Klik tombol "Mulai Tes" dan kamu akan langsung diarahkan ke halaman asesmen.</p><code class="step-code">/quiz</code></div>
+				<div class="step-card fade-in-up" style="animation-delay:0.2s;"><div class="step-number">02</div><h3>Jawab Pertanyaan</h3><p>Jawab 20+ pertanyaan dengan jujur. Tidak ada jawaban benar atau salah — jawab sesuai dirimu.</p><code class="step-code">±5 menit</code></div>
+				<div class="step-card fade-in-up" style="animation-delay:0.3s;"><div class="step-number">03</div><h3>Dapatkan Hasil</h3><p>Terima analisis lengkap tipe MBTI-mu, lengkap dengan stack fungsi kognitif dan profil mendalam.</p><code class="step-code">hasil instan</code></div>
+			</div>
+		</div>
+	</section>
+
+	<!-- INTEGRATION LOGOS (Marquee) -->
+	<section class="section-integrations" aria-label="Integrations">
+		<div class="container">
+			<p class="integration-heading fade-in-up">Didukung oleh</p>
+			<div class="marquee-wrapper fade-in-up">
+				<div class="marquee-track" aria-hidden="true">
+					<span class="marquee-item"><span class="brand-dot" style="background:#7c3aed;"></span> Psikologi Jungian</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#0d7377;"></span> MBTI</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#d97706;"></span> Fungsi Kognitif</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#059669;"></span> 16 Tipe</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#7c3aed;"></span> 4 Dikotomi</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#0d7377;"></span> Asesmen</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#d97706;"></span> Kepribadian</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#059669;"></span> Psikologi</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#7c3aed;"></span> Psikologi Jungian</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#0d7377;"></span> MBTI</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#d97706;"></span> Fungsi Kognitif</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#059669;"></span> 16 Tipe</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#7c3aed;"></span> 4 Dikotomi</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#0d7377;"></span> Asesmen</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#d97706;"></span> Kepribadian</span>
+					<span class="marquee-item"><span class="brand-dot" style="background:#059669;"></span> Psikologi</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- TESTIMONIALS (Marquee) -->
+	<section class="testimonials-section section-alt" aria-labelledby="testimonials-heading">
+		<div class="container"><div class="section-heading fade-in-up"><h2 id="testimonials-heading">Kata Mereka</h2><p>Ribuan pengguna telah mencoba asesmen ini. Ini cerita mereka.</p></div></div>
+		<div class="testimonials-marquee fade-in-up">
+			<div class="testimonials-track" aria-hidden="true">
+				<div class="testimonial-card"><p class="testimonial-quote">"Hasilnya sangat akurat! Saya INTJ dan deskripsinya benar-benar menggambarkan saya."</p><div class="testimonial-author"><div class="testimonial-avatar">RA</div><div><p class="testimonial-name">Rizky A.</p><p class="testimonial-role">Mahasiswa, Jakarta</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Sebagai HR, saya menggunakan ini untuk memahami dinamika tim. Hasilnya sangat membantu."</p><div class="testimonial-author"><div class="testimonial-avatar">SN</div><div><p class="testimonial-name">Sari N.</p><p class="testimonial-role">HR Manager, Bandung</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Tes ini membuka mata saya tentang fungsi kognitif dominan saya yang ternyata Ni."</p><div class="testimonial-author"><div class="testimonial-avatar">DP</div><div><p class="testimonial-name">Dimas P.</p><p class="testimonial-role">Entrepreneur, Surabaya</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Sangat recommended buat yang ingin mengenal diri sendiri lebih dalam. Prosesnya cepat!"</p><div class="testimonial-author"><div class="testimonial-avatar">AL</div><div><p class="testimonial-name">Aulia L.</p><p class="testimonial-role">Desainer, Yogyakarta</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"MBTI assessment yang paling mudah dipahami. Visualisasi stack kognitifnya keren."</p><div class="testimonial-author"><div class="testimonial-avatar">MR</div><div><p class="testimonial-name">Mario R.</p><p class="testimonial-role">Developer, Bali</p></div></div></div>
+				<!-- duplicates for seamless loop -->
+				<div class="testimonial-card"><p class="testimonial-quote">"Hasilnya sangat akurat! Saya INTJ dan deskripsinya benar-benar menggambarkan saya."</p><div class="testimonial-author"><div class="testimonial-avatar">RA</div><div><p class="testimonial-name">Rizky A.</p><p class="testimonial-role">Mahasiswa, Jakarta</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Sebagai HR, saya menggunakan ini untuk memahami dinamika tim. Hasilnya sangat membantu."</p><div class="testimonial-author"><div class="testimonial-avatar">SN</div><div><p class="testimonial-name">Sari N.</p><p class="testimonial-role">HR Manager, Bandung</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Tes ini membuka mata saya tentang fungsi kognitif dominan saya yang ternyata Ni."</p><div class="testimonial-author"><div class="testimonial-avatar">DP</div><div><p class="testimonial-name">Dimas P.</p><p class="testimonial-role">Entrepreneur, Surabaya</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Sangat recommended buat yang ingin mengenal diri sendiri lebih dalam. Prosesnya cepat!"</p><div class="testimonial-author"><div class="testimonial-avatar">AL</div><div><p class="testimonial-name">Aulia L.</p><p class="testimonial-role">Desainer, Yogyakarta</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"MBTI assessment yang paling mudah dipahami. Visualisasi stack kognitifnya keren."</p><div class="testimonial-author"><div class="testimonial-avatar">MR</div><div><p class="testimonial-name">Mario R.</p><p class="testimonial-role">Developer, Bali</p></div></div></div>
+			</div>
+		</div>
+		<div class="testimonials-marquee fade-in-up" style="margin-top: var(--space-lg);">
+			<div class="testimonials-track reverse" aria-hidden="true">
+				<div class="testimonial-card"><p class="testimonial-quote">"Aplikasi yang sangat membantu untuk self-discovery. Tampilannya juga elegan."</p><div class="testimonial-author"><div class="testimonial-avatar">DW</div><div><p class="testimonial-name">Dewi W.</p><p class="testimonial-role">Psikolog, Jakarta</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Saya jadi lebih paham kenapa saya lebih suka berpikir sebelum bicara — ternyata INTP."</p><div class="testimonial-author"><div class="testimonial-avatar">FH</div><div><p class="testimonial-name">Fahmi H.</p><p class="testimonial-role">Mahasiswa, Malang</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Hasil analisisnya mendalam banget. Saya kagum dengan akurasi deskripsi tipe saya."</p><div class="testimonial-author"><div class="testimonial-avatar">NA</div><div><p class="testimonial-name">Nadia A.</p><p class="testimonial-role">Marketing, Semarang</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Gratis dan berkualitas. Ini yang saya cari-cari selama ini."</p><div class="testimonial-author"><div class="testimonial-avatar">BT</div><div><p class="testimonial-name">Budi T.</p><p class="testimonial-role">Guru, Medan</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Saya merekomendasikan ini ke semua teman saya. Really insightful!"</p><div class="testimonial-author"><div class="testimonial-avatar">CN</div><div><p class="testimonial-name">Citra N.</p><p class="testimonial-role">Designer, Bali</p></div></div></div>
+				<!-- duplicates -->
+				<div class="testimonial-card"><p class="testimonial-quote">"Aplikasi yang sangat membantu untuk self-discovery. Tampilannya juga elegan."</p><div class="testimonial-author"><div class="testimonial-avatar">DW</div><div><p class="testimonial-name">Dewi W.</p><p class="testimonial-role">Psikolog, Jakarta</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Saya jadi lebih paham kenapa saya lebih suka berpikir sebelum bicara — ternyata INTP."</p><div class="testimonial-author"><div class="testimonial-avatar">FH</div><div><p class="testimonial-name">Fahmi H.</p><p class="testimonial-role">Mahasiswa, Malang</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Hasil analisisnya mendalam banget. Saya kagum dengan akurasi deskripsi tipe saya."</p><div class="testimonial-author"><div class="testimonial-avatar">NA</div><div><p class="testimonial-name">Nadia A.</p><p class="testimonial-role">Marketing, Semarang</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Gratis dan berkualitas. Ini yang saya cari-cari selama ini."</p><div class="testimonial-author"><div class="testimonial-avatar">BT</div><div><p class="testimonial-name">Budi T.</p><p class="testimonial-role">Guru, Medan</p></div></div></div>
+				<div class="testimonial-card"><p class="testimonial-quote">"Saya merekomendasikan ini ke semua teman saya. Really insightful!"</p><div class="testimonial-author"><div class="testimonial-avatar">CN</div><div><p class="testimonial-name">Citra N.</p><p class="testimonial-role">Designer, Bali</p></div></div></div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA BANNER -->
+	<section class="section-cta" aria-labelledby="cta-heading">
+		<div class="container">
+			<h2 id="cta-heading" class="cta-headline fade-in-up">Siap Mengenal Tipe Kepribadianmu?</h2>
+			<div class="cta-benefits fade-in-up">
+				<span class="cta-benefit"><span class="check-icon">✓</span> Gratis Selamanya</span>
+				<span class="cta-benefit"><span class="check-icon">✓</span> Open Source</span>
+				<span class="cta-benefit"><span class="check-icon">✓</span> Tanpa Kartu Kredit</span>
+			</div>
+			<div class="fade-in-up"><a href="/quiz" class="cta-btn" aria-label="Mulai tes sekarang">Mulai Tes Sekarang</a></div>
+		</div>
+	</section>
+
+	<!-- FAQ -->
+	@components.FaqSection()
+}

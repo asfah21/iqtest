@@ -1,0 +1,73 @@
+package components
+
+templ Navbar() {
+	<header x-data="{ mobileOpen: false }" class="navbar" role="banner">
+		<div class="navbar-inner">
+			<!-- Logo -->
+			<a href="/" class="navbar-logo" aria-label="ShadowSelf Beranda">
+				<span class="navbar-logo-icon" aria-hidden="true">
+					<span class="material-symbols-outlined">psychology</span>
+				</span>
+				ShadowSelf
+			</a>
+
+			<!-- Desktop Nav Links (center) -->
+			<nav class="navbar-links" aria-label="Navigasi utama">
+				<a href="/" class="navbar-link" aria-current="page">Beranda</a>
+				<a href="/#features" class="navbar-link">Fitur</a>
+				<a href="/quiz" class="navbar-link">Tes</a>
+			</nav>
+
+			<!-- Desktop CTA (right) -->
+			<a href="/quiz" class="navbar-cta">
+				<span class="material-symbols-outlined" aria-hidden="true">play_arrow</span>
+				Mulai Tes
+			</a>
+
+			<!-- Mobile Toggle -->
+			<button @click="mobileOpen = !mobileOpen"
+					:aria-expanded="mobileOpen"
+					aria-controls="mobile-menu"
+					aria-label="Buka menu navigasi"
+					class="navbar-toggle">
+				<span x-show="!mobileOpen" class="material-symbols-outlined" aria-hidden="true">menu</span>
+				<span x-show="mobileOpen" x-cloak class="material-symbols-outlined" aria-hidden="true">close</span>
+			</button>
+		</div>
+
+		<!-- Mobile Menu -->
+		<div id="mobile-menu"
+			 x-show="mobileOpen"
+			 x-cloak
+			 x-transition:enter="navbar-mobile-enter"
+			 x-transition:enter-start="navbar-mobile-enter-start"
+			 x-transition:enter-end="navbar-mobile-enter-end"
+			 x-transition:leave="navbar-mobile-leave"
+			 x-transition:leave-start="navbar-mobile-leave-start"
+			 x-transition:leave-end="navbar-mobile-leave-end"
+			 class="navbar-mobile"
+			 :class="{ 'open': mobileOpen }"
+			 role="navigation"
+			 aria-label="Navigasi mobile">
+			<nav class="flex flex-col gap-1">
+				<a href="/" @click="mobileOpen = false" class="navbar-mobile-link">
+					<span class="material-symbols-outlined" aria-hidden="true">home</span>
+					Beranda
+				</a>
+				<a href="/#features" @click="mobileOpen = false" class="navbar-mobile-link">
+					<span class="material-symbols-outlined" aria-hidden="true">grid_view</span>
+					Fitur
+				</a>
+				<a href="/quiz" @click="mobileOpen = false" class="navbar-mobile-link">
+					<span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+					Tes
+				</a>
+				<hr class="navbar-mobile-divider" aria-hidden="true"/>
+				<a href="/quiz" @click="mobileOpen = false" class="navbar-mobile-link navbar-mobile-cta">
+					<span class="material-symbols-outlined" aria-hidden="true">play_arrow</span>
+					Mulai Tes
+				</a>
+			</nav>
+		</div>
+	</header>
+}

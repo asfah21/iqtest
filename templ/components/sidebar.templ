@@ -1,0 +1,27 @@
+package components
+
+templ Sidebar() {
+	<aside class="dashboard-sidebar">
+		<div class="sidebar-inner">
+			<!-- Logo -->
+			<a href="/admin/dashboard" class="sidebar-logo">
+				<span class="sidebar-logo-icon" aria-hidden="true">
+					<span class="material-symbols-outlined">shield</span>
+				</span>
+				<span class="sidebar-logo-text">Admin</span>
+			</a>
+
+			<!-- Nav -->
+			<nav class="sidebar-nav">
+				<a href="/admin/dashboard" class="sidebar-link">
+					<span class="material-symbols-outlined">dashboard</span>
+					<span>Dashboard</span>
+				</a>
+				<a href="/admin/logout" class="sidebar-link sidebar-link-logout">
+					<span class="material-symbols-outlined">logout</span>
+					<span>Logout</span>
+				</a>
+			</nav>
+		</div>
+	</aside>
+}

@@ -1,0 +1,85 @@
+package pages
+
+import (
+	"ego/models"
+	"ego/templ/layouts"
+)
+
+templ PaywallPage(data models.PaywallData) {
+	@layouts.PublicLayout("Bayar", paywallContent(data))
+}
+
+templ paywallContent(data models.PaywallData) {
+	<section class="min-h-screen pt-24 pb-16 bg-gradient-paywall">
+		<div class="mx-auto max-w-[640px] px-6 lg:px-8">
+			<div class="text-center mb-10 fade-in-up">
+				<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--warm-200)] bg-[var(--warm-50)] text-xs font-medium text-[var(--warm-600)] mb-4 transition-all duration-300 hover:shadow-sm">
+					<span class="w-1.5 h-1.5 rounded-full bg-[var(--warning)]"></span>
+					Akses Premium
+				</div>
+				<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--textMain)] m-0">
+					Selangkah Lagi, <span class="text-gradient-machiavellian">{ data.Nama }</span>
+				</h1>
+				<p class="mt-3 text-[var(--textMuted)] m-0 max-w-md mx-auto">
+					Hasil asesmen lengkap dengan analisis mendalam menunggu kamu.
+				</p>
+			</div>
+
+			<div class="card card-elevated p-6 mb-6 fade-in-up transition-all duration-300 hover:shadow-xl" style="animation-delay:0.1s;">
+				<div class="flex items-center justify-between mb-4">
+					<h3 class="text-sm font-semibold text-[var(--textMain)] m-0">Preview Hasil</h3>
+					<span class="badge badge-warning">Terkunci</span>
+				</div>
+				<div class="space-y-4 opacity-50 blur-sm select-none">
+					<div><div class="flex justify-between text-sm mb-1"><span class="text-[var(--textMuted)]">Narsisme</span><span class="font-mono text-[var(--textSubtle)]">••%</span></div><div class="progress-bar"><div class="progress-fill" style="width:60%;background:#e7e5e4;"></div></div></div>
+					<div><div class="flex justify-between text-sm mb-1"><span class="text-[var(--textMuted)]">Machiavellian</span><span class="font-mono text-[var(--textSubtle)]">••%</span></div><div class="progress-bar"><div class="progress-fill" style="width:60%;background:#e7e5e4;"></div></div></div>
+					<div><div class="flex justify-between text-sm mb-1"><span class="text-[var(--textMuted)]">Psikopati</span><span class="font-mono text-[var(--textSubtle)]">••%</span></div><div class="progress-bar"><div class="progress-fill" style="width:60%;background:#e7e5e4;"></div></div></div>
+				</div>
+			</div>
+
+			<div class="card card-elevated p-8 text-center fade-in-up transition-all duration-300 hover:shadow-xl" style="animation-delay:0.2s;">
+				<p class="text-sm font-medium text-[var(--textSubtle)] mb-2 m-0">Harga Spesial</p>
+				<div class="flex items-baseline justify-center gap-1 mb-6">
+					<span class="text-4xl font-bold text-[var(--textMain)]">Rp35.000</span>
+					<span class="text-sm text-[var(--textSubtle)]">/ sekali</span>
+				</div>
+				<div class="mb-6 p-6 rounded-2xl bg-[var(--bgAlt)] border border-[var(--bordLight)] transition-all duration-300 hover:shadow-sm">
+					<div class="w-48 h-48 mx-auto rounded-2xl bg-white flex items-center justify-center border border-[var(--bordLight)]">
+						<div class="text-center"><span class="material-symbols-outlined text-5xl text-[var(--textSubtle)]">qr_code_scanner</span><p class="text-xs text-[var(--textSubtle)] mt-2 m-0">Scan QRIS</p></div>
+					</div>
+					<p class="text-xs text-[var(--textMuted)] mt-3 m-0">Scan QR code di atas menggunakan aplikasi mobile banking atau e-wallet.</p>
+				</div>
+				<div class="space-y-3">
+					<input type="text" id="namaPengirim" placeholder="Nama pengirim transfer" class="input-field transition-all duration-200"/>
+					<button data-paywall-id={ data.ID } onclick="konfirmasiBayar(this)" class="btn-primary w-full shadow-glow transition-all duration-300">
+						<span class="material-symbols-outlined text-lg">check_circle</span>Saya Sudah Bayar
+					</button>
+				</div>
+				<p class="text-xs text-[var(--textSubtle)] mt-4 m-0 leading-relaxed">Hasil akan langsung bisa diakses setelah pembayaran terverifikasi.</p>
+			</div>
+
+			<div class="text-center mt-6">
+				<a href="/" class="btn-ghost text-sm transition-all duration-200">
+					<span class="material-symbols-outlined text-base align-middle">arrow_back</span>Kembali ke Beranda
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<script>
+	function konfirmasiBayar(btn) {
+		const nama = document.getElementById('namaPengirim').value.trim();
+		if (!nama) { alert('Silakan masukkan nama pengirim transfer.'); return; }
+		const id = btn.getAttribute('data-paywall-id');
+		btn.disabled = true;
+		btn.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">refresh</span> Memverifikasi...';
+		fetch('/konfirmasi-bayar/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nama_pengirim: nama }) })
+		.then(r => r.json())
+		.then(data => {
+			if (data.success) { window.location.href = '/hasil/' + data.id; }
+			else { alert('Gagal: ' + (data.error || 'Terjadi kesalahan')); btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined text-lg">check_circle</span>Saya Sudah Bayar'; }
+		})
+		.catch(() => { alert('Koneksi error. Silakan coba lagi.'); btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined text-lg">check_circle</span>Saya Sudah Bayar'; });
+	}
+	</script>
+}

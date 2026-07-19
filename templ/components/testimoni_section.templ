@@ -1,0 +1,72 @@
+package components
+
+templ TestimoniSection() {
+	<section class="section" style="background: var(--surface);">
+		<div class="container">
+			<div class="section-heading fade-in-up">
+				<h2>Kata Mereka</h2>
+				<p>Ribuan pengguna telah mencoba asesmen ini. Ini cerita mereka.</p>
+			</div>
+
+			<!-- Alternating testimonial rows — not a card grid -->
+			<div class="max-w-3xl mx-auto space-y-5">
+				<div class="card p-6 fade-in-up flex flex-col md:flex-row md:items-start gap-5" style="animation-delay:0.1s;">
+					<div class="flex md:flex-col items-center md:items-start gap-3 md:gap-2 md:min-w-[120px]">
+						<div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style="background: var(--accentLight); color: var(--accent);">
+							RA
+						</div>
+						<div>
+							<p class="text-sm font-semibold">Rizky A.</p>
+							<p class="text-xs" style="color: var(--inkSubtle);">Mahasiswa, Jakarta</p>
+						</div>
+					</div>
+					<div class="flex-1">
+						<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">
+							"Hasilnya sangat akurat! Saya jadi lebih paham kenapa saya sering 
+							mengambil keputusan impulsif. Sangat recommended buat yang ingin 
+							mengenal diri sendiri lebih dalam."
+						</p>
+					</div>
+				</div>
+
+				<div class="card p-6 fade-in-up flex flex-col md:flex-row md:items-start gap-5" style="animation-delay:0.2s;">
+					<div class="flex md:flex-col items-center md:items-start gap-3 md:gap-2 md:min-w-[120px]">
+						<div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style="background: var(--accentLight); color: var(--accent);">
+							SN
+						</div>
+						<div>
+							<p class="text-sm font-semibold">Sari N.</p>
+							<p class="text-xs" style="color: var(--inkSubtle);">HR Manager, Bandung</p>
+						</div>
+					</div>
+					<div class="flex-1">
+						<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">
+							"Sebagai HR, saya menggunakan ini untuk memahami dinamika tim. 
+							Hasilnya membantu saya menempatkan orang di posisi yang tepat 
+							sesuai karakter mereka."
+						</p>
+					</div>
+				</div>
+
+				<div class="card p-6 fade-in-up flex flex-col md:flex-row md:items-start gap-5" style="animation-delay:0.3s;">
+					<div class="flex md:flex-col items-center md:items-start gap-3 md:gap-2 md:min-w-[120px]">
+						<div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0" style="background: var(--accentLight); color: var(--accent);">
+							DP
+						</div>
+						<div>
+							<p class="text-sm font-semibold">Dimas P.</p>
+							<p class="text-xs" style="color: var(--inkSubtle);">Entrepreneur, Surabaya</p>
+						</div>
+					</div>
+					<div class="flex-1">
+						<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">
+							"Tes ini membuka mata saya tentang sisi Machiavellian yang ternyata 
+							cukup tinggi. Saya jadi lebih aware dan bisa mengontrolnya dalam 
+							negosiasi bisnis."
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+}
