@@ -70,6 +70,13 @@ CREATE TABLE IF NOT EXISTS iq_results (
     calculated_at         TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS admins (
+    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username          VARCHAR(50) UNIQUE NOT NULL,
+    password_hash     VARCHAR(255) NOT NULL,
+    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS payments (
     id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id           UUID NOT NULL REFERENCES users(id),
@@ -80,13 +87,6 @@ CREATE TABLE IF NOT EXISTS payments (
     payment_method    VARCHAR(50),
     paid_at           TIMESTAMPTZ,
     confirmed_by      UUID REFERENCES admins(id),
-    created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS admins (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    username          VARCHAR(50) UNIQUE NOT NULL,
-    password_hash     VARCHAR(255) NOT NULL,
     created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
