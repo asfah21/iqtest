@@ -98,3 +98,30 @@ CREATE INDEX IF NOT EXISTS idx_payments_user ON payments(user_id);
 CREATE INDEX IF NOT EXISTS idx_payments_status ON payments(status);
 CREATE INDEX IF NOT EXISTS idx_questions_domain ON questions(domain) WHERE is_active = TRUE;
 `
+
+// SeedQuestionsSQL mengisi tabel questions dari data default (dijalankan terpisah)
+const SeedQuestionsSQL = `
+INSERT INTO questions (question_code, domain, difficulty, weight, image_url, option_a_image, option_b_image, option_c_image, option_d_image, correct_option)
+VALUES
+  ('Q_MTX_001', 'MTX', 'easy', 1.0, '/assets/images/q_mtx_001.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', 'A'),
+  ('Q_MTX_002', 'MTX', 'easy', 1.0, '/assets/images/q_mtx_002.svg', '/assets/images/opt_a2.svg', '/assets/images/opt_b2.svg', '/assets/images/opt_c2.svg', '/assets/images/opt_d2.svg', 'B'),
+  ('Q_MTX_003', 'MTX', 'medium', 1.5, '/assets/images/q_mtx_003.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', 'C'),
+  ('Q_MTX_004', 'MTX', 'medium', 1.5, '/assets/images/q_mtx_004.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', 'D'),
+  ('Q_MTX_005', 'MTX', 'hard', 2.0, '/assets/images/q_mtx_005.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', 'A'),
+  ('Q_MTX_006', 'MTX', 'very_hard', 2.5, '/assets/images/q_mtx_006.svg', '/assets/images/opt_a2.svg', '/assets/images/opt_b2.svg', '/assets/images/opt_c2.svg', '/assets/images/opt_d2.svg', 'B'),
+  ('Q_SEQ_001', 'SEQ', 'easy', 1.0, '/assets/images/q_seq_001.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', 'A'),
+  ('Q_SEQ_002', 'SEQ', 'medium', 1.5, '/assets/images/q_seq_002.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', 'B'),
+  ('Q_SEQ_003', 'SEQ', 'medium', 1.5, '/assets/images/q_seq_003.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', 'C'),
+  ('Q_SEQ_004', 'SEQ', 'hard', 2.0, '/assets/images/q_seq_004.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', 'D'),
+  ('Q_SEQ_005', 'SEQ', 'hard', 2.0, '/assets/images/q_seq_005.svg', '/assets/images/opt_a2.svg', '/assets/images/opt_b2.svg', '/assets/images/opt_c2.svg', '/assets/images/opt_d2.svg', 'A'),
+  ('Q_SPA_001', 'SPA', 'medium', 1.5, '/assets/images/q_spa_001.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', 'B'),
+  ('Q_SPA_002', 'SPA', 'medium', 1.5, '/assets/images/q_spa_002.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', 'C'),
+  ('Q_SPA_003', 'SPA', 'hard', 2.0, '/assets/images/q_spa_003.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', 'D'),
+  ('Q_SPA_004', 'SPA', 'very_hard', 2.5, '/assets/images/q_spa_004.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', 'A'),
+  ('Q_SPA_005', 'SPA', 'very_hard', 2.5, '/assets/images/q_spa_005.svg', '/assets/images/opt_a2.svg', '/assets/images/opt_b2.svg', '/assets/images/opt_c2.svg', '/assets/images/opt_d2.svg', 'B'),
+  ('Q_ANL_001', 'ANL', 'easy', 1.0, '/assets/images/q_anl_001.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', 'C'),
+  ('Q_ANL_002', 'ANL', 'medium', 1.5, '/assets/images/q_anl_002.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', 'D'),
+  ('Q_ANL_003', 'ANL', 'medium', 1.5, '/assets/images/q_anl_003.svg', '/assets/images/opt_c.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', 'A'),
+  ('Q_ANL_004', 'ANL', 'hard', 2.0, '/assets/images/q_anl_004.svg', '/assets/images/opt_d.svg', '/assets/images/opt_a.svg', '/assets/images/opt_b.svg', '/assets/images/opt_c.svg', 'B')
+ON CONFLICT (question_code) DO NOTHING;
+`

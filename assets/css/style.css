@@ -2145,9 +2145,9 @@ p, li, .text-body { text-wrap: pretty; }
 .top-0 { top: 0; }
 .inline-flex { display: inline-flex; }
 .min-h-screen { min-height: 100vh; }
-.duration-150 { }
-.duration-200 { }
-.duration-300 { }
+.duration-150 { transition-duration: 150ms; }
+.duration-200 { transition-duration: 200ms; }
+.duration-300 { transition-duration: 300ms; }
 .transition-colors { transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease; }
 .transition-all { transition: all 0.2s ease; }
 .bg-accent { background: var(--accent); }

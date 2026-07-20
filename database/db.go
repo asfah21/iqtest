@@ -33,4 +33,11 @@ func Init() {
 		log.Fatalf("Gagal menjalankan migrasi schema: %v", err)
 	}
 	log.Println("🗄️  Migrasi database berhasil dijalankan!")
+
+	// Seed data questions (ON CONFLICT DO NOTHING — aman dijalankan berulang)
+	_, err = DB.Exec(SeedQuestionsSQL)
+	if err != nil {
+		log.Fatalf("Gagal menjalankan seed questions: %v", err)
+	}
+	log.Println("🌱  Seed questions berhasil (20 soal)!")
 }
