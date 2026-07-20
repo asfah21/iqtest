@@ -124,57 +124,22 @@
   margin: 0 0 20px;
 }
 
-/* ---- Shape Grid 3x3 (per QUIZUI.md §6.3) ---- */
-.shape-grid-3x3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  justify-items: center;
-  align-items: center;
-}
-
-@media (max-width: 639px) {
-  .shape-grid-3x3 {
-    gap: 16px;
-  }
-}
-
-.shape-grid-item {
+/* ---- Matrix Question Image (per QUIZUI.md §6.3) ---- */
+.matrix-container {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  aspect-ratio: 1;
+  padding: 8px 0;
 }
 
-.shape-grid-item img {
-  max-width: 100%;
-  max-height: 100%;
+.quiz-question-matrix {
+  width: 100%;
+  height: auto;
+  max-width: 320px;
+  max-height: 320px;
   object-fit: contain;
   display: block;
-}
-
-/* Unknown Placeholder (per QUIZUI.md §6.3) */
-.shape-unknown {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--qorange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--qfont);
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--qwhite);
-}
-
-@media (max-width: 639px) {
-  .shape-unknown {
-    width: 48px;
-    height: 48px;
-    font-size: 22px;
-  }
 }
 
 /* ---- Answer Grid (2 columns x 3 rows, per QUIZUI.md §6.4) ---- */

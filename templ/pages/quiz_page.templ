@@ -60,20 +60,11 @@ templ quizContent() {
 							 :key="currentQuestion">
 							<h2 class="quiz-card-title">Bentuk manakah yang hilang?</h2>
 							<hr class="quiz-card-divider"/>
-							<div class="shape-grid-3x3">
-								<template x-for="(_, cellIdx) in 9" :key="cellIdx">
-									<div class="shape-grid-item">
-										<template x-if="cellIdx < 8">
-											<img :src="questions[currentQuestion]?.image_url"
-												 :alt="'Sel ' + (cellIdx + 1)"
-												 class="quiz-question-image"
-												 loading="eager"/>
-										</template>
-										<template x-if="cellIdx === 8">
-											<div class="shape-unknown">?</div>
-										</template>
-									</div>
-								</template>
+							<div class="matrix-container">
+								<img :src="questions[currentQuestion]?.image_url"
+									 :alt="'Matriks soal ' + (currentQuestion + 1)"
+									 class="quiz-question-matrix"
+									 loading="eager"/>
 							</div>
 						</div>
 
