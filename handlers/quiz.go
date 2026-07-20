@@ -74,7 +74,7 @@ func SubmitTest(c *gin.Context) {
 		}
 	}
 
-	sessionID, err := services.ProcessQuizAnswers(req.Email, req.Nama, rawAnswers, req.TabSwitchCount)
+	sessionID, err := services.ProcessQuizAnswers(req.Email, req.Nama, rawAnswers, req.TabSwitchCount, c.ClientIP())
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Gagal menyimpan data tes: " + err.Error(),

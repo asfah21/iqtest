@@ -215,7 +215,7 @@ func generateSessionToken() string {
 // ProcessQuizAnswers
 // ──────────────────────────────────────────────────────────────
 
-func ProcessQuizAnswers(email, nama string, rawAnswers map[string]string, tabSwitchCount int) (string, error) {
+func ProcessQuizAnswers(email, nama string, rawAnswers map[string]string, tabSwitchCount int, ipAddress string) (string, error) {
 	var responses []models.SessionResponse
 	for _, q := range questionBank {
 		selectedOption, exists := rawAnswers[q.QuestionCode]
@@ -257,7 +257,7 @@ func ProcessQuizAnswers(email, nama string, rawAnswers map[string]string, tabSwi
 	}
 
 	sessionToken := generateSessionToken()
-	sessionID, err := repositories.CreateSession(userID, sessionToken, "web", "")
+	sessionID, err := repositories.CreateSession(userID, sessionToken, "web", ipAddress)
 	if err != nil {
 		return "", err
 	}

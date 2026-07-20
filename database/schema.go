@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS test_sessions (
     started_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     completed_at      TIMESTAMPTZ,
     device_type       VARCHAR(20),
-    ip_address        INET,
+    ip_address        VARCHAR(45),
     is_completed      BOOLEAN NOT NULL DEFAULT FALSE,
     metadata          JSONB
 );

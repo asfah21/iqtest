@@ -325,6 +325,16 @@ templ quizContent() {
 				})
 				.then(r => r.json())
 				.then(data => {
+					if (data.error) {
+						alert(data.error);
+						this.step = 'identity';
+						return;
+					}
+					if (!data.id) {
+						alert('Terjadi kesalahan. Silakan coba lagi.');
+						this.step = 'identity';
+						return;
+					}
 					window.location.href = '/paywall/' + data.id;
 				})
 				.catch(() => {
