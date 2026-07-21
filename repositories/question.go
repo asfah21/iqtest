@@ -50,6 +50,10 @@ func GetActiveQuestions() ([]models.QuestionDef, error) {
 		questions = append(questions, q)
 	}
 
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
 	return questions, nil
 }
 

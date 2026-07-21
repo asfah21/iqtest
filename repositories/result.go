@@ -77,6 +77,10 @@ func GetAllRawScores() ([]float64, error) {
 		scores = append(scores, s)
 	}
 
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
 	return scores, nil
 }
 

@@ -63,5 +63,9 @@ func GetSessionResponses(sessionID string) ([]models.SessionResponse, error) {
 		responses = append(responses, r)
 	}
 
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
 	return responses, nil
 }

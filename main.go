@@ -24,6 +24,6 @@ func main() {
 	handlers.SetupRoutes(r)
 
 	// Jalankan di port 8080
-	log.Println("🚀 ShadowSelf berjalan di :8080")
+	log.Println("🚀 IQ Test berjalan di :8080")
 	r.Run(":8080")
 }

@@ -61,5 +61,9 @@ func GetSessionsByUserID(userID string) ([]models.Session, error) {
 		sessions = append(sessions, s)
 	}
 
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
 	return sessions, nil
 }
