@@ -276,14 +276,14 @@ func hasilContent(data types.HasilPageData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			for _, item := range data.Kekuatan {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "<div class=\"card card-elevated p-5 md:p-6 flex items-start gap-4\"><div class=\"w-8 h-8 rounded-full bg-[var(--accentLight)] flex items-center justify-center flex-shrink-0 mt-0.5\"><span class=\"material-symbols-outlined text-sm text-[var(--accent)]\">check</span></div><p class=\"text-sm text-[var(--textMuted)] leading-relaxed m-0\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "<div class=\"card card-elevated p-5 md:p-6 flex items-start gap-4\"><div class=\"w-8 h-8 rounded-full bg-[var(--accentLight)] flex items-center justify-center flex-shrink-0 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-[var(--accent)]\"><polyline points=\"20 6 9 17 4 12\"></polyline></svg></div><p class=\"text-sm text-[var(--textMuted)] leading-relaxed m-0\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var17 string
 				templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(item)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 76, Col: 77}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 78, Col: 77}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 				if templ_7745c5c3_Err != nil {
@@ -309,14 +309,14 @@ func hasilContent(data types.HasilPageData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			for _, item := range data.AreaPerhatian {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "<div class=\"card card-elevated p-5 md:p-6 flex items-start gap-4\"><div class=\"w-8 h-8 rounded-full bg-[var(--warm-100)] flex items-center justify-center flex-shrink-0 mt-0.5\"><span class=\"material-symbols-outlined text-sm text-[var(--warm-500)]\">lightbulb</span></div><p class=\"text-sm text-[var(--textMuted)] leading-relaxed m-0\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "<div class=\"card card-elevated p-5 md:p-6 flex items-start gap-4\"><div class=\"w-8 h-8 rounded-full bg-[var(--warm-100)] flex items-center justify-center flex-shrink-0 mt-0.5\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-[var(--warm-500)]\"><path d=\"M9 18h6\"></path><path d=\"M10 22h4\"></path><path d=\"M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14\"></path></svg></div><p class=\"text-sm text-[var(--textMuted)] leading-relaxed m-0\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var18 string
 				templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(item)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 91, Col: 77}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 95, Col: 77}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 				if templ_7745c5c3_Err != nil {
@@ -332,7 +332,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "<!-- Disclaimer (per IQTEST.md §7.1 + Appendix E) --><div class=\"card p-6 bg-[var(--warm-50)] border border-[var(--warm-200)] fade-in-up mb-8\"><p class=\"text-xs text-[var(--textMuted)] leading-relaxed m-0\"><strong>Peringatan:</strong> Estimasi ini bersifat indikatif dan belum divalidasi secara klinis.  Bukan pengganti tes IQ terstandar oleh psikolog berlisensi. Tes ini untuk tujuan hiburan  dan pengembangan diri, bukan diagnosis klinis. Untuk asesmen resmi, konsultasikan psikolog berlisensi.</p></div><div class=\"flex flex-wrap gap-3 mt-8 justify-center no-print\"><button onclick=\"window.print()\" class=\"btn-secondary\"><span class=\"material-symbols-outlined text-lg\">print</span>Cetak Laporan</button> <a href=\"/\" class=\"btn-ghost\"><span class=\"material-symbols-outlined text-lg\">home</span>Kembali ke Beranda</a></div></div></section><script>document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.querySelectorAll('.progress-fill').forEach(function(el){el.style.width=el.dataset.width+'%';});},400);});</script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "<!-- Disclaimer (per IQTEST.md §7.1 + Appendix E) --><div class=\"card p-6 bg-[var(--warm-50)] border border-[var(--warm-200)] fade-in-up mb-8\"><p class=\"text-xs text-[var(--textMuted)] leading-relaxed m-0\"><strong>Peringatan:</strong> Estimasi ini bersifat indikatif dan belum divalidasi secara klinis.  Bukan pengganti tes IQ terstandar oleh psikolog berlisensi. Tes ini untuk tujuan hiburan  dan pengembangan diri, bukan diagnosis klinis. Untuk asesmen resmi, konsultasikan psikolog berlisensi.</p></div><div class=\"flex flex-wrap gap-3 mt-8 justify-center no-print\"><button onclick=\"window.print()\" class=\"btn-secondary\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"6 9 6 2 18 2 18 9\"></polyline><path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\"></path><rect x=\"6\" y=\"14\" width=\"12\" height=\"8\"></rect></svg> Cetak Laporan</button> <a href=\"/\" class=\"btn-ghost\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path><polyline points=\"9 22 9 12 15 12 15 22\"></polyline></svg> Kembali ke Beranda</a></div></div></section><script>document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.querySelectorAll('.progress-fill').forEach(function(el){el.style.width=el.dataset.width+'%';});},400);});</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

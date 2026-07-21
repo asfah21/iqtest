@@ -7,7 +7,6 @@ templ FaqSection() {
 				<h2 id="faq-heading">Pertanyaan Umum</h2>
 				<p>Semua yang perlu kamu tahu sebelum memulai asesmen.</p>
 			</div>
-
 			<div class="space-y-3" x-data="{ active: null }" role="list">
 				<!-- FAQ 1 -->
 				<div class="card overflow-hidden" role="listitem">
@@ -16,19 +15,14 @@ templ FaqSection() {
 							aria-controls="faq-1-content"
 							class="w-full flex items-center justify-between p-5 text-left cursor-pointer bg-transparent border-none font-inherit">
 						<span class="text-sm font-medium">Apa itu Dark Triad?</span>
-						<span class="material-symbols-outlined text-base transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 1 }" aria-hidden="true">add</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 1 }" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
 					</button>
 					<div x-show="active === 1" x-collapse id="faq-1-content" role="region" aria-labelledby="faq-1-trigger">
 						<div class="px-5 pb-5">
-							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">
-								Dark Triad adalah tiga sifat kepribadian yang saling terkait: Narsisme, 
-								Machiavellian, dan Psikopati. Konsep ini pertama kali diperkenalkan oleh 
-								psikolog Delroy Paulhus dan Kevin Williams pada tahun 2002.
-							</p>
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Dark Triad adalah tiga sifat kepribadian yang saling terkait: Narsisme,  Machiavellian, dan Psikopati. Konsep ini pertama kali diperkenalkan oleh  psikolog Delroy Paulhus dan Kevin Williams pada tahun 2002.</p>
 						</div>
 					</div>
 				</div>
-
 				<!-- FAQ 2 -->
 				<div class="card overflow-hidden" role="listitem">
 					<button @click="active = active === 2 ? null : 2"
@@ -36,19 +30,14 @@ templ FaqSection() {
 							aria-controls="faq-2-content"
 							class="w-full flex items-center justify-between p-5 text-left cursor-pointer bg-transparent border-none font-inherit">
 						<span class="text-sm font-medium">Apakah tes ini akurat?</span>
-						<span class="material-symbols-outlined text-base transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 2 }" aria-hidden="true">add</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 2 }" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
 					</button>
 					<div x-show="active === 2" x-collapse id="faq-2-content" role="region" aria-labelledby="faq-2-trigger">
 						<div class="px-5 pb-5">
-							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">
-								Tes ini dirancang berdasarkan instrumen psikologi yang telah divalidasi. 
-								Namun, hasilnya bersifat indikatif dan tidak menggantikan diagnosis 
-								profesional dari psikolog atau psikiater.
-							</p>
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes ini dirancang berdasarkan instrumen psikologi yang telah divalidasi.  Namun, hasilnya bersifat indikatif dan tidak menggantikan diagnosis  profesional dari psikolog atau psikiater.</p>
 						</div>
 					</div>
 				</div>
-
 				<!-- FAQ 3 -->
 				<div class="card overflow-hidden" role="listitem">
 					<button @click="active = active === 3 ? null : 3"
@@ -56,18 +45,14 @@ templ FaqSection() {
 							aria-controls="faq-3-content"
 							class="w-full flex items-center justify-between p-5 text-left cursor-pointer bg-transparent border-none font-inherit">
 						<span class="text-sm font-medium">Berapa lama tesnya?</span>
-						<span class="material-symbols-outlined text-base transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 3 }" aria-hidden="true">add</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 3 }" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
 					</button>
 					<div x-show="active === 3" x-collapse id="faq-3-content" role="region" aria-labelledby="faq-3-trigger">
 						<div class="px-5 pb-5">
-							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">
-								Tes hanya membutuhkan waktu sekitar 5 menit. Kamu akan menjawab 
-								5 pertanyaan sederhana dan langsung mendapatkan hasilnya.
-							</p>
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes hanya membutuhkan waktu sekitar 5 menit. Kamu akan menjawab  5 pertanyaan sederhana dan langsung mendapatkan hasilnya.</p>
 						</div>
 					</div>
 				</div>
-
 				<!-- FAQ 4 -->
 				<div class="card overflow-hidden" role="listitem">
 					<button @click="active = active === 4 ? null : 4"
@@ -75,15 +60,11 @@ templ FaqSection() {
 							aria-controls="faq-4-content"
 							class="w-full flex items-center justify-between p-5 text-left cursor-pointer bg-transparent border-none font-inherit">
 						<span class="text-sm font-medium">Apakah data saya aman?</span>
-						<span class="material-symbols-outlined text-base transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 4 }" aria-hidden="true">add</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 4 }" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
 					</button>
 					<div x-show="active === 4" x-collapse id="faq-4-content" role="region" aria-labelledby="faq-4-trigger">
 						<div class="px-5 pb-5">
-							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">
-								Ya, data kamu sepenuhnya aman. Kami menggunakan enkripsi dan tidak 
-								akan membagikan data pribadi kamu ke pihak ketiga. Hasil tes hanya 
-								bisa diakses oleh kamu.
-							</p>
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Ya, data kamu sepenuhnya aman. Kami menggunakan enkripsi dan tidak  akan membagikan data pribadi kamu ke pihak ketiga. Hasil tes hanya  bisa diakses oleh kamu.</p>
 						</div>
 					</div>
 				</div>
