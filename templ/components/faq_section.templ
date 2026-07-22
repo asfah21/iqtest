@@ -2,24 +2,24 @@ package components
 
 templ FaqSection() {
 	<section class="section-alt" aria-labelledby="faq-heading">
-		<div class="container" style="max-width: 640px;">
+		<div class="container">
 			<div class="section-heading fade-in-up">
 				<h2 id="faq-heading">Pertanyaan Umum</h2>
-				<p>Semua yang perlu kamu tahu sebelum memulai asesmen.</p>
+				<p>Semua yang perlu kamu tahu sebelum memulai tes kemampuan kognitif.</p>
 			</div>
-			<div class="space-y-3" x-data="{ active: null }" role="list">
+			<div class="faq-grid" x-data="{ active: null }" role="list">
 				<!-- FAQ 1 -->
 				<div class="card overflow-hidden" role="listitem">
 					<button @click="active = active === 1 ? null : 1"
 							:aria-expanded="active === 1"
 							aria-controls="faq-1-content"
 							class="w-full flex items-center justify-between p-5 text-left cursor-pointer bg-transparent border-none font-inherit">
-						<span class="text-sm font-medium">Apa itu Dark Triad?</span>
+						<span class="text-sm font-medium">Apa itu tes kemampuan kognitif?</span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 1 }" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
 					</button>
 					<div x-show="active === 1" x-collapse id="faq-1-content" role="region" aria-labelledby="faq-1-trigger">
 						<div class="px-5 pb-5">
-							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Dark Triad adalah tiga sifat kepribadian yang saling terkait: Narsisme,  Machiavellian, dan Psikopati. Konsep ini pertama kali diperkenalkan oleh  psikolog Delroy Paulhus dan Kevin Williams pada tahun 2002.</p>
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes kemampuan kognitif adalah asesmen yang mengukur kemampuan berpikir non-verbal seperti penalaran logis, pemecahan masalah, pola spasial, dan analogi visual. Tes ini menggunakan soal bergambar sehingga meminimalkan bias bahasa dan budaya, serta mengukur <em>fluid intelligence</em> — kemampuan bawaan untuk menalar tanpa bergantung pada pengetahuan yang dipelajari.</p>
 						</div>
 					</div>
 				</div>
@@ -34,7 +34,7 @@ templ FaqSection() {
 					</button>
 					<div x-show="active === 2" x-collapse id="faq-2-content" role="region" aria-labelledby="faq-2-trigger">
 						<div class="px-5 pb-5">
-							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes ini dirancang berdasarkan instrumen psikologi yang telah divalidasi.  Namun, hasilnya bersifat indikatif dan tidak menggantikan diagnosis  profesional dari psikolog atau psikiater.</p>
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes ini dikembangkan berdasarkan Classical Test Theory (CTT) dengan sistem bobot kesulitan soal — semakin sulit soal, semakin besar bobot skornya. Soal dikalibrasi dari Mudah hingga Sangat Sulit dengan distribusi yang terstruktur. Namun, hasil yang ditampilkan bersifat indikatif dan belum menggantikan diagnosis profesional dari psikolog berlisensi.</p>
 						</div>
 					</div>
 				</div>
@@ -49,7 +49,7 @@ templ FaqSection() {
 					</button>
 					<div x-show="active === 3" x-collapse id="faq-3-content" role="region" aria-labelledby="faq-3-trigger">
 						<div class="px-5 pb-5">
-							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes hanya membutuhkan waktu sekitar 5 menit. Kamu akan menjawab  5 pertanyaan sederhana dan langsung mendapatkan hasilnya.</p>
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes terdiri dari 20 soal bergambar dengan batas waktu 2 menit per soal, sehingga total durasi maksimal sekitar 40 menit. Setiap soal akan otomatis lanjut jika waktu habis — jadi pastikan kamu fokus dan tidak terganggu selama mengerjakan tes.</p>
 						</div>
 					</div>
 				</div>
@@ -64,7 +64,52 @@ templ FaqSection() {
 					</button>
 					<div x-show="active === 4" x-collapse id="faq-4-content" role="region" aria-labelledby="faq-4-trigger">
 						<div class="px-5 pb-5">
-							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Ya, data kamu sepenuhnya aman. Kami menggunakan enkripsi dan tidak  akan membagikan data pribadi kamu ke pihak ketiga. Hasil tes hanya  bisa diakses oleh kamu.</p>
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Ya, data kamu sepenuhnya aman. Kami menggunakan enkripsi dan tidak akan membagikan data pribadi kamu ke pihak ketiga. Hasil tes hanya bisa diakses melalui tautan unik yang dikirim ke email kamu setelah pembayaran dikonfirmasi.</p>
+						</div>
+					</div>
+				</div>
+				<!-- FAQ 5 -->
+				<div class="card overflow-hidden" role="listitem">
+					<button @click="active = active === 5 ? null : 5"
+							:aria-expanded="active === 5"
+							aria-controls="faq-5-content"
+							class="w-full flex items-center justify-between p-5 text-left cursor-pointer bg-transparent border-none font-inherit">
+						<span class="text-sm font-medium">Apa yang diukur dalam tes ini?</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 5 }" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+					</button>
+					<div x-show="active === 5" x-collapse id="faq-5-content" role="region" aria-labelledby="faq-5-trigger">
+						<div class="px-5 pb-5">
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes ini mengukur 4 domain kemampuan kognitif: <strong>Penalaran Matriks/Pola (MTX)</strong> — melengkapi pola gambar, <strong>Deret Logis Bergambar (SEQ)</strong> — menentukan urutan berikutnya, <strong>Rotasi & Penalaran Spasial (SPA)</strong> — visualisasi rotasi objek, dan <strong>Analogi Visual (ANL)</strong> — mencari hubungan analogi antar gambar. Keempat domain ini mencakup spektrum luas <em>fluid intelligence</em>.</p>
+						</div>
+					</div>
+				</div>
+				<!-- FAQ 6 -->
+				<div class="card overflow-hidden" role="listitem">
+					<button @click="active = active === 6 ? null : 6"
+							:aria-expanded="active === 6"
+							aria-controls="faq-6-content"
+							class="w-full flex items-center justify-between p-5 text-left cursor-pointer bg-transparent border-none font-inherit">
+						<span class="text-sm font-medium">Bagaimana cara mendapatkan hasil lengkap?</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 6 }" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+					</button>
+					<div x-show="active === 6" x-collapse id="faq-6-content" role="region" aria-labelledby="faq-6-trigger">
+						<div class="px-5 pb-5">
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Tes gratis bisa kamu ikuti kapan saja. Setelah selesai, kamu akan melihat halaman pembayaran untuk membuka hasil lengkap. Cukup dengan pembayaran satu kali sebesar <strong>IDR 14.900</strong>, kamu bisa melihat skor mentah, persentil, breakdown per domain, dan analisis kekuatan kognitif secara detail.</p>
+						</div>
+					</div>
+				</div>
+				<!-- FAQ 7 -->
+				<div class="card overflow-hidden" role="listitem">
+					<button @click="active = active === 7 ? null : 7"
+							:aria-expanded="active === 7"
+							aria-controls="faq-7-content"
+							class="w-full flex items-center justify-between p-5 text-left cursor-pointer bg-transparent border-none font-inherit">
+						<span class="text-sm font-medium">Bisakah saya mengulang tes?</span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-all duration-200" style="color: var(--inkSubtle);" :class="{ 'rotate-45': active === 7 }" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+					</button>
+					<div x-show="active === 7" x-collapse id="faq-7-content" role="region" aria-labelledby="faq-7-trigger">
+						<div class="px-5 pb-5">
+							<p class="text-sm leading-relaxed" style="color: var(--inkMuted);">Ya, kamu bisa mengulang tes setelah jeda 30 hari sejak sesi sebelumnya. Masa tunggu ini diperlukan untuk mencegah <em>practice effect</em> — di mana skor meningkat hanya karena hafal soal, bukan karena peningkatan kemampuan kognitif yang sesungguhnya.</p>
 						</div>
 					</div>
 				</div>

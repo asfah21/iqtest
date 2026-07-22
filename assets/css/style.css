@@ -1735,6 +1735,27 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================================
+   FAQ GRID
+   ============================================================ */
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+}
+
+.faq-grid .card {
+  break-inside: avoid;
+}
+
+@media (max-width: 767px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
    UTILITY CLASSES
    ============================================================ */
 .flex { display: flex; }
