@@ -10,51 +10,7 @@ templ IndexPage() {
 }
 
 templ indexContent() {
-	<!-- HERO -->
-	<section class="section-hero" aria-label="Hero">
-		<div class="container">
-			<div class="hero-grid">
-				<div class="fade-in-up">
-					<h1 class="hero-headline">
-						Kenali Kemampuan<br/>
-						<span class="text-accent">Kognitifmu</span>
-					</h1>
-					<p class="hero-subheadline">
-						Temukan potensi dirimu melalui asesmen kemampuan kognitif berbasis
-						<strong>IQ Test</strong> — 20 soal bergambar untuk mengukur penalaran, logika, spasial, dan analogi.
-					</p>
-					<div class="terminal-block" role="code" aria-label="Installation command">
-						<span class="terminal-prompt">$</span>
-						<span class="terminal-command">npx iqtest assess</span>
-						<span class="terminal-comment"># ±40 menit</span>
-						<span class="terminal-cursor" aria-hidden="true"></span>
-					</div>
-					<div class="hero-actions">
-						<a href="/quiz" class="btn-primary" aria-label="Mulai tes gratis">Mulai Tes Gratis</a>
-						<a href="#features" class="btn-secondary" aria-label="Pelajari lebih lanjut">Pelajari Lebih Lanjut</a>
-					</div>
-					<div class="hero-stats">
-						<span class="stat-pill">🧠 <strong>4</strong> Domain Kognitif</span>
-						<span class="stat-pill">📝 <strong>20</strong> Soal</span>
-						<span class="stat-pill">⚡ <strong>2 Menit</strong>/Soal</span>
-						<span class="stat-pill">🆓 <strong>Gratis</strong></span>
-					</div>
-				</div>
-				<div class="hero-visual fade-in-up-delayed">
-					<div class="dashboard-mockup" role="img" aria-label="Dashboard preview">
-						<div class="mockup-header"><span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span></div>
-						<div class="mockup-body">
-							<div class="mockup-row"><span class="mockup-label">MTX</span><div class="mockup-bar" style="background:#0d7377;"></div><span class="mockup-score">80%</span></div>
-							<div class="mockup-row"><span class="mockup-label">SEQ</span><div class="mockup-bar" style="background:#d97706;"></div><span class="mockup-score">60%</span></div>
-							<div class="mockup-row"><span class="mockup-label">SPA</span><div class="mockup-bar" style="background:#7c3aed;"></div><span class="mockup-score">30%</span></div>
-							<div class="mockup-row"><span class="mockup-label">ANL</span><div class="mockup-bar" style="background:#059669;"></div><span class="mockup-score">70%</span></div>
-							<div class="mockup-footer"><span class="mockup-badge">Cognitive Assessment</span><span class="mockup-score">Raw: 18.5/30.5</span></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	@components.HeroSection()
 
 	<!-- FEATURES -->
 	<section id="features" class="section-alt" aria-labelledby="features-heading">

@@ -33,3 +33,6 @@ This file defines the global rules that all AI agents must follow when working o
    
 8. **Ask instead of guessing**
    - If requirements are ambiguous, ask for clarification instead of making assumptions.
+
+9. **Use PowerShell**
+   - Always use Windows PowerShell-compatible commands. Never use CMD syntax.
