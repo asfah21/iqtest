@@ -1,6 +1,8 @@
 package repositories
 
 import (
+	"encoding/json"
+
 	"ego/database"
 	"ego/models"
 )
@@ -21,11 +23,16 @@ func InsertIQResult(sessionID string, result models.IQTestResult) (string, error
 	spaPct := nullFloat(result.DomainScores["SPA"].Percentage)
 	anlPct := nullFloat(result.DomainScores["ANL"].Percentage)
 
-	err := database.DB.QueryRow(query,
+	reliabilityJSON, err := json.Marshal(result.ReliabilityFlags)
+	if err != nil {
+		return "", err
+	}
+
+	err = database.DB.QueryRow(query,
 		sessionID, result.RawScore, result.MaxPossible,
 		mtxPct, seqPct, spaPct, anlPct,
 		result.Percentile, result.EstimatedIQ, result.AvgResponseMs,
-		result.IsReliable, result.ReliabilityFlags,
+		result.IsReliable, reliabilityJSON,
 	).Scan(&id)
 	return id, err
 }
