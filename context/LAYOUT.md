@@ -17,12 +17,39 @@
 
 ## 2. Container
 
-- **Max-width:** `1200px` (di layar lebih lebar, konten tetap terkunci di tengah dengan padding tambahan, bukan melebar penuh)
+Container adalah wrapper tunggal yang dipakai berulang (`.container`) di **setiap section pada setiap halaman** — Navbar, Hero, semua Component section, dan Footer. Tidak ada section yang punya max-width sendiri di luar aturan ini, supaya lebar semua bagian benar-benar sejajar/rata (searasi) secara vertikal dari atas sampai bawah halaman.
+
+- **Max-width default:** `1200px`
+- **Max-width pada layar besar:** `1290px`, aktif mulai `min-width: 1200px`
+
+```css
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: 16px; /* mobile default, lihat tabel padding di bawah */
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1290px;
+  }
+}
+```
+
 - **Padding horizontal container:**
   - Mobile: `16px`
   - Tablet: `24px`
-  - Desktop: `40px`
+  - Desktop (`≥1024px`): `40px`
+  - Wide (`≥1200px`): `40px` (padding tetap, hanya max-width yang bertambah jadi `1290px`)
 - **Centering:** `margin: 0 auto`
+
+### 2.1 Aturan Wajib Konsistensi
+- **Navbar:** isi navbar (logo, menu, CTA) dibungkus `.container` yang sama persis — bukan full-bleed lebih lebar dari section lain. Background navbar boleh full-width, tapi kontennya tetap terkunci di `.container`.
+- **Hero, semua Component section (Trust Bar, Tabel IQ, Tentang, Cara Kerja, Kenapa Pilih, Pricing, FAQ):** semua memakai `.container` yang identik. Tidak boleh ada section dengan max-width custom (mis. 1100px atau 1320px) — supaya tepi kiri-kanan konten selalu sejajar antar section saat discroll.
+- **Footer:** kolom-kolom footer (§6.10) juga dibungkus `.container` yang sama, walau background footer (`--color-bg-dark`) full-bleed selebar layar.
+- **Semua halaman lain** (blog, about, pricing detail, dsb.): wajib pakai `.container` yang sama ini, bukan didefinisikan ulang per halaman, supaya lebar konten konsisten di seluruh situs.
+- Jika suatu saat butuh section yang benar-benar full-width tanpa batas (mis. banner promo penuh warna), section tersebut tetap membungkus **konten teksnya** dengan `.container` di dalamnya — hanya background yang full-bleed.
 
 ---
 
