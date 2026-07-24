@@ -12,9 +12,6 @@ templ HeroSection() {
 			overflow: hidden;
 		}
 		.hero-inner {
-			max-width: 1440px;
-			margin: 0 auto;
-			padding: 0 64px;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -207,7 +204,6 @@ templ HeroSection() {
 		/* ===== Responsive ===== */
 		@media (max-width: 1024px) {
 			.hero-inner {
-				padding: 0 32px;
 				gap: 40px;
 			}
 			.hero-title {
@@ -217,7 +213,6 @@ templ HeroSection() {
 		@media (max-width: 768px) {
 			.hero-inner {
 				flex-direction: column;
-				padding: 24px 16px;
 				gap: 40px;
 			}
 			.hero-left, .hero-right {
@@ -241,7 +236,8 @@ templ HeroSection() {
 		}
 	</style>
 	<section class="hero-wrapper" aria-label="Hero">
-		<div class="hero-inner">
+		<div class="container">
+			<div class="hero-inner">
 			<!-- ===== LEFT ===== -->
 			<div class="hero-left">
 				<!-- Badge sosial proof -->
@@ -485,6 +481,7 @@ templ HeroSection() {
 					</div>
 
 				</div>
+			</div>
 			</div>
 		</div>
 	</section>

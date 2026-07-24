@@ -11,7 +11,8 @@ templ PaywallPage(data models.PaywallData) {
 
 templ paywallContent(data models.PaywallData) {
 	<section class="min-h-screen pt-24 pb-16 bg-gradient-paywall">
-		<div class="mx-auto max-w-[640px] px-6 lg:px-8">
+		<div class="container">
+			<div style="max-width:640px;margin:0 auto;">
 			<div class="text-center mb-10 fade-in-up">
 				<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--warm-200)] bg-[var(--warm-50)] text-xs font-medium text-[var(--warm-600)] mb-4 transition-all duration-300 hover:shadow-sm">
 					<span class="w-1.5 h-1.5 rounded-full bg-[var(--warning)]"></span>
@@ -66,6 +67,7 @@ templ paywallContent(data models.PaywallData) {
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="align-middle"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
 					Kembali ke Beranda
 				</a>
+			</div>
 			</div>
 		</div>
 	</section>

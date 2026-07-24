@@ -28,10 +28,6 @@
   padding: 20px 16px 16px;
 }
 
-.quiz-page-inner {
-  max-width: 960px;
-  margin: 0 auto;
-}
 
 /* ---- Quiz Header (per QUIZUI.md §6.1) ---- */
 .quiz-header {
@@ -304,10 +300,6 @@
 }
 
 /* ---- Skeleton / Loading States ---- */
-.skeleton-quiz {
-  max-width: 960px;
-  margin: 0 auto;
-}
 
 .skeleton-header-block {
   height: 52px;

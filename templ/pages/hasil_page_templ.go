@@ -64,14 +64,14 @@ func hasilContent(data types.HasilPageData) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"min-h-screen pt-24 pb-16 bg-gradient-result\"><div class=\"mx-auto max-w-[768px] px-6 lg:px-8\"><div class=\"text-center mb-12 fade-in-up\"><div class=\"inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--accent-200)] bg-[var(--accent-50)] text-xs font-medium text-[var(--accent-600)] mb-4 transition-all duration-300 hover:shadow-sm\"><span class=\"w-1.5 h-1.5 rounded-full bg-[var(--success)]\"></span> Laporan Kognitif</div><h1 class=\"text-3xl md:text-4xl font-bold tracking-tight text-[var(--textMain)] m-0\">Halo, <span class=\"text-accent\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"min-h-screen pt-24 pb-16 bg-gradient-result\"><div class=\"container\"><div style=\"max-width:768px;margin:0 auto;\"><div class=\"text-center mb-12 fade-in-up\"><div class=\"inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--accent-200)] bg-[var(--accent-50)] text-xs font-medium text-[var(--accent-600)] mb-4 transition-all duration-300 hover:shadow-sm\"><span class=\"w-1.5 h-1.5 rounded-full bg-[var(--success)]\"></span> Laporan Kognitif</div><h1 class=\"text-3xl md:text-4xl font-bold tracking-tight text-[var(--textMain)] m-0\">Halo, <span class=\"text-accent\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(data.Nama)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 21, Col: 132}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 22, Col: 132}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -84,7 +84,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(data.RawScore, 'f', 1, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 28, Col: 115}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 29, Col: 115}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -97,7 +97,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(data.MaxPossible, 'f', 1, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 28, Col: 217}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 29, Col: 217}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -110,7 +110,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(data.Percentile, 'f', 1, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 29, Col: 115}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 30, Col: 115}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -128,7 +128,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(*data.EstimatedIQ, 'f', 1, 64))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 31, Col: 120}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 32, Col: 120}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -146,7 +146,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(data.DomainScores["MTX"].Percentage, 'f', 0, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 39, Col: 137}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 40, Col: 137}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -159,7 +159,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.ResolveAttributeValue(strconv.FormatFloat(data.DomainScores["MTX"].Percentage, 'f', 0, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 40, Col: 186}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 41, Col: 186}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var9)
 		if templ_7745c5c3_Err != nil {
@@ -172,7 +172,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(data.DomainScores["SEQ"].Percentage, 'f', 0, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 44, Col: 137}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 45, Col: 137}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -185,7 +185,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(strconv.FormatFloat(data.DomainScores["SEQ"].Percentage, 'f', 0, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 45, Col: 186}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 46, Col: 186}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
@@ -198,7 +198,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(data.DomainScores["SPA"].Percentage, 'f', 0, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 49, Col: 137}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 50, Col: 137}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 		if templ_7745c5c3_Err != nil {
@@ -211,7 +211,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(strconv.FormatFloat(data.DomainScores["SPA"].Percentage, 'f', 0, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 50, Col: 186}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 51, Col: 186}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 		if templ_7745c5c3_Err != nil {
@@ -224,7 +224,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatFloat(data.DomainScores["ANL"].Percentage, 'f', 0, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 54, Col: 137}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 55, Col: 137}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {
@@ -237,7 +237,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.ResolveAttributeValue(strconv.FormatFloat(data.DomainScores["ANL"].Percentage, 'f', 0, 64))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 55, Col: 186}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 56, Col: 186}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 		if templ_7745c5c3_Err != nil {
@@ -255,7 +255,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 			var templ_7745c5c3_Var16 string
 			templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(data.ExecutiveSummary)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 63, Col: 138}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 64, Col: 138}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 			if templ_7745c5c3_Err != nil {
@@ -283,7 +283,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 				var templ_7745c5c3_Var17 string
 				templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(item)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 78, Col: 77}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 79, Col: 77}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 				if templ_7745c5c3_Err != nil {
@@ -316,7 +316,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 				var templ_7745c5c3_Var18 string
 				templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(item)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 95, Col: 77}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/hasil_page.templ`, Line: 96, Col: 77}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 				if templ_7745c5c3_Err != nil {
@@ -332,7 +332,7 @@ func hasilContent(data types.HasilPageData) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "<!-- Disclaimer (per IQTEST.md §7.1 + Appendix E) --><div class=\"card p-6 bg-[var(--warm-50)] border border-[var(--warm-200)] fade-in-up mb-8\"><p class=\"text-xs text-[var(--textMuted)] leading-relaxed m-0\"><strong>Peringatan:</strong> Estimasi ini bersifat indikatif dan belum divalidasi secara klinis.  Bukan pengganti tes IQ terstandar oleh psikolog berlisensi. Tes ini untuk tujuan hiburan  dan pengembangan diri, bukan diagnosis klinis. Untuk asesmen resmi, konsultasikan psikolog berlisensi.</p></div><div class=\"flex flex-wrap gap-3 mt-8 justify-center no-print\"><button onclick=\"window.print()\" class=\"btn-secondary\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"6 9 6 2 18 2 18 9\"></polyline><path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\"></path><rect x=\"6\" y=\"14\" width=\"12\" height=\"8\"></rect></svg> Cetak Laporan</button> <a href=\"/\" class=\"btn-ghost\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path><polyline points=\"9 22 9 12 15 12 15 22\"></polyline></svg> Kembali ke Beranda</a></div></div></section><script>document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.querySelectorAll('.progress-fill').forEach(function(el){el.style.width=el.dataset.width+'%';});},400);});</script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "<!-- Disclaimer (per IQTEST.md §7.1 + Appendix E) --><div class=\"card p-6 bg-[var(--warm-50)] border border-[var(--warm-200)] fade-in-up mb-8\"><p class=\"text-xs text-[var(--textMuted)] leading-relaxed m-0\"><strong>Peringatan:</strong> Estimasi ini bersifat indikatif dan belum divalidasi secara klinis.  Bukan pengganti tes IQ terstandar oleh psikolog berlisensi. Tes ini untuk tujuan hiburan  dan pengembangan diri, bukan diagnosis klinis. Untuk asesmen resmi, konsultasikan psikolog berlisensi.</p></div><div class=\"flex flex-wrap gap-3 mt-8 justify-center no-print\"><button onclick=\"window.print()\" class=\"btn-secondary\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"6 9 6 2 18 2 18 9\"></polyline><path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\"></path><rect x=\"6\" y=\"14\" width=\"12\" height=\"8\"></rect></svg> Cetak Laporan</button> <a href=\"/\" class=\"btn-ghost\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path><polyline points=\"9 22 9 12 15 12 15 22\"></polyline></svg> Kembali ke Beranda</a></div></div></div></section><script>document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.querySelectorAll('.progress-fill').forEach(function(el){el.style.width=el.dataset.width+'%';});},400);});</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
