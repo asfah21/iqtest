@@ -66,7 +66,7 @@ func PublicLayout(title string, body tc.Component) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<!-- Back-to-top button (LAYOUT.md §7) --><button x-data=\"{ show: false }\" x-init=\"window.addEventListener('scroll', () => { show = window.scrollY > window.innerHeight; })\" x-show=\"show\" x-cloak @click=\"window.scrollTo({ top: 0, behavior: 'smooth' })\" class=\"back-to-top\" :class=\"{ 'visible': show }\" aria-label=\"Kembali ke atas\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><polyline points=\"18 15 12 9 6 15\"></polyline></svg></button></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
