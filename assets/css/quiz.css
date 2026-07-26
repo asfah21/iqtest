@@ -29,37 +29,178 @@
 }
 
 
-/* ---- Quiz Header (per QUIZUI.md §6.1) ---- */
+/* ---- Quiz Header (per QUIZ_HEADER.md) ---- */
 .quiz-header {
-  background: var(--qnavy);
-  border-radius: var(--qradius-card);
-  padding: 14px 20px;
+  background: var(--qwhite);
+  border-radius: 22px;
+  padding: 14px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-.quiz-header-left {
-  color: var(--qwhite);
+/* ---- 1. Info Tes (Left Section) ---- */
+.quiz-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.quiz-header-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7C6FF0, #5B4FE0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quiz-header-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-header-title h2 {
   font-family: var(--qfont);
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 700;
+  color: #1A1A2E;
+  margin: 0;
   line-height: 1.3;
 }
 
-.quiz-header-right {
+.quiz-header-title p {
+  font-family: var(--qfont);
+  font-size: 13px;
+  font-weight: 400;
+  color: #8A8A9E;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ---- 2. Progress Tes (Section) ---- */
+.quiz-header-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.quiz-progress-label {
+  font-family: var(--qfont);
+  font-size: 12px;
+  font-weight: 400;
+  color: #8A8A9E;
+  line-height: 1;
+}
+
+.quiz-progress-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: var(--qwhite);
+  gap: 10px;
+}
+
+.quiz-progress-bar {
+  width: 100%;
+  max-width: 220px;
+  height: 8px;
+  border-radius: var(--qradius-pill);
+  background: #E8E8F0;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  border-radius: var(--qradius-pill);
+  background: #5B4FE0;
+  transition: width 0.25s ease;
+}
+
+.quiz-progress-counter {
   font-family: var(--qfont);
-  font-size: 19px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1A1A2E;
   white-space: nowrap;
 }
 
-.quiz-header-right svg {
+/* ---- 3. Waktu Tersisa (Timer Section) ---- */
+.quiz-timer-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #EAEAF2;
+  background: var(--qwhite);
+  flex-shrink: 0;
+}
+
+.quiz-timer-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #EDEBFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quiz-timer-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-timer-text small {
+  font-family: var(--qfont);
+  font-size: 11px;
+  font-weight: 400;
+  color: #8A8A9E;
+  line-height: 1.2;
+}
+
+.quiz-timer-text strong {
+  font-family: var(--qfont);
+  font-size: 16px;
+  font-weight: 700;
+  color: #1A1A2E;
+  line-height: 1.3;
+}
+
+/* ---- 4. Tombol Aksi (Right Section) ---- */
+.quiz-end-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--qradius-pill);
+  border: 1px solid #D9D9E6;
+  background: var(--qwhite);
+  color: #1A1A2E;
+  font-family: var(--qfont);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.quiz-end-btn:hover {
+  color: #DC2626;
+  border-color: #DC2626;
+}
+
+.quiz-end-btn svg {
   flex-shrink: 0;
 }
 
@@ -330,6 +471,35 @@
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+@media (max-width: 767px) {
+  .quiz-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .quiz-header-brand {
+    flex: 1 1 auto;
+  }
+
+  .quiz-header-progress {
+    order: 1;
+    flex: 1 1 100%;
+  }
+
+  .quiz-timer-card {
+    padding: 8px 12px;
+  }
+
+  .quiz-end-btn span {
+    display: none;
+  }
+
+  .quiz-end-btn {
+    padding: 10px 12px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
