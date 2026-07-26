@@ -104,7 +104,7 @@
   text-align: center;
 }
 
-.quiz-progress-row {
+/* .quiz-progress-row {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,6 +118,18 @@
   border-radius: var(--qradius-pill);
   background: #E8E8F0;
   overflow: hidden;
+} */
+
+.quiz-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.quiz-progress-bar {
+    flex: 1;
+    max-width: none;
 }
 
 .quiz-progress-fill {
