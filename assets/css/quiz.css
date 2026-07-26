@@ -6,8 +6,10 @@
 /* ---- CSS Variables (Quiz Design Tokens per QUIZUI.md §2) ---- */
 :root {
   --qnavy: #16324F;
-  --qorange: #F5821F;
-  --qorange-hover: #F7941D;
+  /* --qorange: #F5821F; */
+  --qorange: #EC4899;
+  /* --qorange-hover: #F7941D; */
+  --qorange-hover: #f57bb8;
   --qwhite: #FFFFFF;
   --qbg: #F2F3F5;
   --qgray-900: #333333;
@@ -136,6 +138,7 @@
   height: 100%;
   border-radius: var(--qradius-pill);
   background: #5B4FE0;
+  height: 7px;
   transition: width 0.25s ease;
 }
 
@@ -410,7 +413,8 @@
 
 /* ---- Question Navigator (per QUIZUI.md §6.6) ---- */
 .quiz-navigator {
-  background: var(--qgray-900);
+  /* background: var(--qgray-900); */
+  background: #5b4fe0;
   border-radius: var(--qradius-card);
   padding: 16px 20px;
 }
@@ -461,7 +465,8 @@
   right: -6px;
   font-size: 9px;
   font-weight: 700;
-  color: var(--qorange);
+  /* color: var(--qorange); */
+  color: #ffa5d1;
   line-height: 1;
 }
 
@@ -513,6 +518,13 @@
     order: 1;
     flex: 1 1 100%;
     align-items: flex-start;
+  }
+
+  .quiz-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
   }
 
   .quiz-timer-card {
