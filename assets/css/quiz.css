@@ -217,6 +217,13 @@
 }
 
 @media (min-width: 768px) {
+  .quiz-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+  }
+
   .quiz-body {
     flex-direction: row;
   }
