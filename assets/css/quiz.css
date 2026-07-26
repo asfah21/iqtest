@@ -88,6 +88,7 @@
 .quiz-header-progress {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 6px;
   min-width: 0;
   flex: 1;
@@ -99,11 +100,13 @@
   font-weight: 400;
   color: #8A8A9E;
   line-height: 1;
+  text-align: center;
 }
 
 .quiz-progress-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -136,8 +139,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 18px;
-  border-radius: 10px;
+  padding: 0px;
+  border-radius: 9px;
   border: 1px solid #D9D9E6;
   background: var(--qwhite);
   flex-shrink: 0;
@@ -157,6 +160,7 @@
 .quiz-timer-text {
   display: flex;
   flex-direction: column;
+  padding: 0 8px 0 0;
 }
 
 .quiz-timer-text small {
@@ -488,10 +492,11 @@
   .quiz-header-progress {
     order: 1;
     flex: 1 1 100%;
+    align-items: flex-start;
   }
 
   .quiz-timer-card {
-    padding: 10px 12px;
+    padding: 0px;
   }
 
   .quiz-end-btn span {
