@@ -206,10 +206,6 @@ templ quizContent() {
 						this.questions = qs;
 						this.step = 'question-active';
 						this.startGlobalTimer();
-						this.$nextTick(() => {
-							const firstOpt = document.querySelector('.answer-option');
-							if (firstOpt) firstOpt.focus();
-						});
 					})
 					.catch(() => {
 						alert('Gagal memuat soal. Silakan refresh halaman.');
