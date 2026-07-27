@@ -181,7 +181,7 @@ a { color: inherit; text-decoration: none; }
   transform: translateX(-50%);
   z-index: 50;
   width: calc(100% - 32px);
-  max-width: 1140px;
+  max-width: 1200px;
   background: #FFFFFF;
   border-radius: 22px;
   padding: 10px 14px;
@@ -263,37 +263,6 @@ a { color: inherit; text-decoration: none; }
 }
 
 .navbar-link:focus-visible {
-  outline: 2px solid #6366f1;
-  outline-offset: 2px;
-}
-
-/* ---- Actions (right) ---- */
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.navbar-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 20px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  background: #6366f1;
-  color: white;
-  text-decoration: none;
-  transition: background 0.2s ease;
-  font-family: 'Inter', system-ui, sans-serif;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.navbar-cta:hover { background: #4f46e5; }
-.navbar-cta:focus-visible {
   outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
@@ -405,7 +374,6 @@ a { color: inherit; text-decoration: none; }
   }
 
   .navbar-links { display: none; }
-  .navbar-cta { display: none; }
   .navbar-toggle { display: flex; }
 
   .navbar-icon {
@@ -419,12 +387,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Spacing for main content below fixed floating navbar */
-main {
+.public-content {
   padding-top: 88px;
 }
 
 @media (max-width: 767px) {
-  main {
+  .public-content {
     padding-top: 80px;
   }
 }
