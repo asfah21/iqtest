@@ -3,13 +3,33 @@ package components
 templ Navbar() {
 	<header x-data="{ mobileOpen: false }" class="navbar" role="banner">
 		<div class="navbar-inner">
-		<!-- Logo -->
-		<a href="/" class="navbar-logo" aria-label="IQ Test Beranda">
-			<span class="navbar-logo-icon" aria-hidden="true">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10.852 14.772-.383.923"/><path d="m10.852 9.228-.383-.923"/><path d="m13.148 14.772.382.924"/><path d="m13.531 8.305-.383.923"/><path d="m14.772 10.852.923-.383"/><path d="m14.772 13.148.923.383"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 0 0-5.63-1.446 3 3 0 0 0-.368 1.571 4 4 0 0 0-2.525 5.771"/><path d="M17.998 5.125a4 4 0 0 1 2.525 5.771"/><path d="M19.505 10.294a4 4 0 0 1-1.5 7.706"/><path d="M4.032 17.483A4 4 0 0 0 11.464 20c.18-.311.892-.311 1.072 0a4 4 0 0 0 7.432-2.516"/><path d="M4.5 10.291A4 4 0 0 0 6 18"/><path d="M6.002 5.125a3 3 0 0 0 .4 1.375"/><path d="m9.228 10.852-.923-.383"/><path d="m9.228 13.148-.923.383"/><circle cx="12" cy="12" r="3"/></svg>
-			</span>
-			IQ Test
-		</a>
+			<!-- Logo (Left) — matching quiz-header-brand style -->
+			<a href="/" class="navbar-brand" aria-label="IQ Test Beranda">
+				<div class="navbar-icon">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+						stroke="white" stroke-width="1.5"
+						stroke-linecap="round" stroke-linejoin="round">
+						<path d="m10.852 14.772-.383.923"/>
+						<path d="m10.852 9.228-.383-.923"/>
+						<path d="m13.148 14.772.382.924"/>
+						<path d="m13.531 8.305-.383.923"/>
+						<path d="m14.772 10.852.923-.383"/>
+						<path d="m14.772 13.148.923.383"/>
+						<path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 0 0-5.63-1.446 3 3 0 0 0-.368 1.571 4 4 0 0 0-2.525 5.771"/>
+						<path d="M17.998 5.125a4 4 0 0 1 2.525 5.771"/>
+						<path d="M19.505 10.294a4 4 0 0 1-1.5 7.706"/>
+						<path d="M4.032 17.483A4 4 0 0 0 11.464 20c.18-.311.892-.311 1.072 0a4 4 0 0 0 7.432-2.516"/>
+						<path d="M4.5 10.291A4 4 0 0 0 6 18"/>
+						<path d="M6.002 5.125a3 3 0 0 0 .4 1.375"/>
+						<path d="m9.228 10.852-.923-.383"/>
+						<path d="m9.228 13.148-.923.383"/>
+						<circle cx="12" cy="12" r="3"/>
+					</svg>
+				</div>
+				<div class="navbar-title">
+					<span>IQ Test</span>
+				</div>
+			</a>
 
 			<!-- Desktop Nav Links (center) -->
 			<nav class="navbar-links" aria-label="Navigasi utama">
@@ -18,25 +38,27 @@ templ Navbar() {
 				<a href="/quiz" class="navbar-link">Tes</a>
 			</nav>
 
-			<!-- Desktop CTA (right) -->
-			<a href="/quiz" class="navbar-cta">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-				Mulai Tes
-			</a>
+			<!-- Desktop CTA + Mobile Toggle (right) -->
+			<div class="navbar-actions">
+				<a href="/quiz" class="navbar-cta">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+					Mulai Tes
+				</a>
 
-			<!-- Mobile Toggle -->
-			<button @click="mobileOpen = !mobileOpen"
-					:aria-expanded="mobileOpen"
-					aria-controls="mobile-menu"
-					aria-label="Buka menu navigasi"
-					class="navbar-toggle">
-				<span x-show="!mobileOpen" aria-hidden="true">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-				</span>
-				<span x-show="mobileOpen" x-cloak aria-hidden="true">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-				</span>
-			</button>
+				<!-- Mobile Toggle -->
+				<button @click="mobileOpen = !mobileOpen"
+						:aria-expanded="mobileOpen"
+						aria-controls="mobile-menu"
+						aria-label="Buka menu navigasi"
+						class="navbar-toggle">
+					<span x-show="!mobileOpen" aria-hidden="true">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+					</span>
+					<span x-show="mobileOpen" x-cloak aria-hidden="true">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+					</span>
+				</button>
+			</div>
 		</div>
 
 		<!-- Mobile overlay -->
@@ -46,8 +68,8 @@ templ Navbar() {
 			 class="navbar-overlay"
 			 :class="{ 'open': mobileOpen }"></div>
 
-		<!-- Mobile slide-in panel (LAYOUT.md §6.1) -->
-		<div id="mobile-panel"
+		<!-- Mobile slide-in panel -->
+		<div id="mobile-menu"
 			 class="navbar-panel"
 			 :class="{ 'open': mobileOpen }"
 			 role="dialog"

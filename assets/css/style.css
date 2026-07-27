@@ -176,77 +176,66 @@ a { color: inherit; text-decoration: none; }
    ============================================================ */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 50;
-  height: 72px;
-  background: transparent;
-  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, height 0.3s ease;
-  border-bottom: 1px solid transparent;
+  width: calc(100% - 32px);
+  max-width: 1140px;
+  background: #FFFFFF;
+  border-radius: 22px;
+  padding: 10px 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: box-shadow 0.3s ease, padding 0.3s ease;
 }
 
 .navbar.scrolled {
-  background: rgba(248,250,252,0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 1px 12px rgba(15,23,42,0.06);
-  border-bottom: 1px solid var(--bordLight);
-  height: 56px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 6px 14px;
 }
 
 .navbar-inner {
-  margin: 0 auto;
-  max-width: 1200px;
-  height: 100%;
-  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
 }
 
-@media (min-width: 768px) {
-  .navbar-inner {
-    padding: 0 24px;
-  }
-}
 
-@media (min-width: 1024px) {
-  .navbar-inner {
-    padding: 0 40px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .navbar-inner {
-    max-width: 1290px;
-  }
-}
-
-.navbar-logo {
+.navbar-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   text-decoration: none;
-  color: var(--ink);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.02em;
-  transition: opacity 0.2s ease;
+  flex-shrink: 0;
 }
 
-.navbar-logo:hover { opacity: 0.75; }
+.navbar-brand:hover {
+  opacity: 0.8;
+}
 
-.navbar-logo-icon {
-  width: 28px;
-  height: 28px;
+.navbar-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7C6FF0, #5B4FE0);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background: var(--accent);
-  color: white;
   flex-shrink: 0;
+}
+
+.navbar-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-title span {
+  font-family: 'Poppins', 'Nunito', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1A1A2E;
+  line-height: 1.3;
 }
 
 .navbar-links {
@@ -262,19 +251,28 @@ a { color: inherit; text-decoration: none; }
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--inkMuted);
+  color: #475569;
   text-decoration: none;
   transition: color 0.2s ease, background 0.2s ease;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .navbar-link:hover {
-  color: var(--ink);
-  background: var(--bgSection);
+  color: #0f172a;
+  background: #f1f5f9;
 }
 
 .navbar-link:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid #6366f1;
   outline-offset: 2px;
+}
+
+/* ---- Actions (right) ---- */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .navbar-cta {
@@ -282,18 +280,21 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 6px;
   padding: 8px 20px;
-  border-radius: var(--radiusBtn);
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
-  background: var(--accent);
+  background: #6366f1;
   color: white;
   text-decoration: none;
   transition: background 0.2s ease;
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1;
+  white-space: nowrap;
 }
 
-.navbar-cta:hover { background: var(--accentHover); }
+.navbar-cta:hover { background: #4f46e5; }
 .navbar-cta:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
 
@@ -307,19 +308,18 @@ a { color: inherit; text-decoration: none; }
   border-radius: 8px;
   border: none;
   background: transparent;
-  color: var(--ink);
+  color: #1A1A2E;
   cursor: pointer;
   transition: background 0.2s ease;
-  z-index: 51;
 }
 
-.navbar-toggle:hover { background: var(--bgSection); }
+.navbar-toggle:hover { background: #f1f5f9; }
 .navbar-toggle:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
 
-/* Mobile slide-in panel (LAYOUT.md §6.1) */
+/* Mobile slide-in panel */
 .navbar-overlay {
   display: none;
   position: fixed;
@@ -337,13 +337,13 @@ a { color: inherit; text-decoration: none; }
   width: 80%;
   max-width: 320px;
   height: 100vh;
-  background: var(--surface);
+  background: #FFFFFF;
   z-index: 50;
   transform: translateX(100%);
   transition: transform 0.3s ease;
   padding: 88px 24px 24px;
   overflow-y: auto;
-  border-left: 1px solid var(--bordLight);
+  border-left: 1px solid #f1f5f9;
 }
 
 .navbar-panel.open {
@@ -364,39 +364,69 @@ a { color: inherit; text-decoration: none; }
   border-radius: 10px;
   font-size: 15px;
   font-weight: 500;
-  color: var(--inkMuted);
+  color: #475569;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .navbar-panel-link:hover {
-  background: var(--bgSection);
-  color: var(--ink);
+  background: #f1f5f9;
+  color: #0f172a;
 }
 
 .navbar-panel-link:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
 
 .navbar-panel-cta {
-  background: var(--accentLight);
-  color: var(--accent);
+  background: #eef2ff;
+  color: #6366f1;
   font-weight: 600;
   margin-top: 12px;
 }
 
 .navbar-panel-divider {
   border: none;
-  border-top: 1px solid var(--bordLight);
+  border-top: 1px solid #f1f5f9;
   margin: 12px 0;
 }
 
 @media (max-width: 767px) {
+  .navbar {
+    top: 12px;
+    width: calc(100% - 24px);
+    padding: 8px 12px;
+  }
+
+  .navbar.scrolled {
+    padding: 6px 12px;
+  }
+
   .navbar-links { display: none; }
   .navbar-cta { display: none; }
   .navbar-toggle { display: flex; }
-  .navbar-inner { padding: 0 16px; }
+
+  .navbar-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .navbar-title span {
+    font-size: 15px;
+  }
+}
+
+/* Spacing for main content below fixed floating navbar */
+main {
+  padding-top: 88px;
+}
+
+@media (max-width: 767px) {
+  main {
+    padding-top: 80px;
+  }
 }
 
 /* ============================================================
