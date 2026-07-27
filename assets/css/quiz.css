@@ -35,7 +35,8 @@
 .quiz-header {
   background: var(--qwhite);
   border-radius: 22px;
-  padding: 14px 18px;
+  padding: 10px 14px;
+  transform: translateY(-1px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,7 +56,6 @@
 .quiz-header-icon {
   width: 44px;
   height: 44px;
-  transform: translateY(-1px);
   border-radius: 12px;
   background: linear-gradient(135deg, #7C6FF0, #5B4FE0);
   display: flex;
