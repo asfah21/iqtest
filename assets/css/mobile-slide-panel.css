@@ -13,6 +13,10 @@
   z-index: 49;
 }
 
+.navbar-overlay.open {
+  display: block;
+}
+
 /* --- Slide Panel --- */
 .navbar-panel {
   position: fixed;

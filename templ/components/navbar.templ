@@ -65,7 +65,8 @@ templ Navbar() {
 		<div x-show="mobileOpen"
 			 x-cloak
 			 @click="mobileOpen = false"
-			 class="navbar-overlay"></div>
+			 class="navbar-overlay"
+			 :class="{ 'open': mobileOpen }"></div>
 
 		<!-- Mobile slide-in panel -->
 		<div id="mobile-menu"
