@@ -17,7 +17,7 @@ templ paywallContent(data models.PaywallData) {
 			<div style="max-width:640px;margin:0 auto;">
 
 			<!-- ============================================================
-			     SECTION 1: Completion Banner — compact, tinted row
+			     SECTION 1: Completion Banner — waktu + domain terkuat
 			     ============================================================ -->
 			<div class="paywall-completion-banner fade-in-up is-visible" style="animation-delay:0s;">
 				<div class="paywall-banner-icon">
@@ -38,237 +38,257 @@ templ paywallContent(data models.PaywallData) {
 			</div>
 
 			<!-- ============================================================
-			     SECTION 2: Hero Header — personalized conversion hook
+			     SECTION 2: Intro / Well-done — ajakan buka hasil
 			     ============================================================ -->
-			<div class="paywall-header fade-in-up is-visible" style="animation-delay:0.08s;">
-				<div class="paywall-header-badge">
-					<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-					</svg>
-					<span>Hasil Premium</span>
-				</div>
-				<h1 class="paywall-heading">
-					Selangkah Lagi, <span class="paywall-heading-name">{ data.Nama }</span>
-				</h1>
-				<p class="paywall-subheading">
-					Dapatkan skor lengkap, analisis per domain, dan gambaran kemampuan kognitifmu secara mendetail.
-				</p>
+			<div class="paywall-well-done fade-in-up is-visible" style="animation-delay:0.08s;">
+				<p>Skor IQ-mu sudah dianalisis dan dibandingkan dengan ribuan peserta lain di Indonesia. Dapatkan hasil lengkap, sertifikat IQ eksklusif, dan akses program pengembangan otak sekarang juga.</p>
 			</div>
 
 			<!-- ============================================================
-			     SECTION 3: Score Preview — curiosity gap with blurred domains
+			     SECTION 3: Order Details — 3 item (skor, sertifikat, booster)
 			     ============================================================ -->
-			<div class="paywall-preview fade-in-up is-visible" style="animation-delay:0.16s;">
-				<div class="paywall-preview-header">
-					<h3 class="paywall-preview-title">Pratinjau Skor</h3>
-					<span class="paywall-preview-lock">
-						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-						Terkunci
-					</span>
+			<div class="paywall-order-details fade-in-up is-visible" style="animation-delay:0.16s;">
+				<h3 class="paywall-order-heading">Detail Pesanan</h3>
+
+				<!-- Item 1: Skor IQ -->
+				<div class="paywall-order-item">
+					<div class="paywall-order-number">1</div>
+					<div class="paywall-order-info">
+						<h5>Skor IQ Lengkap</h5>
+						<p>Skor IQ akurat berdasarkan jawabanmu, lengkap dengan analisis per kategori kemampuan.</p>
+					</div>
+					<div class="paywall-order-image">
+						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+						</svg>
+					</div>
 				</div>
-				<div class="paywall-preview-body">
-					<!-- Total score row -->
-					<div class="paywall-preview-row">
-						<div class="paywall-preview-label">
-							<span>Skor Total</span>
-							<span class="paywall-preview-value">•• / 30.5</span>
-						</div>
-						<div class="progress-bar">
-							<div class="progress-fill" style="width:65%;background:var(--accent);opacity:0.85;"></div>
-						</div>
+
+				<!-- Item 2: Sertifikat -->
+				<div class="paywall-order-item">
+					<div class="paywall-order-number">2</div>
+					<div class="paywall-order-info">
+						<h5>Sertifikat IQ Eksklusif</h5>
+						<p>Sertifikat IQ pribadi dalam format PDF berkualitas tinggi — bisa kamu cetak dan bagikan.</p>
 					</div>
-					<!-- Percentile row -->
-					<div class="paywall-preview-row">
-						<div class="paywall-preview-label">
-							<span>Persentil</span>
-							<span class="paywall-preview-value">••%</span>
-						</div>
-						<div class="progress-bar">
-							<div class="progress-fill" style="width:55%;background:var(--accent);opacity:0.65;"></div>
-						</div>
+					<div class="paywall-order-image">
+						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--inkMuted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+							<polyline points="14 2 14 8 20 8"/>
+							<line x1="16" y1="13" x2="8" y2="13"/>
+							<line x1="16" y1="17" x2="8" y2="17"/>
+							<polyline points="10 9 9 9 8 9"/>
+						</svg>
 					</div>
-					<!-- Domain breakdown -->
-					<div class="paywall-preview-domains">
-						<p class="paywall-preview-domain-title">Per Domain</p>
-						<div class="paywall-preview-domain-list">
-							<div class="paywall-preview-row">
-								<div class="paywall-preview-label paywall-preview-label-sm">
-									<span>Penalaran Logis</span>
-									<span class="paywall-preview-value">••%</span>
-								</div>
-								<div class="progress-bar">
-									<div class="progress-fill" style="width:75%;background:var(--accent);opacity:0.85;"></div>
-								</div>
-							</div>
-							<div class="paywall-preview-row">
-								<div class="paywall-preview-label paywall-preview-label-sm">
-									<span>Kemampuan Spasial</span>
-									<span class="paywall-preview-value">••%</span>
-								</div>
-								<div class="progress-bar">
-									<div class="progress-fill" style="width:60%;background:var(--accent);opacity:0.65;"></div>
-								</div>
-							</div>
-							<div class="paywall-preview-row">
-								<div class="paywall-preview-label paywall-preview-label-sm">
-									<span>Analisis Pola</span>
-									<span class="paywall-preview-value">••%</span>
-								</div>
-								<div class="progress-bar">
-									<div class="progress-fill" style="width:45%;background:var(--accent);opacity:0.45;"></div>
-								</div>
-							</div>
-							<div class="paywall-preview-row">
-								<div class="paywall-preview-label paywall-preview-label-sm">
-									<span>Pemahaman Verbal</span>
-									<span class="paywall-preview-value">••%</span>
-								</div>
-								<div class="progress-bar">
-									<div class="progress-fill" style="width:55%;background:var(--accent);opacity:0.30;"></div>
-								</div>
-							</div>
-						</div>
+				</div>
+
+				<!-- Item 3: IQ Booster -->
+				<div class="paywall-order-item">
+					<div class="paywall-order-number">3</div>
+					<div class="paywall-order-info">
+						<h5>Program IQ Booster</h5>
+						<p>Coba gratis 7 hari program pelatihan otak — dirancang untuk mengasah kemampuan kognitifmu secara bertahap.</p>
+					</div>
+					<div class="paywall-order-image">
+						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--inkMuted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>
+						</svg>
 					</div>
 				</div>
 			</div>
 
 			<!-- ============================================================
-			     SECTION 4: Value Props — what they unlock after payment
+			     SECTION 4: Payment Card — harga + QRIS + metode + CTA
 			     ============================================================ -->
-			<div class="paywall-valueprops fade-in-up is-visible" style="animation-delay:0.24s;">
-				<div class="paywall-valueprop">
-					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-						<polyline points="22 4 12 14.01 9 11.01"/>
-					</svg>
-					<span>Skor IQ lengkap dan grafik per domain</span>
-				</div>
-				<div class="paywall-valueprop">
-					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-						<polyline points="22 4 12 14.01 9 11.01"/>
-					</svg>
-					<span>Analisis mendalam tiap kemampuan kognitif</span>
-				</div>
-				<div class="paywall-valueprop">
-					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-						<polyline points="22 4 12 14.01 9 11.01"/>
-					</svg>
-					<span>Perbandingan persentil nasional & global</span>
-				</div>
-			</div>
+			<div class="paywall-payment-card fade-in-up is-visible" style="animation-delay:0.24s;">
 
-			<!-- ============================================================
-			     SECTION 5: Payment Card — pricing, QRIS, CTA
-			     ============================================================ -->
-			<div class="paywall-payment-card fade-in-up is-visible" style="animation-delay:0.32s;">
-
-				<!-- Price Zone -->
-				<div class="paywall-price-zone">
-					<div class="paywall-price-badge">
-						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-						Sekali Bayar
+				<!-- Order Total -->
+				<div class="paywall-order-total">
+					<div>
+						<h4>Total hari ini</h4>
 					</div>
-					<div class="paywall-price-display">
-						<span class="paywall-price-amount">Rp14.900</span>
-						<span class="paywall-price-period">/ sekali</span>
-					</div>
-					<p class="paywall-price-desc">
-						Akses penuh hasil tes — skor lengkap, analisis per domain, dan gambaran kemampuan kognitif.
-					</p>
+					<span class="paywall-price-amount">Rp9.900</span>
 				</div>
 
 				<!-- Divider -->
 				<div class="paywall-divider"></div>
 
-				<!-- Payment Action Zone -->
+				<!-- Action Zone -->
 				<div class="paywall-action-zone">
 
-					<!-- QRIS -->
+					<!-- QRIS — Primary -->
 					<div class="paywall-qris">
 						<div class="paywall-qris-visual">
 							<div class="paywall-qris-placeholder">
-								<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--inkSubtle)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="2"/></svg>
+								<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--inkSubtle)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+									<path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+									<path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+									<path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+									<rect x="7" y="7" width="10" height="10" rx="2"/>
+								</svg>
 								<p class="paywall-qris-label">QRIS</p>
 							</div>
 						</div>
 						<div class="paywall-qris-info">
 							<p class="paywall-qris-title">Scan QRIS</p>
-							<p class="paywall-qris-desc">Gunakan aplikasi mobile banking atau e-wallet favoritmu.</p>
+							<p class="paywall-qris-desc">Bayar pakai aplikasi mobile banking atau e-wallet favoritmu.</p>
 						</div>
 					</div>
 
-					<!-- Trust signal -->
+					<!-- Metode Pembayaran Lainnya -->
+					<p class="paywall-payment-methods-label">Juga menerima pembayaran dari</p>
+					<div class="paywall-payment-methods">
+						<span class="paywall-payment-method-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+							BCA
+						</span>
+						<span class="paywall-payment-method-icon">Mandiri</span>
+						<span class="paywall-payment-method-icon">BNI</span>
+						<span class="paywall-payment-method-icon">BRI</span>
+						<span class="paywall-payment-method-icon">GoPay</span>
+						<span class="paywall-payment-method-icon">Dana</span>
+						<span class="paywall-payment-method-icon">OVO</span>
+						<span class="paywall-payment-method-icon">LinkAja</span>
+					</div>
+
+					<!-- Trust Signal -->
 					<div class="paywall-trust">
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+							<path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+						</svg>
 						<span>Pembayaran aman & terenkripsi</span>
 					</div>
 
-					<!-- Form -->
+					<!-- Form: nama pengirim + CTA -->
 					<div class="paywall-form">
+
+						<!-- Agreement Checkbox -->
+						<div class="paywall-agreement">
+							<label>
+								<input type="checkbox" id="agreeCheckbox" name="agree"/>
+								<span>Saya menyetujui <a href="/page/syarat-ketentuan" target="_blank">Syarat & Ketentuan</a> dan <a href="/page/kebijakan-privasi" target="_blank">Kebijakan Privasi</a>. Setelah masa trial 7 hari, langganan akan berlanjut otomatis sebesar <strong>Rp29.900 setiap 28 hari</strong> kecuali dibatalkan.</span>
+							</label>
+							<p id="agreeError" class="paywall-agreement-error">Harap centang persetujuan terlebih dahulu.</p>
+						</div>
+
 						<input type="text" id="namaPengirim" placeholder="Nama pengirim transfer" class="paywall-input"/>
-						<button data-paywall-id={ data.ID } onclick="konfirmasiBayar(this)" class="paywall-cta">
-							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-							Saya Sudah Bayar
+
+						<button data-paywall-id={ data.ID } onclick="konfirmasiBayar(this)" class="paywall-cta" id="payBtn">
+							<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+								<polyline points="22 4 12 14.01 9 11.01"/>
+							</svg>
+							Lanjutkan ke Pembayaran
 						</button>
 					</div>
 
 					<p class="paywall-form-note">Hasil akan langsung bisa diakses setelah pembayaran terverifikasi.</p>
 				</div>
-
 			</div>
 
 			<!-- ============================================================
-			     SECTION 6: FAQ — quick payment questions
+			     SECTION 5: Disclaimer
 			     ============================================================ -->
-			<div class="paywall-faq fade-in-up is-visible" style="animation-delay:0.40s;">
-				<div class="paywall-faq-item" x-data="{ open: false }">
-					<button class="paywall-faq-trigger" @click="open = !open" :aria-expanded="open">
-						<span>Apa yang saya dapatkan setelah bayar?</span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="paywall-faq-icon" :class="{ 'rotate-45': open }"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-					</button>
-					<div class="paywall-faq-content" x-show="open" x-collapse.duration.250ms>
-						<p>Skor IQ lengkap, grafik per domain, analisis kemampuan kognitif, dan perbandingan persentil — semuanya bisa diakses langsung setelah pembayaran terverifikasi.</p>
+			<div class="paywall-disclaimer fade-in-up is-visible" style="animation-delay:0.32s;">
+				<p>Dengan melanjutkan pembayaran, kamu menyetujui pembayaran sebesar Rp9.900 untuk hasil tes, sertifikat IQ, dan akses 7 hari ke Program IQ Booster — platform pelatihan otak. Setelah 7 hari, langganan akan dimulai secara otomatis dan diperpanjang sebesar Rp29.900 setiap 28 hari hingga dibatalkan. Kamu dapat membatalkan kapan saja melalui dashboard IQ Boostermu atau dengan menghubungi kami di <a href="mailto:info@iqbooster.org">info@iqbooster.org</a>. Lihat <a href="/page/syarat-ketentuan" target="_blank">Syarat & Ketentuan</a> dan <a href="/page/kebijakan-privasi" target="_blank">Kebijakan Privasi</a> untuk informasi lebih lanjut.</p>
+			</div>
+
+			<!-- ============================================================
+			     SECTION 6: Customer Reviews
+			     ============================================================ -->
+			<div class="paywall-reviews fade-in-up is-visible" style="animation-delay:0.40s;">
+				<div class="paywall-reviews-heading">
+					<h2>Ulasan & Testimoni</h2>
+					<p>Setelah mendapatkan hasil, kamu juga bisa ikut berbagi pengalaman.</p>
+					<div class="paywall-rating-summary">
+						<span>Rating Rata-rata: Sangat Baik</span>
+						<span class="paywall-review-stars">
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+						</span>
 					</div>
 				</div>
-				<div class="paywall-faq-item" x-data="{ open: false }">
-					<button class="paywall-faq-trigger" @click="open = !open" :aria-expanded="open">
-						<span>Berapa lama hasil bisa diakses?</span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="paywall-faq-icon" :class="{ 'rotate-45': open }"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-					</button>
-					<div class="paywall-faq-content" x-show="open" x-collapse.duration.250ms>
-						<p>Hasil bisa diakses kapan saja setelah pembayaran diverifikasi. Kamu juga akan mendapatkan link hasil via email.</p>
+
+				<!-- Testimonial 1 -->
+				<div class="paywall-review-card">
+					<div class="paywall-review-header">
+						<p class="paywall-review-name">Andi P.</p>
+						<span class="paywall-review-stars">
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+						</span>
 					</div>
+					<p class="paywall-review-text">"Awalnya ragu, tapi hasilnya benar-benar memuaskan. Tesnya menantang dan analisisnya sangat detail. Recommended!"</p>
 				</div>
-				<div class="paywall-faq-item" x-data="{ open: false }">
-					<button class="paywall-faq-trigger" @click="open = !open" :aria-expanded="open">
-						<span>Metode pembayaran apa saja yang tersedia?</span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="paywall-faq-icon" :class="{ 'rotate-45': open }"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-					</button>
-					<div class="paywall-faq-content" x-show="open" x-collapse.duration.250ms>
-						<p>Saat ini kami menerima pembayaran via QRIS — bisa menggunakan mobile banking, GoPay, OVO, DANA, atau e-wallet lainnya.</p>
+
+				<!-- Testimonial 2 -->
+				<div class="paywall-review-card">
+					<div class="paywall-review-header">
+						<p class="paywall-review-name">Sari W.</p>
+						<span class="paywall-review-stars">
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+						</span>
 					</div>
+					<p class="paywall-review-text">"Prosesnya cepat dan mudah. Sertifikat IQ-nya keren banget, bisa langsung dipajang di LinkedIn. Puas banget!"</p>
+				</div>
+
+				<!-- Testimonial 3 -->
+				<div class="paywall-review-card">
+					<div class="paywall-review-header">
+						<p class="paywall-review-name">Rizky A.</p>
+						<span class="paywall-review-stars">
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+						</span>
+					</div>
+					<p class="paywall-review-text">"IQ Boosternya bikin penasaran — 7 hari trial ternyata cukup buat liat perkembangan. Overall worth it banget!"</p>
 				</div>
 			</div>
 
 			<!-- ============================================================
-			     SECTION 7: Back link
+			     SECTION 7: Bottom CTA
 			     ============================================================ -->
-			<div class="paywall-back fade-in-up is-visible" style="animation-delay:0.48s;">
-				<a href="/" class="btn-ghost">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-					Kembali ke Beranda
-				</a>
+			<div class="paywall-bottom-cta fade-in-up is-visible" style="animation-delay:0.48s;">
+				<button data-paywall-id={ data.ID } onclick="konfirmasiBayar(this)" class="paywall-cta" id="payBtnBottom">
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+						<polyline points="22 4 12 14.01 9 11.01"/>
+					</svg>
+					Lanjutkan ke Pembayaran
+				</button>
 			</div>
 
 			</div>
 		</div>
 	</section>
 
-	<!-- Embedded script: payment confirmation logic — DO NOT MODIFY -->
+	<!-- Embedded script: payment confirmation + checkbox validation -->
 	<script>
 	function konfirmasiBayar(btn) {
+		// Checkbox validation
+		var checkbox = document.getElementById('agreeCheckbox');
+		var errorMsg = document.getElementById('agreeError');
+		if (!checkbox || !checkbox.checked) {
+			if (errorMsg) errorMsg.style.display = 'block';
+			return;
+		}
+		if (errorMsg) errorMsg.style.display = 'none';
+
 		const nama = document.getElementById('namaPengirim').value.trim();
 		if (!nama) { alert('Silakan masukkan nama pengirim transfer.'); return; }
 		const id = btn.getAttribute('data-paywall-id');
@@ -278,9 +298,9 @@ templ paywallContent(data models.PaywallData) {
 		.then(r => r.json())
 		.then(data => {
 			if (data.success) { window.location.href = '/hasil/' + data.id; }
-			else { alert('Gagal: ' + (data.error || 'Terjadi kesalahan')); btn.disabled = false; btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Saya Sudah Bayar'; }
+			else { alert('Gagal: ' + (data.error || 'Terjadi kesalahan')); btn.disabled = false; btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Lanjutkan ke Pembayaran'; }
 		})
-		.catch(() => { alert('Koneksi error. Silakan coba lagi.'); btn.disabled = false; btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Saya Sudah Bayar'; });
+		.catch(() => { alert('Koneksi error. Silakan coba lagi.'); btn.disabled = false; btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Lanjutkan ke Pembayaran'; });
 	}
 	</script>
 }

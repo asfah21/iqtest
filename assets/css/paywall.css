@@ -656,3 +656,400 @@
     transform: none;
   }
 }
+
+/* ============================================================
+   SECTION 4: Well-done Content (replaces old hero header)
+   ============================================================ */
+.paywall-well-done {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-lg) 0;
+}
+
+.paywall-well-done p {
+  font-size: var(--text-base);
+  color: var(--inkMuted);
+  max-width: var(--measure-narrow);
+  margin: 0 auto;
+  line-height: var(--leading-relaxed);
+}
+
+/* ============================================================
+   SECTION 5: Order Details (replaces old score preview)
+   ============================================================ */
+.paywall-order-details {
+  margin-bottom: var(--space-lg);
+}
+
+.paywall-order-heading {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 var(--space-md);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.paywall-order-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--surface);
+  border: 1px solid var(--bordLight);
+  border-radius: var(--radiusCard);
+  margin-bottom: var(--space-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.paywall-order-item:last-child {
+  margin-bottom: 0;
+}
+
+.paywall-order-item:hover {
+  border-color: var(--bord);
+  box-shadow: var(--shadow1);
+}
+
+.paywall-order-number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: white;
+  background: var(--accent);
+  line-height: 1;
+}
+
+.paywall-order-item:nth-child(2) .paywall-order-number {
+  background: var(--narcissus);
+}
+
+.paywall-order-item:nth-child(3) .paywall-order-number {
+  background: var(--machiavellian);
+}
+
+.paywall-order-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.paywall-order-info h5 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 2px;
+  line-height: var(--leading-snug);
+}
+
+.paywall-order-info p {
+  font-size: var(--text-xs);
+  color: var(--inkMuted);
+  margin: 0;
+  line-height: var(--leading-relaxed);
+}
+
+.paywall-order-image {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radiusBtn);
+  background: var(--bgSection);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.paywall-order-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .paywall-order-item {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .paywall-order-image {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ============================================================
+   SECTION 6: Order Total
+   ============================================================ */
+.paywall-order-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--surface);
+  border: 1px solid var(--bord);
+  border-radius: var(--radiusCard);
+  margin-bottom: var(--space-lg);
+}
+
+.paywall-order-total h4 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--inkMuted);
+  margin: 0;
+}
+
+.paywall-order-total h4 span {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--inkSubtle);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.paywall-order-total .paywall-price-amount {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* ============================================================
+   SECTION 7: Payment Methods Logos Row
+   ============================================================ */
+.paywall-payment-methods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.paywall-payment-methods-label {
+  font-size: var(--text-xs);
+  color: var(--inkSubtle);
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+  text-align: center;
+}
+
+.paywall-payment-method-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  background: var(--surface);
+  border: 1px solid var(--bordLight);
+  border-radius: var(--radiusBtn);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--inkMuted);
+  gap: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.paywall-payment-method-icon:hover {
+  border-color: var(--bord);
+}
+
+.paywall-payment-method-icon svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SECTION 8: Agreement Checkbox
+   ============================================================ */
+.paywall-agreement {
+  padding: 0 var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.paywall-agreement label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: var(--text-xs);
+  color: var(--inkMuted);
+  line-height: var(--leading-relaxed);
+  cursor: pointer;
+}
+
+.paywall-agreement input[type="checkbox"] {
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.paywall-agreement label a {
+  color: var(--accent);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.paywall-agreement label a:hover {
+  color: var(--accentHover);
+}
+
+.paywall-agreement-error {
+  font-size: var(--text-xs);
+  color: var(--color-error, #DC2626);
+  margin: var(--space-xs) var(--space-lg) 0;
+  display: none;
+  line-height: var(--leading-relaxed);
+}
+
+/* ============================================================
+   SECTION 9: Disclaimer Text
+   ============================================================ */
+.paywall-disclaimer {
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bgSection);
+  border-radius: var(--radiusCard);
+  border: 1px solid var(--bordLight);
+}
+
+.paywall-disclaimer p {
+  font-size: var(--text-xs);
+  color: var(--inkSubtle);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+.paywall-disclaimer a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   SECTION 10: Customer Reviews
+   ============================================================ */
+.paywall-reviews {
+  margin-top: var(--space-xl);
+}
+
+.paywall-reviews-heading {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.paywall-reviews-heading h2 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 var(--space-2xs);
+}
+
+.paywall-reviews-heading p {
+  font-size: var(--text-xs);
+  color: var(--inkSubtle);
+  margin: 0;
+}
+
+.paywall-reviews-heading .paywall-rating-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--inkMuted);
+}
+
+.paywall-review-card {
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+  background: var(--surface);
+  border: 1px solid var(--bordLight);
+  border-radius: var(--radiusCard);
+}
+
+.paywall-review-card:last-child {
+  margin-bottom: 0;
+}
+
+.paywall-review-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.paywall-review-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.paywall-review-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #f59e0b;
+  font-size: var(--text-xs);
+}
+
+.paywall-review-text {
+  font-size: var(--text-sm);
+  color: var(--inkMuted);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* ============================================================
+   SECTION 11: Bottom CTA
+   ============================================================ */
+.paywall-bottom-cta {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--bordLight);
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile refinements for new sections
+   ============================================================ */
+@media (max-width: 767px) {
+  .paywall-order-total {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .paywall-agreement {
+    padding: 0 var(--space-md);
+  }
+
+  .paywall-agreement-error {
+    margin: var(--space-xs) var(--space-md) 0;
+  }
+
+  .paywall-payment-methods {
+    gap: 6px;
+    padding: var(--space-sm);
+  }
+
+  .paywall-payment-method-icon {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .paywall-disclaimer {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .paywall-review-card {
+    padding: var(--space-sm);
+  }
+}
