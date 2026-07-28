@@ -1,0 +1,26 @@
+/* ============================================================
+   PAYWALL — Refined visual hierarchy (per paywall.md)
+   ============================================================ */
+
+/* CTA button with subtle glow and hover lift */
+.btn-paywall-cta {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.btn-paywall-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow2), 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.btn-paywall-cta:active {
+  transform: translateY(0);
+}
+
+/* Thin divider between price and QRIS section */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--bord);
+  border: none;
+  margin: 0;
+}
