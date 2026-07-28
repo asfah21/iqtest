@@ -2,14 +2,26 @@
    PAYWALL — Refined visual hierarchy (per paywall.md)
    ============================================================ */
 
-/* CTA button with subtle glow and hover lift */
+/* CTA button — clean, confident, no exaggerated glow */
 .btn-paywall-cta {
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-paywall-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+  pointer-events: none;
 }
 
 .btn-paywall-cta:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow2), 0 0 0 3px rgba(99, 102, 241, 0.12);
+  box-shadow: var(--shadow2);
 }
 
 .btn-paywall-cta:active {
@@ -23,4 +35,9 @@
   background: var(--bord);
   border: none;
   margin: 0;
+}
+
+/* Accent-tinted background — lightweight, no color-mix dependency */
+.bg-accent-tint {
+  background: var(--accentLight);
 }
