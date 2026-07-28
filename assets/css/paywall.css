@@ -7,7 +7,9 @@
 /* --- Utility replacements for Tailwind arbitrary classes --- */
 .text-main { color: var(--ink); }
 .border-light { border-color: var(--bordLight); }
+.border-t-light { border-top: 1px solid var(--bordLight); }
 .bg-section { background: var(--bgSection); }
+.mb-1 { margin-bottom: 4px; }
 
 /* Accent light with opacity using color-mix */
 .bg-accent-light-40 {
