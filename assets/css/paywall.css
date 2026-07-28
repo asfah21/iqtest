@@ -1,8 +1,78 @@
 /* ============================================================
-   PAYWALL — Refined visual hierarchy (per paywall.md)
+   PAYWALL — Premium conversion page
+   All classes in this file are paywall-specific utilities.
+   Tokens from style.css: --accent, --ink, --surface, etc.
    ============================================================ */
 
-/* CTA button — clean, confident, no exaggerated glow */
+/* --- Utility replacements for Tailwind arbitrary classes --- */
+.text-main { color: var(--ink); }
+.border-light { border-color: var(--bordLight); }
+.bg-section { background: var(--bgSection); }
+
+/* Accent light with opacity using color-mix */
+.bg-accent-light-40 {
+  background: color-mix(in srgb, var(--accentLight) 40%, transparent);
+}
+
+/* --- Accent-tinted background (existing, kept for compat) --- */
+.bg-accent-tint {
+  background: var(--accentLight);
+}
+
+/* --- Payment card (hero element) --- */
+.paywall-card {
+  background: var(--surface);
+  border-radius: var(--radiusCard);
+  border: 1px solid var(--bord);
+  box-shadow: var(--shadow1);
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.paywall-card:hover {
+  box-shadow: var(--shadow2);
+  transform: translateY(-3px);
+}
+
+/* --- QRIS Container --- */
+.qris-container {
+  background: color-mix(in srgb, var(--accentLight) 40%, transparent);
+  border: 1px solid var(--bordLight);
+  border-radius: 12px;
+  padding: 24px;
+  transition: border-color 0.2s ease;
+}
+
+.qris-container:hover {
+  border-color: var(--accent);
+}
+
+.qris-placeholder {
+  width: 176px;
+  height: 176px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed var(--bordLight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Preview block (flat, non-card, teaser) --- */
+.preview-block {
+  background: var(--bgSection);
+  border-radius: var(--radiusCard);
+  padding: 24px;
+}
+
+/* --- Domain progress bar opacity variants --- */
+.progress-domain-1 { background: var(--accent); opacity: 0.85; }
+.progress-domain-2 { background: var(--accent); opacity: 0.65; }
+.progress-domain-3 { background: var(--accent); opacity: 0.45; }
+.progress-domain-4 { background: var(--accent); opacity: 0.30; }
+
+/* --- CTA button refinement --- */
 .btn-paywall-cta {
   position: relative;
   overflow: hidden;
@@ -28,16 +98,7 @@
   transform: translateY(0);
 }
 
-/* Thin divider between price and QRIS section */
-.divider {
-  width: 100%;
-  height: 1px;
-  background: var(--bord);
-  border: none;
-  margin: 0;
-}
-
-/* Accent-tinted background — lightweight, no color-mix dependency */
-.bg-accent-tint {
-  background: var(--accentLight);
-}
+/* --- Fade-in animation delay helpers --- */
+.paywall-delay-0  { animation-delay: 0s; }
+.paywall-delay-1  { animation-delay: 0.1s; }
+.paywall-delay-2  { animation-delay: 0.2s; }
