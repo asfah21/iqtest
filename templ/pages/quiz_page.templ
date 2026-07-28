@@ -6,7 +6,7 @@ import (
 )
 
 templ QuizPage() {
-	@layouts.QuizLayout("ShadowSelf — Tes IQ", quizContent())
+	@layouts.QuizLayout("IQTest — Tes IQ", quizContent())
 }
 
 templ quizContent() {
@@ -162,7 +162,7 @@ templ quizContent() {
 		</div>
 
 		<script>
-	// ShadowSelf Quiz Alpine.js App — Per QUIZUI.md
+	// IQTest Quiz Alpine.js App — Per QUIZUI.md
 	document.addEventListener('alpine:init', () => {
 		Alpine.data('quizApp', () => ({
 			// ── State ──

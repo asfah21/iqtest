@@ -108,7 +108,7 @@ func generateExecutiveSummary(nama string, rawScore, maxScore float64, domainSco
 		overallLabel = "perlu pengembangan"
 	}
 
-	intro := fmt.Sprintf(`Halo, %s. Terima kasih telah menyelesaikan asesmen kemampuan kognitif ShadowSelf. Laporan ini memberikan gambaran tentang profil kognitifmu berdasarkan 4 domain:
+	intro := fmt.Sprintf(`Halo, %s. Terima kasih telah menyelesaikan asesmen kemampuan kognitif IQTest. Laporan ini memberikan gambaran tentang profil kognitifmu berdasarkan 4 domain:
 - Penalaran Matriks (MTX): %s
 - Deret Logis (SEQ): %s
 - Rotasi Spasial (SPA): %s

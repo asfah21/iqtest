@@ -1,6 +1,6 @@
 # QUIZ.md — Spesifikasi UI Halaman Quiz
 
-> Dokumen ini **hanya** membahas UI halaman Quiz (desktop & mobile) pada platform ShadowSelf.
+> Dokumen ini **hanya** membahas UI halaman Quiz (desktop & mobile) pada platform IQTest.
 > Layout, komponen, responsive behavior, UI states, interaksi, dan reusable components.
 > **Tidak** membahas backend, API, database, business logic, scoring, atau implementasi timer.
 > Design tokens & komponen global merujuk ke `DESIGN.md`. Flow aplikasi & struktur konten merujuk ke `IQTEST.md`.

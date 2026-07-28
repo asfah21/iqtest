@@ -42,8 +42,10 @@ type QuizResult struct {
 
 // PaywallData — data untuk rendering paywall page
 type PaywallData struct {
-	ID   string
-	Nama string
+	ID              string
+	Nama            string
+	DurationMinutes int    // lama pengerjaan tes dalam menit
+	DomainMessage   string // pesan tentang domain terkuat
 }
 
 // Payment — data pembayaran (per IQTEST.md §10.2 payments table)

@@ -1,18 +1,44 @@
 package pages
 
 import (
+	"fmt"
+
 	"ego/models"
 	"ego/templ/layouts"
 )
 
 templ PaywallPage(data models.PaywallData) {
-	@layouts.PublicLayout("Bayar", paywallContent(data))
+	@layouts.PaywallLayout("Bayar", paywallContent(data))
 }
 
 templ paywallContent(data models.PaywallData) {
 	<section class="min-h-screen pt-24 pb-16 bg-gradient-paywall">
 		<div class="container">
 			<div style="max-width:640px;margin:0 auto;">
+
+			<!-- Banner hasil tes -->
+			<div class="card p-5 mb-6 fade-in-up border-l-4 border-l-accent bg-[var(--bgAlt)]" style="animation-delay:0s;">
+				<div class="flex items-start gap-3">
+					<div class="shrink-0 w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+							<polyline points="22 4 12 14.01 9 11.01"/>
+						</svg>
+					</div>
+					<div class="min-w-0 flex-1">
+						<p class="text-sm text-[var(--textMuted)] m-0">
+							Kamu menyelesaikan tes dalam
+							<span class="font-semibold text-[var(--textMain)]">{ formatDurasi(data.DurationMinutes) }</span>
+						</p>
+						if data.DomainMessage != "" {
+							<p class="text-sm font-medium text-[var(--textMain)] mt-1 m-0">
+								{ data.DomainMessage }
+							</p>
+						}
+					</div>
+				</div>
+			</div>
+
 			<div class="text-center mb-10 fade-in-up">
 				<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--warm-200)] bg-[var(--warm-50)] text-xs font-medium text-[var(--warm-600)] mb-4 transition-all duration-300 hover:shadow-sm">
 					<span class="w-1.5 h-1.5 rounded-full bg-[var(--warning)]"></span>
@@ -88,4 +114,17 @@ templ paywallContent(data models.PaywallData) {
 		.catch(() => { alert('Koneksi error. Silakan coba lagi.'); btn.disabled = false; btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Saya Sudah Bayar'; });
 	}
 	</script>
+}
+
+// formatDurasi mengubah menit menjadi format "X menit Y detik"
+func formatDurasi(m int) string {
+	if m < 1 {
+		return "kurang dari 1 menit"
+	}
+	jam := m / 60
+	menit := m % 60
+	if jam > 0 {
+		return fmt.Sprintf("%d jam %d menit", jam, menit)
+	}
+	return fmt.Sprintf("%d menit", menit)
 }

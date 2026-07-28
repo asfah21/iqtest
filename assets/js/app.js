@@ -1,4 +1,4 @@
-// ShadowSelf — Polished App JavaScript
+// IQTest — Polished App JavaScript
 (function() {
     'use strict';
 

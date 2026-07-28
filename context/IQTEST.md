@@ -29,7 +29,7 @@
 
 | Attribute | Value |
 |-----------|-------|
-| **Product Name** | ShadowSelf |
+| **Product Name** | IQTest |
 | **Domain** | Cognitive Ability Assessment |
 | **Core Test** | 20-item visual multiple-choice cognitive ability test |
 | **Framework** | Go (Gin) + PostgreSQL + templ |

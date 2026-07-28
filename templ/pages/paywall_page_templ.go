@@ -9,6 +9,8 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
+	"fmt"
+
 	"ego/models"
 	"ego/templ/layouts"
 )
@@ -34,7 +36,7 @@ func PaywallPage(data models.PaywallData) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = layouts.PublicLayout("Bayar", paywallContent(data)).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.PaywallLayout("Bayar", paywallContent(data)).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -63,38 +65,87 @@ func paywallContent(data models.PaywallData) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"min-h-screen pt-24 pb-16 bg-gradient-paywall\"><div class=\"container\"><div style=\"max-width:640px;margin:0 auto;\"><div class=\"text-center mb-10 fade-in-up\"><div class=\"inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--warm-200)] bg-[var(--warm-50)] text-xs font-medium text-[var(--warm-600)] mb-4 transition-all duration-300 hover:shadow-sm\"><span class=\"w-1.5 h-1.5 rounded-full bg-[var(--warning)]\"></span> Akses Premium</div><h1 class=\"text-3xl md:text-4xl font-bold tracking-tight text-[var(--textMain)] m-0\">Selangkah Lagi, <span class=\"text-accent\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"min-h-screen pt-24 pb-16 bg-gradient-paywall\"><div class=\"container\"><div style=\"max-width:640px;margin:0 auto;\"><!-- Banner hasil tes --><div class=\"card p-5 mb-6 fade-in-up border-l-4 border-l-accent bg-[var(--bgAlt)]\" style=\"animation-delay:0s;\"><div class=\"flex items-start gap-3\"><div class=\"shrink-0 w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path> <polyline points=\"22 4 12 14.01 9 11.01\"></polyline></svg></div><div class=\"min-w-0 flex-1\"><p class=\"text-sm text-[var(--textMuted)] m-0\">Kamu menyelesaikan tes dalam <span class=\"font-semibold text-[var(--textMain)]\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(data.Nama)
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(formatDurasi(data.DurationMinutes))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/paywall_page.templ`, Line: 22, Col: 58}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/paywall_page.templ`, Line: 31, Col: 94}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</span></h1><p class=\"mt-3 text-[var(--textMuted)] m-0 max-w-md mx-auto\">Dapatkan skor lengkap, analisis per domain, dan gambaran kemampuan kognitifmu.</p></div><div class=\"card card-elevated p-6 mb-6 fade-in-up transition-all duration-300 hover:shadow-xl\" style=\"animation-delay:0.1s;\"><div class=\"flex items-center justify-between mb-4\"><h3 class=\"text-sm font-semibold text-[var(--textMain)] m-0\">Hasil Premium</h3><span class=\"badge badge-warning\">Terkunci</span></div><div class=\"space-y-4 opacity-50 blur-sm select-none\"><div><div class=\"flex justify-between text-sm mb-1\"><span class=\"text-[var(--textMuted)]\">Skor Total</span><span class=\"font-mono text-[var(--textSubtle)]\">•• / 30.5</span></div><div class=\"progress-bar\"><div class=\"progress-fill\" style=\"width:60%;background:#e7e5e4;\"></div></div></div><div><div class=\"flex justify-between text-sm mb-1\"><span class=\"text-[var(--textMuted)]\">Persentil</span><span class=\"font-mono text-[var(--textSubtle)]\">••%</span></div><div class=\"progress-bar\"><div class=\"progress-fill\" style=\"width:60%;background:#e7e5e4;\"></div></div></div></div></div><div class=\"card card-elevated p-8 text-center fade-in-up transition-all duration-300 hover:shadow-xl\" style=\"animation-delay:0.2s;\"><p class=\"text-sm font-medium text-[var(--textSubtle)] mb-2 m-0\">Harga Spesial</p><div class=\"flex items-baseline justify-center gap-1 mb-6\"><span class=\"text-4xl font-bold text-[var(--textMain)]\">Rp14.900</span> <span class=\"text-sm text-[var(--textSubtle)]\">/ sekali</span></div><div class=\"mb-6 p-6 rounded-2xl bg-[var(--bgAlt)] border border-[var(--bordLight)] transition-all duration-300 hover:shadow-sm\"><div class=\"w-48 h-48 mx-auto rounded-2xl bg-white flex items-center justify-center border border-[var(--bordLight)]\"><div class=\"text-center\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-[var(--textSubtle)]\"><path d=\"M3 7V5a2 2 0 0 1 2-2h2\"></path><path d=\"M17 3h2a2 2 0 0 1 2 2v2\"></path><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\"></path><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\"></path><rect x=\"7\" y=\"7\" width=\"10\" height=\"10\" rx=\"2\"></rect></svg><p class=\"text-xs text-[var(--textSubtle)] mt-2 m-0\">Scan QRIS</p></div></div><p class=\"text-xs text-[var(--textMuted)] mt-3 m-0\">Scan QR code di atas menggunakan aplikasi mobile banking atau e-wallet.</p></div><div class=\"space-y-3\"><input type=\"text\" id=\"namaPengirim\" placeholder=\"Nama pengirim transfer\" class=\"input-field transition-all duration-200\"> <button data-paywall-id=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</span></p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(data.ID)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/paywall_page.templ`, Line: 57, Col: 38}
+		if data.DomainMessage != "" {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<p class=\"text-sm font-medium text-[var(--textMain)] mt-1 m-0\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var4 string
+			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(data.DomainMessage)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/paywall_page.templ`, Line: 35, Col: 28}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</p>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div></div><div class=\"text-center mb-10 fade-in-up\"><div class=\"inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--warm-200)] bg-[var(--warm-50)] text-xs font-medium text-[var(--warm-600)] mb-4 transition-all duration-300 hover:shadow-sm\"><span class=\"w-1.5 h-1.5 rounded-full bg-[var(--warning)]\"></span> Akses Premium</div><h1 class=\"text-3xl md:text-4xl font-bold tracking-tight text-[var(--textMain)] m-0\">Selangkah Lagi, <span class=\"text-accent\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" onclick=\"konfirmasiBayar(this)\" class=\"btn-primary w-full shadow-glow transition-all duration-300\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path><polyline points=\"22 4 12 14.01 9 11.01\"></polyline></svg> Saya Sudah Bayar</button></div><p class=\"text-xs text-[var(--textSubtle)] mt-4 m-0 leading-relaxed\">Hasil akan langsung bisa diakses setelah pembayaran terverifikasi.</p></div><div class=\"text-center mt-6\"><a href=\"/\" class=\"btn-ghost text-sm transition-all duration-200\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"align-middle\"><line x1=\"19\" y1=\"12\" x2=\"5\" y2=\"12\"></line><polyline points=\"12 19 5 12 12 5\"></polyline></svg> Kembali ke Beranda</a></div></div></div></section><script>\r\n\tfunction konfirmasiBayar(btn) {\r\n\t\tconst nama = document.getElementById('namaPengirim').value.trim();\r\n\t\tif (!nama) { alert('Silakan masukkan nama pengirim transfer.'); return; }\r\n\t\tconst id = btn.getAttribute('data-paywall-id');\r\n\t\tbtn.disabled = true;\r\n\t\tbtn.innerHTML = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"animate-spin\" style=\"display:inline-block;vertical-align:middle;margin-right:4px;\"><path d=\"M21 12a9 9 0 1 1-6.219-8.56\"/></svg> Memverifikasi...';\r\n\t\tfetch('/konfirmasi-bayar/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nama_pengirim: nama }) })\r\n\t\t.then(r => r.json())\r\n\t\t.then(data => {\r\n\t\t\tif (data.success) { window.location.href = '/hasil/' + data.id; }\r\n\t\t\telse { alert('Gagal: ' + (data.error || 'Terjadi kesalahan')); btn.disabled = false; btn.innerHTML = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:middle;margin-right:4px;\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"/><polyline points=\"22 4 12 14.01 9 11.01\"/></svg>Saya Sudah Bayar'; }\r\n\t\t})\r\n\t\t.catch(() => { alert('Koneksi error. Silakan coba lagi.'); btn.disabled = false; btn.innerHTML = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:middle;margin-right:4px;\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"/><polyline points=\"22 4 12 14.01 9 11.01\"/></svg>Saya Sudah Bayar'; });\r\n\t}\r\n\t</script>")
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(data.Nama)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/paywall_page.templ`, Line: 48, Col: 58}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</span></h1><p class=\"mt-3 text-[var(--textMuted)] m-0 max-w-md mx-auto\">Dapatkan skor lengkap, analisis per domain, dan gambaran kemampuan kognitifmu.</p></div><div class=\"card card-elevated p-6 mb-6 fade-in-up transition-all duration-300 hover:shadow-xl\" style=\"animation-delay:0.1s;\"><div class=\"flex items-center justify-between mb-4\"><h3 class=\"text-sm font-semibold text-[var(--textMain)] m-0\">Hasil Premium</h3><span class=\"badge badge-warning\">Terkunci</span></div><div class=\"space-y-4 opacity-50 blur-sm select-none\"><div><div class=\"flex justify-between text-sm mb-1\"><span class=\"text-[var(--textMuted)]\">Skor Total</span><span class=\"font-mono text-[var(--textSubtle)]\">•• / 30.5</span></div><div class=\"progress-bar\"><div class=\"progress-fill\" style=\"width:60%;background:#e7e5e4;\"></div></div></div><div><div class=\"flex justify-between text-sm mb-1\"><span class=\"text-[var(--textMuted)]\">Persentil</span><span class=\"font-mono text-[var(--textSubtle)]\">••%</span></div><div class=\"progress-bar\"><div class=\"progress-fill\" style=\"width:60%;background:#e7e5e4;\"></div></div></div></div></div><div class=\"card card-elevated p-8 text-center fade-in-up transition-all duration-300 hover:shadow-xl\" style=\"animation-delay:0.2s;\"><p class=\"text-sm font-medium text-[var(--textSubtle)] mb-2 m-0\">Harga Spesial</p><div class=\"flex items-baseline justify-center gap-1 mb-6\"><span class=\"text-4xl font-bold text-[var(--textMain)]\">Rp14.900</span> <span class=\"text-sm text-[var(--textSubtle)]\">/ sekali</span></div><div class=\"mb-6 p-6 rounded-2xl bg-[var(--bgAlt)] border border-[var(--bordLight)] transition-all duration-300 hover:shadow-sm\"><div class=\"w-48 h-48 mx-auto rounded-2xl bg-white flex items-center justify-center border border-[var(--bordLight)]\"><div class=\"text-center\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"48\" height=\"48\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"text-[var(--textSubtle)]\"><path d=\"M3 7V5a2 2 0 0 1 2-2h2\"></path><path d=\"M17 3h2a2 2 0 0 1 2 2v2\"></path><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\"></path><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\"></path><rect x=\"7\" y=\"7\" width=\"10\" height=\"10\" rx=\"2\"></rect></svg><p class=\"text-xs text-[var(--textSubtle)] mt-2 m-0\">Scan QRIS</p></div></div><p class=\"text-xs text-[var(--textMuted)] mt-3 m-0\">Scan QR code di atas menggunakan aplikasi mobile banking atau e-wallet.</p></div><div class=\"space-y-3\"><input type=\"text\" id=\"namaPengirim\" placeholder=\"Nama pengirim transfer\" class=\"input-field transition-all duration-200\"> <button data-paywall-id=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(data.ID)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ/pages/paywall_page.templ`, Line: 83, Col: 38}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "\" onclick=\"konfirmasiBayar(this)\" class=\"btn-primary w-full shadow-glow transition-all duration-300\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path><polyline points=\"22 4 12 14.01 9 11.01\"></polyline></svg> Saya Sudah Bayar</button></div><p class=\"text-xs text-[var(--textSubtle)] mt-4 m-0 leading-relaxed\">Hasil akan langsung bisa diakses setelah pembayaran terverifikasi.</p></div><div class=\"text-center mt-6\"><a href=\"/\" class=\"btn-ghost text-sm transition-all duration-200\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"align-middle\"><line x1=\"19\" y1=\"12\" x2=\"5\" y2=\"12\"></line><polyline points=\"12 19 5 12 12 5\"></polyline></svg> Kembali ke Beranda</a></div></div></div></section><script>\r\n\tfunction konfirmasiBayar(btn) {\r\n\t\tconst nama = document.getElementById('namaPengirim').value.trim();\r\n\t\tif (!nama) { alert('Silakan masukkan nama pengirim transfer.'); return; }\r\n\t\tconst id = btn.getAttribute('data-paywall-id');\r\n\t\tbtn.disabled = true;\r\n\t\tbtn.innerHTML = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"animate-spin\" style=\"display:inline-block;vertical-align:middle;margin-right:4px;\"><path d=\"M21 12a9 9 0 1 1-6.219-8.56\"/></svg> Memverifikasi...';\r\n\t\tfetch('/konfirmasi-bayar/' + id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nama_pengirim: nama }) })\r\n\t\t.then(r => r.json())\r\n\t\t.then(data => {\r\n\t\t\tif (data.success) { window.location.href = '/hasil/' + data.id; }\r\n\t\t\telse { alert('Gagal: ' + (data.error || 'Terjadi kesalahan')); btn.disabled = false; btn.innerHTML = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:middle;margin-right:4px;\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"/><polyline points=\"22 4 12 14.01 9 11.01\"/></svg>Saya Sudah Bayar'; }\r\n\t\t})\r\n\t\t.catch(() => { alert('Koneksi error. Silakan coba lagi.'); btn.disabled = false; btn.innerHTML = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:middle;margin-right:4px;\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"/><polyline points=\"22 4 12 14.01 9 11.01\"/></svg>Saya Sudah Bayar'; });\r\n\t}\r\n\t</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		return nil
 	})
+}
+
+// formatDurasi mengubah menit menjadi format "X menit Y detik"
+func formatDurasi(m int) string {
+	if m < 1 {
+		return "kurang dari 1 menit"
+	}
+	jam := m / 60
+	menit := m % 60
+	if jam > 0 {
+		return fmt.Sprintf("%d jam %d menit", jam, menit)
+	}
+	return fmt.Sprintf("%d menit", menit)
 }
 
 var _ = templruntime.GeneratedTemplate

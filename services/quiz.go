@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"math"
 	"os"
 
@@ -289,7 +290,53 @@ func GetPaywallData(sessionID string) (*models.PaywallData, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &models.PaywallData{ID: sessionID, Nama: user.Nama}, nil
+
+	// Hitung durasi pengerjaan
+	durasiMenit := 0
+	if session.CompletedAt != nil {
+		durasi := session.CompletedAt.Sub(session.StartedAt)
+		durasiMenit = int(durasi.Minutes())
+	}
+
+	// Cari domain terkuat dari hasil IQ (jika sudah tersimpan)
+	domainMsg := ""
+	result, err := repositories.GetIQResultBySession(sessionID)
+	if err == nil && result != nil {
+		bestCode := ""
+		bestPct := -1.0
+		for code, ds := range result.DomainScores {
+			if ds.Percentage > bestPct {
+				bestPct = ds.Percentage
+				bestCode = code
+			}
+		}
+		if bestCode != "" {
+			domainName := map[string]string{
+				"MTX": "Penalaran Matriks",
+				"SEQ": "Deret Logis",
+				"SPA": "Rotasi Spasial",
+				"ANL": "Analogi Visual",
+			}[bestCode]
+
+			label := "cukup baik"
+			switch {
+			case bestPct >= 80:
+				label = "sangat kompeten"
+			case bestPct >= 60:
+				label = "kompeten"
+			case bestPct >= 40:
+				label = "cukup kompeten"
+			}
+			domainMsg = fmt.Sprintf("Kemampuan terkuatmu ada di area %s, dengan kategori %s.", domainName, label)
+		}
+	}
+
+	return &models.PaywallData{
+		ID:              sessionID,
+		Nama:            user.Nama,
+		DurationMinutes: durasiMenit,
+		DomainMessage:   domainMsg,
+	}, nil
 }
 
 // ──────────────────────────────────────────────────────────────
