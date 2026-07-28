@@ -1,0 +1,129 @@
+/* ============================================================
+   Mobile Slide Panel — modular component stylesheet
+   Extracted from style.css §navbar + new close button header
+   Pure CSS — no Tailwind
+   ============================================================ */
+
+/* --- Overlay --- */
+.navbar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 49;
+}
+
+/* --- Slide Panel --- */
+.navbar-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  max-width: 320px;
+  height: 100vh;
+  height: 100dvh;
+  background: #FFFFFF;
+  z-index: 50;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  padding: 88px 24px 24px;
+  overflow-y: auto;
+  border-left: 1px solid #f1f5f9;
+}
+
+.navbar-panel.open {
+  transform: translateX(0);
+}
+
+/* --- Panel Header (close button row) --- */
+.navbar-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.navbar-panel-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Close (X) button — always visible at top-right inside panel */
+.navbar-panel-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #1A1A2E;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.navbar-panel-close:hover {
+  background: #f1f5f9;
+}
+
+.navbar-panel-close:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* --- Panel Navigation Links --- */
+.navbar-panel-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navbar-panel-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #475569;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.navbar-panel-link:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.navbar-panel-link:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.navbar-panel-cta {
+  background: #eef2ff;
+  color: #6366f1;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.navbar-panel-divider {
+  border: none;
+  border-top: 1px solid #f1f5f9;
+  margin: 12px 0;
+}
+
+/* --- Desktop: hide mobile-only elements --- */
+@media (min-width: 768px) {
+  .navbar-panel,
+  .navbar-overlay {
+    display: none;
+  }
+}
