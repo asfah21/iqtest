@@ -7,6 +7,7 @@
     let lastScrollY = 0;
 
     function handleNavbarScroll() {
+        if (!navbar) return;
         const scrollY = window.scrollY;
         if (scrollY > 20) {
             navbar.classList.add('scrolled');
