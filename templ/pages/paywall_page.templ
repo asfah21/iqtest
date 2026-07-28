@@ -84,7 +84,7 @@ templ paywallContent(data models.PaywallData) {
 			<div class="paywall-card text-center fade-in-up paywall-delay-2">
 
 				<!-- ZONE 1: Price -->
-				<div class="px-8 pt-8 pb-6 border-b border-light">
+				<div class="paywall-card-zone-top border-b border-light">
 					<div class="flex items-center justify-center mb-3">
 						<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-accent-tint text-accent">
 							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -95,13 +95,13 @@ templ paywallContent(data models.PaywallData) {
 						<span class="text-main font-bold tracking-tight leading-none" style="font-size:clamp(2.5rem,6vw,3.75rem);">Rp14.900</span>
 						<span class="text-sm text-subtle font-medium">/ sekali</span>
 					</div>
-					<p class="text-sm text-muted mt-3 m-0 max-w-[36ch] mx-auto leading-snug">
+					<p class="text-sm text-muted mt-3 m-0 mx-auto leading-snug" style="max-width:36ch;">
 						Akses penuh hasil tes — skor lengkap, analisis per domain, dan gambaran kemampuan kognitif.
 					</p>
 				</div>
 
 				<!-- ZONE 2: Payment action -->
-				<div class="px-8 pb-8 pt-6">
+				<div class="paywall-card-zone-bottom">
 					<!-- QRIS container -->
 					<div class="qris-container mb-6">
 						<div class="qris-placeholder">

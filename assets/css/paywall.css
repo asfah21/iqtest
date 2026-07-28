@@ -4,12 +4,18 @@
    Tokens from style.css: --accent, --ink, --surface, etc.
    ============================================================ */
 
-/* --- Utility replacements for Tailwind arbitrary classes --- */
+/* --- Utility replacements for missing Tailwind-style classes --- */
 .text-main { color: var(--ink); }
 .border-light { border-color: var(--bordLight); }
 .border-t-light { border-top: 1px solid var(--bordLight); }
 .bg-section { background: var(--bgSection); }
+.m-0 { margin: 0; }
 .mb-1 { margin-bottom: 4px; }
+.mt-0\.5 { margin-top: 2px; }
+.w-8 { width: 32px; }
+.h-8 { height: 32px; }
+.leading-none { line-height: 1; }
+.items-baseline { align-items: baseline; }
 
 /* Accent light with opacity using color-mix */
 .bg-accent-light-40 {
@@ -34,6 +40,15 @@
 .paywall-card:hover {
   box-shadow: var(--shadow2);
   transform: translateY(-3px);
+}
+
+/* Payment card zone padding (replaces missing Tailwind px-8/pt-8/pb-6 etc.) */
+.paywall-card-zone-top {
+  padding: 32px 32px 24px;
+}
+
+.paywall-card-zone-bottom {
+  padding: 24px 32px 32px;
 }
 
 /* --- QRIS Container --- */
