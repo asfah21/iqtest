@@ -143,7 +143,6 @@
   .footer-grid {
     grid-template-columns: 1fr;
     gap: var(--space-xl);
-    margin-top: 20px;
   }
 
   .footer-inner {
