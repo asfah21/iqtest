@@ -4,6 +4,14 @@
 
 /* --- Wrapper & Layout --- */
 .hero-wrapper {
+	/* Scoped hero color tokens — anchored to main design system */
+	--hero-accent: var(--accent);
+	--hero-accent-hover: var(--accentHover);
+	--hero-accent-purple: #6C5CE7;
+	--hero-accent-yellow: #F5A623;
+	--hero-text-dark: var(--ink);
+	--hero-text-secondary: var(--inkMuted);
+
 	background: #FFFFFF;
 	padding: 80px 0;
 	overflow: hidden;
@@ -51,15 +59,15 @@
 	font-weight: 800;
 	line-height: 1.05;
 	letter-spacing: -1px;
-	color: #111827;
+	color: var(--hero-text-dark);
 	margin: 0 0 20px;
 	position: relative;
 }
 .hero-title .highlight {
-	color: #4A5CF5;
+	color: var(--hero-accent);
 }
 .hero-title .quote {
-	color: #111827;
+	color: var(--hero-text-dark);
 }
 .hero-title .sparkle-decor {
 	position: absolute;
@@ -70,7 +78,7 @@
 /* --- Subheadline --- */
 .hero-desc {
 	font-size: 19px;
-	color: #4B5563;
+	color: var(--hero-text-secondary);
 	font-weight: 400;
 	line-height: 1.5;
 	margin: 0 0 32px;
@@ -82,7 +90,7 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 12px;
-	background: linear-gradient(135deg, #5B6EF5, #6C5CE7);
+	background: linear-gradient(135deg, var(--hero-accent), var(--hero-accent-purple));
 	color: #FFFFFF;
 	font-weight: 700;
 	font-size: 18px;
@@ -90,13 +98,13 @@
 	padding: 18px 28px;
 	border-radius: 999px;
 	border: none;
-	box-shadow: 0 12px 24px rgba(91,110,245,0.35);
+	box-shadow: 0 12px 24px color-mix(in srgb, var(--hero-accent) 35%, transparent);
 	cursor: pointer;
 	text-decoration: none;
 	transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 .cta-btn-hero:hover {
-	box-shadow: 0 16px 32px rgba(91,110,245,0.45);
+	box-shadow: 0 16px 32px color-mix(in srgb, var(--hero-accent) 45%, transparent);
 	transform: translateY(-1px);
 }
 

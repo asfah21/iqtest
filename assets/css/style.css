@@ -279,7 +279,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 6px;
   padding: 8px 20px;
-  border-radius: 10px;
+  border-radius: var(--radiusBtn);
   font-size: 14px;
   font-weight: 600;
   background: #6366f1;
@@ -450,43 +450,45 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--text-base);
   color: var(--inkMuted);
   line-height: var(--leading-normal);
+  text-wrap: balance;
 }
 
 /* ============================================================
-   TRUST BAR (LAYOUT.md §6.3)
+   TRUST SIGNAL
    ============================================================ */
-.trust-bar {
+.trust-signal {
+  text-align: center;
+  max-width: var(--measure-body);
+  margin: 0 auto;
+  padding: var(--space-xl) 0;
+}
+.trust-quote {
+  font-size: var(--text-lg);
+  color: var(--inkMuted);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-lg);
+  font-style: italic;
+}
+.trust-pills {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: var(--space-sm);
+}
+.trust-pill {
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-xl);
-  padding: var(--space-2xl) 0;
-}
-
-.trust-item {
-  text-align: center;
-}
-
-.trust-item .trust-number {
-  font-size: var(--text-3xl);
-  font-weight: 800;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--accentLight);
   color: var(--ink);
-  line-height: 1;
-  margin-bottom: var(--space-2xs);
-}
-
-.trust-item .trust-label {
+  border-radius: 999px;
   font-size: var(--text-sm);
-  color: var(--inkMuted);
+  font-weight: 500;
 }
-
-@media (max-width: 767px) {
-  .trust-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-  }
+.trust-pill .check-icon {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 /* ============================================================
@@ -664,16 +666,19 @@ a { color: inherit; text-decoration: none; }
 
 .feature-card {
   background: var(--surface);
-  border: 1px solid var(--bordLight);
   border-radius: var(--radiusCard);
   padding: var(--space-xl);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
   box-shadow: var(--shadow1);
 }
 
+.feature-card--primary {
+  border: none;
+}
+
 .feature-card:hover {
-  border-color: var(--bord);
   box-shadow: var(--shadow2);
+  transform: translateY(-2px);
 }
 
 .feature-icon {
@@ -707,6 +712,30 @@ a { color: inherit; text-decoration: none; }
   line-height: var(--leading-relaxed);
 }
 
+/* Feature strip — secondary features, not cards */
+.feature-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--surface);
+  border: 1px solid var(--bordLight);
+  border-radius: var(--radiusCard);
+  margin-top: var(--space-lg);
+}
+.feature-strip-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--inkMuted);
+  flex: 1 1 240px;
+}
+.feature-strip-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
 /* ============================================================
    HOW IT WORKS (Cara Kerja)
    ============================================================ */
@@ -718,14 +747,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .steps-container::before {
-  content: '';
-  position: absolute;
-  top: 48px;
-  left: calc(16.67% + var(--space-xl));
-  right: calc(16.67% + var(--space-xl));
-  height: 1px;
-  background: var(--bordLight);
-  z-index: 0;
+  display: none;
 }
 
 .step-card {
@@ -734,14 +756,19 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
 }
 
-.step-number {
-  font-size: clamp(3rem, 5vw, 4rem);
-  font-weight: 800;
-  color: var(--bordLight);
+.step-marker {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  margin: 0 auto var(--space-sm);
   line-height: 1;
-  margin-bottom: var(--space-sm);
-  font-family: 'Inter', sans-serif;
-  letter-spacing: -0.04em;
 }
 
 .step-card h3 {
@@ -1123,15 +1150,16 @@ p, li, .text-body { text-wrap: pretty; }
   .features-grid {
     grid-template-columns: 1fr;
   }
+  .feature-strip {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
 
   .steps-container {
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
   }
 
-  .steps-container::before {
-    display: none;
-  }
 
 }
 
