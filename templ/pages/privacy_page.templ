@@ -1,0 +1,325 @@
+package pages
+
+import (
+	"ego/templ/layouts"
+)
+
+templ PrivacyPage() {
+	@layouts.PublicLayout("Kebijakan Privasi", privacyContent())
+}
+
+templ privacyContent() {
+	<section class="min-h-screen bg-white pt-24 pb-16">
+		<div class="container">
+			<div style="max-width:768px;margin:0 auto;">
+			<div class="text-center mb-12 fade-in-up">
+				<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--accent-200)] bg-[var(--accent-50)] text-xs font-medium text-[var(--accent-600)] mb-4 transition-all duration-300 hover:shadow-sm">
+					<span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-500)]"></span>
+					Legal
+				</div>
+				<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--textMain)] m-0">
+					Kebijakan <span class="text-accent">Privasi</span>
+				</h1>
+				<p class="mt-3 text-[var(--textMuted)] m-0 max-w-md mx-auto">
+					Terakhir diperbarui: 1 Januari 2026
+				</p>
+			</div>
+
+			<div class="space-y-4">
+				<div class="card card-hover p-8 fade-in-up">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">1. Pendahuluan</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Selamat datang di IQ Test. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, mentransfer, dan menyimpan informasi Anda ketika Anda mengunjungi situs web kami, menggunakan layanan tes IQ online kami, atau berinteraksi dengan kami melalui cara apa pun. Kami berkomitmen untuk melindungi privasi Anda dan memastikan bahwa informasi pribadi Anda ditangani dengan cara yang aman dan bertanggung jawab. Dengan mengakses atau menggunakan Platform kami, Anda menyetujui pengumpulan, penggunaan, pengungkapan, dan penyimpanan informasi Anda sebagaimana dijelaskan dalam Kebijakan Privasi ini. Jika Anda tidak setuju dengan kebijakan ini, mohon untuk tidak menggunakan layanan kami. Kebijakan ini merupakan bagian integral dari Syarat dan Ketentuan IQ Test dan harus dibaca bersama-sama dengan dokumen tersebut.
+							</p>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kebijakan Privasi ini berlaku untuk semua pengguna Platform, termasuk namun tidak terbatas pada pengunjung situs web, pengguna terdaftar, dan individu yang menyelesaikan tes IQ. Kami dapat mengubah Kebijakan Privasi ini dari waktu ke waktu sesuai dengan kebutuhan operasional dan perubahan peraturan perundang-undangan yang berlaku. Setiap perubahan akan diumumkan melalui Situs atau melalui email kepada pengguna terdaftar. Kami mendorong Anda untuk meninjau Kebijakan Privasi ini secara berkala agar tetap mendapat informasi tentang bagaimana kami melindungi informasi Anda. Penggunaan berkelanjutan atas layanan kami setelah perubahan apa pun merupakan penerimaan Anda atas kebijakan yang diperbarui.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.08s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">2. Informasi yang Kami Kumpulkan</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Dalam rangka menyediakan layanan tes IQ dan hasil analisis kognitif yang akurat, kami mengumpulkan beberapa kategori informasi dari dan tentang pengguna Platform kami. Pengumpulan informasi ini dilakukan secara transparan dan semata-mata untuk tujuan yang dijelaskan dalam kebijakan ini. Berikut adalah rincian lengkap dari setiap kategori informasi yang kami kumpulkan:
+							</p>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">2.1 Informasi Pribadi (Personal Data)</p>
+							<ul class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li><strong>Nama Lengkap:</strong> Dikumpulkan pada tahap identitas setelah menyelesaikan tes, digunakan untuk personalisasi laporan hasil dan sertifikat. Anda dapat menggunakan nama panggilan atau inisial jika merasa lebih nyaman, namun perlu diingat bahwa nama ini akan muncul pada sertifikat hasil tes Anda.</li>
+								<li><strong>Alamat Email:</strong> Diperlukan untuk mengirimkan tautan unik ke halaman hasil tes Anda, konfirmasi pembayaran, dan komunikasi penting terkait layanan. Alamat email Anda juga digunakan sebagai pengenal unik untuk menghubungkan sesi tes Anda dengan hasilnya.</li>
+								<li><strong>Informasi Pembayaran:</strong> Ketika Anda melakukan pembayaran untuk mengakses hasil premium, informasi transaksi Anda diproses sepenuhnya oleh Midtrans, payment gateway pihak ketiga bersertifikasi PCI DSS Level 1. Kami tidak pernah menerima, menyimpan, atau memiliki akses ke data kartu kredit, nomor rekening bank, atau kredensial e-wallet Anda. Kami hanya menerima token transaksi dan status pembayaran (berhasil/gagal) dari Midtrans.</li>
+							</ul>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">2.2 Data Tes (Assessment Data)</p>
+							<ul class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li><strong>Jawaban Soal:</strong> Setiap pilihan jawaban (A, B, C, atau D) yang Anda pilih untuk masing-masing dari 20 soal tes direkam beserta timestamp-nya. Data ini digunakan untuk menghitung skor mentah dan menganalisis pola jawaban Anda.</li>
+								<li><strong>Waktu Pengerjaan per Soal:</strong> Durasi yang Anda habiskan pada setiap soal dicatat dalam milidetik. Metrik ini digunakan sebagai komponen analisis gaya kognitif dan untuk mendeteksi anomali (misalnya menjawab terlalu cepat atau terlalu lambat).</li>
+								<li><strong>Skor Mentah dan Skor Tertimbang:</strong> Hasil perhitungan berdasarkan jawaban benar dengan bobot kesulitan soal (rentang 1.0 hingga 2.5 per soal). Skor ini menjadi dasar untuk menentukan persentil dan klasifikasi kemampuan kognitif Anda.</li>
+								<li><strong>Data Sesi Tes:</strong> Informasi tentang sesi tes Anda termasuk waktu mulai, waktu selesai, total durasi, jumlah soal yang dijawab, jumlah soal yang dilewati, dan apakah sesi diselesaikan hingga akhir atau diakhiri lebih awal.</li>
+							</ul>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">2.3 Data Teknis (Technical Data)</p>
+							<ul class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li><strong>Alamat IP (Internet Protocol):</strong> Dicatat untuk tujuan keamanan, pencegahan kecurangan (misalnya mendeteksi beberapa sesi dari IP yang sama dalam waktu singkat), dan analitik penggunaan Platform. Alamat IP disimpan dalam bentuk terenkripsi dan tidak digunakan untuk mengidentifikasi Anda secara pribadi di luar konteks keamanan.</li>
+								<li><strong>Informasi Browser dan Perangkat:</strong> Jenis browser (Chrome, Firefox, Safari, dll.), versi browser, sistem operasi (Windows, macOS, Android, iOS), resolusi layar, dan tipe perangkat (desktop, tablet, mobile). Data ini membantu kami mengoptimalkan tampilan Platform untuk berbagai perangkat dan mendiagnosis masalah kompatibilitas.</li>
+								<li><strong>Data Log Server:</strong> Log akses standar yang mencakup halaman yang dikunjungi, waktu kunjungan, durasi kunjungan, halaman rujukan (referrer), dan kode status HTTP. Data ini digunakan untuk pemantauan kinerja, analitik trafik, dan investigasi insiden keamanan.</li>
+								<li><strong>Cookies dan Teknologi Serupa:</strong> Kami menggunakan cookie esensial untuk mempertahankan sesi tes Anda dan mencegah kehilangan data jika koneksi terputus. Kami tidak menggunakan cookie pelacakan pihak ketiga untuk iklan atau profiling. Cookie sesi akan otomatis kedaluwarsa setelah Anda menutup browser.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.16s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--success-light)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--success)]"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">3. Bagaimana Kami Menggunakan Informasi Anda</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kami menggunakan informasi yang kami kumpulkan untuk berbagai tujuan operasional, analitis, dan peningkatan layanan. Setiap penggunaan informasi didasarkan pada dasar hukum yang sah sesuai dengan peraturan perlindungan data yang berlaku. Berikut adalah penjelasan rinci tentang setiap tujuan penggunaan:
+							</p>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">3.1 Penyediaan Layanan Utama</p>
+							<ul class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li>Menghitung dan menghasilkan skor IQ serta laporan analisis kognitif berdasarkan jawaban dan waktu pengerjaan Anda menggunakan algoritma penilaian berbasis Classical Test Theory (CTT).</li>
+								<li>Mengirimkan tautan unik ke halaman hasil premium melalui email setelah pembayaran Anda dikonfirmasi, sehingga Anda dapat mengakses hasil kapan saja.</li>
+								<li>Memproses dan memverifikasi pembayaran Anda melalui integrasi dengan Midtrans, termasuk mengonfirmasi status pembayaran dan memberikan akses ke konten premium yang sesuai.</li>
+								<li>Menyediakan dukungan pelanggan, termasuk menjawab pertanyaan, menangani keluhan, dan membantu masalah teknis yang mungkin Anda alami selama menggunakan Platform.</li>
+							</ul>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">3.2 Peningkatan dan Pengembangan Produk</p>
+							<ul class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li>Menganalisis data jawaban secara agregat dan anonim untuk mengkalibrasi tingkat kesulitan soal, mengidentifikasi soal yang perlu direvisi, dan mengembangkan soal-soal baru yang lebih baik.</li>
+								<li>Menggunakan data waktu pengerjaan dan pola jawaban untuk menyempurnakan algoritma penilaian, termasuk penyesuaian bobot soal dan parameter estimasi kemampuan.</li>
+								<li>Menganalisis data penggunaan Platform (halaman yang diakses, fitur yang digunakan, titik keluar) untuk mengidentifikasi area yang perlu ditingkatkan dalam antarmuka pengguna dan alur pengalaman pengguna.</li>
+								<li>Melakukan penelitian statistik tentang distribusi skor IQ di berbagai demografi untuk meningkatkan akurasi dan relevansi norma persentil yang kami gunakan.</li>
+							</ul>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">3.3 Komunikasi dan Pemasaran</p>
+							<ul class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li>Mengirimkan email transaksional yang berkaitan dengan aktivitas Anda di Platform, seperti konfirmasi penyelesaian tes, tautan ke halaman pembayaran, dan notifikasi akses hasil.</li>
+								<li>Mengirimkan pembaruan dan pengumuman penting tentang perubahan layanan, pemeliharaan sistem, atau modifikasi kebijakan yang memengaruhi penggunaan Anda.</li>
+								<li>Dengan persetujuan eksplisit Anda, mengirimkan newsletter, tips pengembangan kognitif, dan informasi tentang fitur atau penawaran baru. Anda dapat berhenti berlangganan kapan saja melalui tautan unsubscribe di email.</li>
+							</ul>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">3.4 Keamanan dan Kepatuhan</p>
+							<ul class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li>Mendeteksi, mencegah, dan menyelidiki aktivitas mencurigakan atau penipuan, termasuk upaya manipulasi skor, pembuatan akun palsu secara massal, atau serangan terhadap infrastruktur kami.</li>
+								<li>Menganalisis pola akses dan log server untuk mengidentifikasi dan merespons insiden keamanan secara tepat waktu.</li>
+								<li>Mematuhi kewajiban hukum dan peraturan yang berlaku, termasuk merespons permintaan sah dari otoritas penegak hukum atau badan pengatur.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.24s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--warm-100)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--warm-500)]"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">4. Dasar Hukum Pemrosesan Data</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Sesuai dengan peraturan perlindungan data yang berlaku, termasuk Undang-Undang Nomor 27 Tahun 2022 tentang Perlindungan Data Pribadi di Indonesia dan General Data Protection Regulation (GDPR) Uni Eropa untuk pengguna yang berada di wilayah EEA, kami memproses informasi pribadi Anda berdasarkan satu atau lebih dasar hukum berikut:
+							</p>
+							<ul class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li><strong>Pelaksanaan Perjanjian (Contractual Necessity):</strong> Pemrosesan data yang diperlukan untuk menyediakan layanan yang Anda minta, termasuk menghasilkan hasil tes IQ dan memproses pembayaran Anda. Tanpa data ini, kami tidak dapat memenuhi kewajiban kontraktual kami kepada Anda.</li>
+								<li><strong>Kepentingan yang Sah (Legitimate Interest):</strong> Pemrosesan untuk tujuan peningkatan produk, analitik, keamanan, dan pencegahan penipuan. Kepentingan ini telah kami timbang terhadap hak dan kebebasan Anda dan kami pastikan tidak mengesampingkan kepentingan privasi Anda.</li>
+								<li><strong>Persetujuan (Consent):</strong> Untuk pengiriman komunikasi pemasaran dan newsletter, kami memerlukan persetujuan eksplisit Anda yang dapat ditarik kembali sewaktu-waktu tanpa memengaruhi keabsahan pemrosesan berdasarkan persetujuan sebelum penarikan.</li>
+								<li><strong>Kewajiban Hukum (Legal Obligation):</strong> Pemrosesan yang diperlukan untuk mematuhi peraturan perundang-undangan yang berlaku, termasuk kewajiban penyimpanan catatan transaksi sesuai peraturan perpajakan Indonesia.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.32s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">5. Penyimpanan dan Retensi Data</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kami menyimpan informasi Anda selama diperlukan untuk memenuhi tujuan yang dijelaskan dalam Kebijakan Privasi ini, kecuali jika periode penyimpanan yang lebih lama diwajibkan atau diizinkan oleh hukum. Kriteria yang kami gunakan untuk menentukan periode retensi meliputi:
+							</p>
+							<ul class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li><strong>Data Tes dan Hasil:</strong> Disimpan secara permanen selama akun Anda aktif atau hingga Anda meminta penghapusan. Hasil tes Anda tetap dapat diakses melalui tautan unik yang dikirim ke email Anda tanpa batas waktu.</li>
+								<li><strong>Data Pribadi (Nama dan Email):</strong> Disimpan selama hasil tes Anda masih tersimpan, atau hingga Anda meminta penghapusan data.</li>
+								<li><strong>Data Teknis dan Log Server:</strong> Disimpan selama maksimal 12 bulan untuk keperluan keamanan dan analitik, setelah itu dihapus atau dianonimkan secara otomatis.</li>
+								<li><strong>Data Transaksi:</strong> Disimpan minimal 5 tahun sesuai dengan ketentuan perpajakan dan peraturan keuangan yang berlaku di Indonesia.</li>
+								<li><strong>Cookie Sesi:</strong> Dihapus secara otomatis saat Anda menutup browser atau setelah periode tidak aktif selama 30 menit.</li>
+							</ul>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Data yang telah dianonimkan atau diagregasi (tidak dapat lagi dikaitkan dengan individu tertentu) dapat disimpan untuk tujuan analitis dan penelitian tanpa batas waktu.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.40s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--brand-100)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--brand-500)]"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">6. Berbagi Data dengan Pihak Ketiga</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kami sangat serius menjaga kerahasiaan data Anda. Kami tidak menjual, menyewakan, memperdagangkan, atau membagikan informasi pribadi Anda kepada pihak ketiga untuk tujuan pemasaran atau komersial apa pun. Pengungkapan data kepada pihak ketiga hanya terjadi dalam situasi terbatas berikut:
+							</p>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">6.1 Penyedia Layanan (Service Providers)</p>
+							<p class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kami menggunakan penyedia layanan pihak ketiga yang membantu kami dalam mengoperasikan Platform. Semua penyedia layanan terikat kontrak untuk memproses data hanya sesuai instruksi kami dan dengan tingkat perlindungan yang setara dengan kebijakan ini:
+							</p>
+							<ul class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li><strong>Midtrans (PT Midtrans):</strong> Payment gateway untuk memproses pembayaran Anda. Midtrans menerima informasi pembayaran Anda secara langsung dan memprosesnya sesuai dengan standar keamanan PCI DSS Level 1. Kebijakan privasi Midtrans berlaku untuk data yang diproses oleh mereka dan dapat ditemukan di situs resmi Midtrans.</li>
+								<li><strong>Penyedia Infrastruktur Cloud:</strong> Server dan database kami dihosting pada infrastruktur cloud yang aman dengan sertifikasi keamanan internasional (ISO 27001, SOC 2). Penyedia hosting tidak memiliki akses ke data aplikasi kami kecuali untuk pemeliharaan infrastruktur yang diperlukan.</li>
+								<li><strong>Layanan Email:</strong> Kami menggunakan penyedia layanan email untuk mengirim komunikasi transaksional dan pemasaran (dengan persetujuan Anda). Data Anda (nama dan email) dibagikan seperlunya untuk mengirimkan email tersebut.</li>
+							</ul>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">6.2 Kewajiban Hukum</p>
+							<p class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kami dapat mengungkapkan informasi Anda jika diwajibkan oleh hukum, peraturan, proses hukum, atau permintaan pemerintah yang sah, seperti surat perintah pengadilan, panggilan pengadilan, atau permintaan dari otoritas penegak hukum yang berwenang. Kami akan berusaha memberi tahu Anda tentang pengungkapan tersebut jika diizinkan oleh hukum.
+							</p>
+							<p class="mt-3 text-sm font-semibold text-[var(--textMain)] m-0">6.3 Transfer Bisnis</p>
+							<p class="mt-1 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Dalam hal merger, akuisisi, reorganisasi, atau penjualan aset, informasi Anda dapat ditransfer sebagai bagian dari transaksi tersebut. Kami akan memberi tahu Anda melalui email atau pengumuman di Situs sebelum informasi Anda ditransfer dan tunduk pada kebijakan privasi yang berbeda.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.48s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--success-light)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--success)]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">7. Keamanan Data</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Keamanan informasi Anda adalah prioritas utama kami. Kami menerapkan langkah-langkah keamanan teknis, administratif, dan fisik yang dirancang untuk melindungi informasi Anda dari akses tidak sah, pengungkapan, perubahan, atau perusakan. Langkah-langkah ini mencakup namun tidak terbatas pada:
+							</p>
+							<ul class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li><strong>Enkripsi Data:</strong> Semua komunikasi antara browser Anda dan server kami dilindungi dengan enkripsi TLS (Transport Layer Security) 1.3 menggunakan sertifikat SSL 256-bit. Data sensitif dalam database dienkripsi saat disimpan (encryption at rest) menggunakan AES-256.</li>
+								<li><strong>Kontrol Akses:</strong> Akses ke data pribadi dibatasi secara ketat hanya untuk personel yang memerlukannya untuk menjalankan fungsi pekerjaan mereka. Semua akses dicatat dan diaudit secara berkala. Kami menerapkan prinsip hak akses minimal (least privilege) dan otentikasi multi-faktor untuk akses administratif.</li>
+								<li><strong>Pemantauan Keamanan:</strong> Sistem kami dimonitor 24/7 untuk aktivitas mencurigakan. Kami menggunakan sistem deteksi intrusi (IDS) dan firewall aplikasi web (WAF) untuk melindungi dari serangan umum seperti SQL injection, cross-site scripting (XSS), dan distributed denial-of-service (DDoS).</li>
+								<li><strong>Audit Keamanan Berkala:</strong> Kami melakukan penilaian kerentanan (vulnerability assessment) dan pengujian penetrasi (penetration testing) secara berkala untuk mengidentifikasi dan memperbaiki potensi kerentanan keamanan.</li>
+								<li><strong>Cadangan Data:</strong> Data Anda dicadangkan secara berkala ke lokasi yang aman dan terenkripsi untuk memastikan pemulihan jika terjadi kegagalan sistem atau bencana.</li>
+								<li><strong>Pelatihan Karyawan:</strong> Semua personel yang memiliki akses ke data pribadi menerima pelatihan berkala tentang praktik keamanan data dan kewajiban kerahasiaan.</li>
+							</ul>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Meskipun kami berusaha keras untuk melindungi informasi Anda, tidak ada metode transmisi melalui internet atau penyimpanan elektronik yang 100% aman. Kami tidak dapat menjamin keamanan absolut. Jika Anda memiliki alasan untuk meyakini bahwa interaksi Anda dengan kami tidak lagi aman, segera hubungi kami melalui halaman Kontak.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.56s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--warm-100)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--warm-500)]"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">8. Hak-Hak Pengguna Atas Data Pribadi</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Sesuai dengan peraturan perlindungan data yang berlaku, Anda memiliki hak-hak tertentu terkait data pribadi Anda. Kami berkomitmen untuk menghormati dan memfasilitasi pelaksanaan hak-hak ini. Berikut adalah rincian hak-hak Anda dan cara menggunakannya:
+							</p>
+							<ul class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed space-y-2 list-disc pl-5">
+								<li><strong>Hak Akses (Right of Access):</strong> Anda berhak untuk meminta konfirmasi apakah kami memproses data pribadi Anda dan, jika ya, meminta salinan data pribadi yang kami simpan tentang Anda beserta informasi tentang bagaimana data tersebut diproses. Kami akan menyediakan salinan data dalam format yang umum digunakan dan dapat dibaca mesin (JSON atau CSV).</li>
+								<li><strong>Hak Perbaikan (Right to Rectification):</strong> Anda berhak untuk meminta koreksi atas data pribadi yang tidak akurat atau tidak lengkap yang kami simpan tentang Anda. Jika Anda menemukan kesalahan pada nama atau email yang terdaftar, Anda dapat menghubungi kami untuk memperbaikinya.</li>
+								<li><strong>Hak Penghapusan (Right to Erasure / "Right to be Forgotten"):</strong> Anda berhak untuk meminta penghapusan data pribadi Anda dalam keadaan tertentu, seperti ketika data tidak lagi diperlukan untuk tujuan pengumpulannya, ketika Anda menarik persetujuan, atau ketika data diproses secara tidak sah. Kami akan menghapus data Anda dalam waktu 30 hari setelah verifikasi permintaan Anda, kecuali jika ada kewajiban hukum yang mengharuskan kami menyimpannya.</li>
+								<li><strong>Hak Pembatasan Pemrosesan (Right to Restriction of Processing):</strong> Anda berhak untuk meminta pembatasan pemrosesan data pribadi Anda dalam keadaan tertentu, seperti ketika Anda menantang keakuratan data atau keberatan terhadap pemrosesan.</li>
+								<li><strong>Hak Portabilitas Data (Right to Data Portability):</strong> Anda berhak untuk menerima data pribadi Anda dalam format terstruktur, umum digunakan, dan dapat dibaca mesin, dan untuk mentransfer data tersebut ke pengendali data lain tanpa hambatan dari kami.</li>
+								<li><strong>Hak Keberatan (Right to Object):</strong> Anda berhak untuk mengajukan keberatan terhadap pemrosesan data pribadi Anda berdasarkan kepentingan sah kami. Kami akan menghentikan pemrosesan kecuali kami dapat menunjukkan alasan sah yang mengesampingkan kepentingan Anda.</li>
+								<li><strong>Hak Penarikan Persetujuan (Right to Withdraw Consent):</strong> Jika pemrosesan didasarkan pada persetujuan Anda, Anda berhak untuk menarik persetujuan tersebut kapan saja. Penarikan tidak memengaruhi keabsahan pemrosesan yang dilakukan sebelum penarikan.</li>
+							</ul>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Untuk menggunakan hak-hak Anda, silakan hubungi kami melalui halaman <a href="/contact" class="text-accent hover:underline">Kontak</a>. Kami akan merespons permintaan Anda dalam waktu 14 hari kerja. Kami mungkin perlu memverifikasi identitas Anda sebelum memproses permintaan. Jika Anda tidak puas dengan respons kami, Anda berhak untuk mengajukan keluhan kepada otoritas perlindungan data yang berwenang.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.64s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">9. Transfer Data Lintas Batas</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Informasi Anda dapat ditransfer ke dan disimpan di server yang berlokasi di luar negara tempat Anda tinggal, termasuk Indonesia dan negara-negara lain di mana kami atau penyedia layanan kami beroperasi. Negara-negara ini mungkin memiliki undang-undang perlindungan data yang berbeda dari negara Anda. Ketika kami mentransfer data pribadi lintas batas, kami memastikan bahwa perlindungan yang sesuai diterapkan sesuai dengan hukum yang berlaku, termasuk:
+							</p>
+							<ul class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li>Menggunakan Klausul Kontrak Standar (Standard Contractual Clauses/SCC) yang disetujui oleh Komisi Eropa untuk transfer data ke negara di luar EEA.</li>
+								<li>Memastikan bahwa negara penerima memiliki tingkat perlindungan data yang memadai sebagaimana diakui oleh otoritas perlindungan data yang relevan.</li>
+								<li>Menerapkan langkah-langkah teknis dan organisasional tambahan yang diperlukan untuk melindungi data yang ditransfer.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.72s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--brand-100)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--brand-500)]"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">10. Perubahan Kebijakan Privasi</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kami berhak untuk memperbarui atau mengubah Kebijakan Privasi ini dari waktu ke waktu untuk mencerminkan perubahan dalam praktik kami, persyaratan hukum, atau peningkatan layanan. Ketika kami membuat perubahan, kami akan memperbarui tanggal "Terakhir diperbarui" di bagian atas halaman ini. Untuk perubahan yang bersifat material atau signifikan, kami akan memberikan pemberitahuan yang lebih jelas, seperti:
+							</p>
+							<ul class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li>Mengirimkan pemberitahuan email kepada pengguna terdaftar setidaknya 7 hari sebelum perubahan berlaku.</li>
+								<li>Menampilkan banner pemberitahuan di Situs kami selama periode yang wajar.</li>
+								<li>Mencantumkan ringkasan perubahan utama di bagian atas kebijakan.</li>
+							</ul>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kami mendorong Anda untuk meninjau Kebijakan Privasi ini secara berkala. Penggunaan berkelanjutan atas layanan kami setelah perubahan apa pun merupakan penerimaan Anda atas kebijakan yang diperbarui.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.80s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">11. Privasi Anak-Anak</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Layanan IQ Test tidak ditujukan untuk individu di bawah usia 13 tahun, dan kami tidak secara sadar mengumpulkan informasi pribadi dari anak-anak di bawah usia 13 tahun. Jika Anda adalah orang tua atau wali dan mengetahui bahwa anak Anda telah memberikan informasi pribadi kepada kami tanpa persetujuan Anda, segera hubungi kami melalui halaman <a href="/contact" class="text-accent hover:underline">Kontak</a>. Jika kami mengetahui bahwa kami telah mengumpulkan informasi pribadi dari anak di bawah usia 13 tahun tanpa verifikasi persetujuan orang tua, kami akan mengambil langkah-langkah untuk menghapus informasi tersebut dari server kami sesegera mungkin. Untuk pengguna berusia 13 hingga 18 tahun, kami menyarankan agar mereka meninjau Kebijakan Privasi ini bersama orang tua atau wali sebelum menggunakan layanan kami.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.88s;">
+					<div class="flex items-start gap-4">
+						<div class="w-12 h-12 rounded-2xl bg-[var(--success-light)] flex items-center justify-center flex-shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--success)]"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+						</div>
+						<div>
+							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">12. Hubungi Kami</h3>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Jika Anda memiliki pertanyaan, kekhawatiran, atau permintaan terkait Kebijakan Privasi ini atau praktik privasi kami, jangan ragu untuk menghubungi kami. Kami menangani privasi dengan sangat serius dan akan merespons pertanyaan Anda secepat mungkin:
+							</p>
+							<ul class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed space-y-1 list-disc pl-5">
+								<li><strong>Halaman Kontak:</strong> <a href="/contact" class="text-accent hover:underline">https://iqtest.id/contact</a></li>
+								<li><strong>Email:</strong> <a href="mailto:support@iqtest.id" class="text-accent hover:underline">support@iqtest.id</a></li>
+							</ul>
+							<p class="mt-2 text-sm text-[var(--textMuted)] leading-relaxed m-0">
+								Kami akan merespons dalam waktu 1×24 jam pada hari kerja (Senin–Jumat, pukul 09.00–17.00 WIB). Untuk pertanyaan mendesak di luar jam kerja, kami akan merespons pada hari kerja berikutnya.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+}

@@ -53,6 +53,20 @@ func SetupRoutes(r *gin.Engine) {
 	r.GET("/tentang", ShowTentang)
 	r.HEAD("/tentang", ShowTentang)
 
+	// 7a. Halaman Legal
+	r.GET("/privacy", ShowPrivacy)
+	r.HEAD("/privacy", ShowPrivacy)
+	r.GET("/terms", ShowTerms)
+	r.HEAD("/terms", ShowTerms)
+	r.GET("/purchase-policy", ShowPurchasePolicy)
+	r.HEAD("/purchase-policy", ShowPurchasePolicy)
+
+	// 7b. Halaman Informasi Tambahan
+	r.GET("/faq", ShowFaq)
+	r.HEAD("/faq", ShowFaq)
+	r.GET("/contact", ShowContact)
+	r.HEAD("/contact", ShowContact)
+
 	// 8. Admin Routes
 	r.GET("/admin/login", ShowLogin)
 	r.HEAD("/admin/login", ShowLogin)
