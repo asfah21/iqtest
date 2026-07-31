@@ -26,13 +26,13 @@
   max-width: 320px;
   height: 100vh;
   height: 100dvh;
-  background: #FFFFFF;
+  background: var(--surface);
   z-index: 50;
   transform: translateX(100%);
   transition: transform 0.3s ease;
   padding: 0 24px 24px;
   overflow-y: auto;
-  border-left: 1px solid #f1f5f9;
+  box-shadow: -4px 0 24px rgba(15,23,42,0.08);
 }
 
 .navbar-panel.open {
@@ -51,9 +51,17 @@
   border: none;
 }
 
-/* Hide "Menu" title — keep in DOM for a11y if needed */
+/* Hide "Menu" title visually but keep accessible */
 .navbar-panel-title {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Close (X) button — always visible at top-right inside panel */
@@ -66,17 +74,17 @@
   border-radius: 8px;
   border: none;
   background: transparent;
-  color: #1A1A2E;
+  color: var(--ink);
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .navbar-panel-close:hover {
-  background: #f1f5f9;
+  background: var(--bgSection);
 }
 
 .navbar-panel-close:focus-visible {
-  outline: 2px solid #6366f1;
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -96,32 +104,32 @@
   border-radius: 10px;
   font-size: 15px;
   font-weight: 500;
-  color: #475569;
+  color: var(--inkMuted);
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
 .navbar-panel-link:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--bgSection);
+  color: var(--ink);
 }
 
 .navbar-panel-link:focus-visible {
-  outline: 2px solid #6366f1;
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 .navbar-panel-cta {
-  background: #eef2ff;
-  color: #6366f1;
+  background: var(--accentLight);
+  color: var(--accent);
   font-weight: 600;
   margin-top: 12px;
 }
 
 .navbar-panel-divider {
   border: none;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--bordLight);
   margin: 12px 0;
 }
 
