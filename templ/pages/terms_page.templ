@@ -11,7 +11,7 @@ templ TermsPage() {
 templ termsContent() {
 	<section class="min-h-screen bg-white pt-24 pb-16">
 		<div class="container">
-			<div style="max-width:768px;margin:0 auto;">
+			<div class="legal-content-wrapper">
 			<div class="text-center mb-12 fade-in-up">
 				<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--accent-200)] bg-[var(--accent-50)] text-xs font-medium text-[var(--accent-600)] mb-4 transition-all duration-300 hover:shadow-sm">
 					<span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-500)]"></span>
@@ -26,11 +26,35 @@ templ termsContent() {
 				</p>
 			</div>
 
+			<!-- Table of Contents -->
+			<nav class="legal-toc fade-in-up" aria-label="Daftar Isi">
+				<p class="legal-toc-title">Daftar Isi</p>
+				<ol class="legal-toc-list">
+					<li><a href="#sec-1" class="legal-toc-link">1. Ketentuan Penggunaan</a></li>
+					<li><a href="#sec-2" class="legal-toc-link">2. Ikhtisar dan Definisi</a></li>
+					<li><a href="#sec-3" class="legal-toc-link">3. Modifikasi Situs dan Syarat</a></li>
+					<li><a href="#sec-4" class="legal-toc-link">4. Hak Kekayaan Intelektual</a></li>
+					<li><a href="#sec-5" class="legal-toc-link">5. Pendaftaran dan Akun</a></li>
+					<li><a href="#sec-6" class="legal-toc-link">6. Komunikasi Elektronik</a></li>
+					<li><a href="#sec-7" class="legal-toc-link">7. Lisensi Penggunaan</a></li>
+					<li><a href="#sec-8" class="legal-toc-link">8. Hak Kepemilikan</a></li>
+					<li><a href="#sec-9" class="legal-toc-link">9. Biaya dan Pembayaran</a></li>
+					<li><a href="#sec-10" class="legal-toc-link">10. Pemutusan dan Penangguhan</a></li>
+					<li><a href="#sec-11" class="legal-toc-link">11. Keamanan</a></li>
+					<li><a href="#sec-12" class="legal-toc-link">12. Jaminan dan Kewajiban</a></li>
+					<li><a href="#sec-13" class="legal-toc-link">13. Ganti Rugi (Indemnifikasi)</a></li>
+					<li><a href="#sec-14" class="legal-toc-link">14. Penyangkalan (Disclaimer)</a></li>
+					<li><a href="#sec-15" class="legal-toc-link">15. Hukum dan Sengketa</a></li>
+					<li><a href="#sec-16" class="legal-toc-link">16. Ketentuan Umum</a></li>
+					<li><a href="#sec-17" class="legal-toc-link">17. Pertanyaan dan Umpan Balik</a></li>
+				</ol>
+			</nav>
+
 			<div class="space-y-4">
-				<div class="card card-hover p-8 fade-in-up">
+				<div id="sec-1" class="legal-section-major p-8 fade-in-up anim-delay-1">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Informasi</title><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">1. Ketentuan Penggunaan</h3>
@@ -47,10 +71,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.08s;">
+				<div id="sec-2" class="legal-section-minor p-8 fade-in-up anim-delay-2">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Dokumen</title><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">2. Ikhtisar dan Definisi</h3>
@@ -71,10 +95,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.16s;">
+				<div id="sec-3" class="legal-section-minor p-8 fade-in-up anim-delay-3">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Perubahan</title><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">3. Modifikasi Situs dan Syarat & Ketentuan</h3>
@@ -91,10 +115,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.24s;">
+				<div id="sec-4" class="legal-section-major p-8 fade-in-up anim-delay-4">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Peringatan</title><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">4. Hak Kekayaan Intelektual</h3>
@@ -111,10 +135,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.32s;">
+				<div id="sec-5" class="legal-section-major p-8 fade-in-up anim-delay-5">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Pengguna</title><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">5. Pendaftaran dan Akun Pengguna</h3>
@@ -131,10 +155,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.40s;">
+				<div id="sec-6" class="legal-section-minor p-8 fade-in-up anim-delay-6">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Email</title><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">6. Komunikasi Elektronik</h3>
@@ -158,10 +182,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.48s;">
+				<div id="sec-7" class="legal-section-major p-8 fade-in-up anim-delay-7">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Monitor</title><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">7. Pemberian Lisensi Penggunaan Platform</h3>
@@ -183,10 +207,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.56s;">
+				<div id="sec-8" class="legal-section-minor p-8 fade-in-up anim-delay-8">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Mikrofon</title><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">8. Hak Kepemilikan</h3>
@@ -204,10 +228,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.64s;">
+				<div id="sec-9" class="legal-section-major p-8 fade-in-up anim-delay-9">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Biaya</title><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">9. Biaya dan Pembayaran</h3>
@@ -224,10 +248,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.72s;">
+				<div id="sec-10" class="legal-section-major p-8 fade-in-up anim-delay-10">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Peringatan</title><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">10. Pemutusan dan Penangguhan</h3>
@@ -247,10 +271,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.80s;">
+				<div id="sec-11" class="legal-section-minor p-8 fade-in-up anim-delay-11">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Keamanan</title><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">11. Keamanan</h3>
@@ -271,10 +295,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.88s;">
+				<div id="sec-12" class="legal-section-major p-8 fade-in-up anim-delay-12">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Perisai</title><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">12. Jaminan, Kewajiban, dan Larangan Pengguna</h3>
@@ -296,10 +320,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:0.96s;">
+				<div id="sec-13" class="legal-section-minor p-8 fade-in-up anim-delay-13">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Ceklis</title><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">13. Ganti Rugi (Indemnifikasi)</h3>
@@ -319,10 +343,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:1.04s;">
+				<div id="sec-14" class="legal-section-major p-8 fade-in-up anim-delay-14">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Peringatan Segitiga</title><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">14. Penyangkalan (Disclaimer)</h3>
@@ -345,10 +369,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:1.12s;">
+				<div id="sec-15" class="legal-section-major p-8 fade-in-up anim-delay-15">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Lokasi</title><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">15. Hukum yang Berlaku dan Penyelesaian Sengketa</h3>
@@ -364,10 +388,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:1.20s;">
+				<div id="sec-16" class="legal-section-minor p-8 fade-in-up anim-delay-16">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Pesan</title><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">16. Ketentuan Umum (Miscellaneous)</h3>
@@ -386,10 +410,10 @@ templ termsContent() {
 					</div>
 				</div>
 
-				<div class="card card-hover p-8 fade-in-up" style="animation-delay:1.28s;">
+				<div id="sec-17" class="legal-section-minor p-8 fade-in-up anim-delay-17">
 					<div class="flex items-start gap-4">
 						<div class="w-12 h-12 rounded-2xl bg-[var(--accent-50)] flex items-center justify-center flex-shrink-0">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--accent-500)]" aria-hidden="true"><title>Bantuan</title><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
 						</div>
 						<div>
 							<h3 class="text-lg font-bold text-[var(--textMain)] m-0">17. Pertanyaan dan Umpan Balik</h3>
