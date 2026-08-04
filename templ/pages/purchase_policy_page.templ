@@ -12,7 +12,7 @@ templ purchasePolicyContent() {
 	<section class="min-h-screen bg-white pt-24 pb-16">
 		<div class="container">
 			<div class="legal-content-wrapper">
-			<div class="text-center mb-12 fade-in-up">
+			<div class="legal-page-header text-center fade-in-up">
 				<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--accent-200)] bg-[var(--accent-50)] text-xs font-medium text-[var(--accent-600)] mb-4 transition-all duration-300 hover:shadow-sm">
 					<span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-500)]"></span>
 					Legal
@@ -27,6 +27,7 @@ templ purchasePolicyContent() {
 			</div>
 
 			<!-- Table of Contents -->
+			<div class="legal-page-body">
 			<nav class="legal-toc fade-in-up" aria-label="Daftar Isi">
 				<p class="legal-toc-title">Daftar Isi</p>
 				<ol class="legal-toc-list">
@@ -41,6 +42,7 @@ templ purchasePolicyContent() {
 				</ol>
 			</nav>
 
+			<div class="legal-page-sections">
 			<div class="space-y-4">
 				<div id="sec-1" class="legal-section-minor p-8 fade-in-up anim-delay-1">
 					<div class="flex items-start gap-4">
@@ -292,6 +294,8 @@ templ purchasePolicyContent() {
 						</div>
 					</div>
 				</div>
+			</div>
+			</div>
 			</div>
 			</div>
 		</div>
